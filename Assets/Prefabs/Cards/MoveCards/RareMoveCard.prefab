@@ -16,6 +16,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1708276804, guid: 2d318bb797e5ea14db40b3574cf9a7b9, type: 3}
+      propertyPath: _cardData
+      value: 
+      objectReference: {fileID: 11400000, guid: 96645f99675bf114d90fbdfc85f6d7b1, type: 2}
+    - target: {fileID: 1708276804, guid: 2d318bb797e5ea14db40b3574cf9a7b9, type: 3}
       propertyPath: _aeraOfEffect
       value: 7
       objectReference: {fileID: 0}

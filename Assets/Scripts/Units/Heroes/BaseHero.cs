@@ -307,11 +307,11 @@ public class BaseHero : BaseUnit
         {
             if (card.CardType == CardType.Attackcard)
             {
-                _mainDeck.AddCard(card);
+                _mainDeck.AddCardWithoutData(card);
             }
             else if (card.CardType == CardType.MoveCard)
             {
-                _movementDeck.AddCard(card);
+                _movementDeck.AddCardWithoutData(card);
             }
 
             _cardPlayedManager.ResetSlots();

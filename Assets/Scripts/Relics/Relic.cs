@@ -15,7 +15,7 @@ public abstract class Relic : MonoBehaviour
     // References ------------------------------------------------------------------------------------------------------
     [SerializeField] protected Button _button;
 
-    [SerializeField] protected RelicData _relicData;
+    [SerializeField] protected RelicData _relicDataRef;
 
     [SerializeField] private GameObject _effectBox;
 
@@ -23,6 +23,8 @@ public abstract class Relic : MonoBehaviour
     public event Action<Relic> OnCollected;
     
     // Getters and Setters ---------------------------------------------------------------------------------------------
+    public RelicData RelicDataRef => _relicDataRef;
+
     public bool IsCollected
     {
         get => _isCollected;
@@ -34,8 +36,7 @@ public abstract class Relic : MonoBehaviour
     //Methods ----------------------------------------------------------------------------------------------------------
     protected virtual void Start()
     {
-        _type = _relicData.Type;
-        _isCollected = false;
+        _type = _relicDataRef.Type;
     }
 
     public void OnClick()

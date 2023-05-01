@@ -76,12 +76,14 @@ public class UIBattleManager : MonoBehaviour
         _notEnoughManaTxt.gameObject.SetActive(false);
 
         BattleManager.OnVictory += HandleVictoryUI;
+        BaseCard.OnNoTEnoughMana += DisplayNotEnoughManaTxt;
     }
 
 
     private void OnDestroy()
     {
         BattleManager.OnVictory -= HandleVictoryUI;
+        BaseCard.OnNoTEnoughMana -= DisplayNotEnoughManaTxt;
     }
     
     // Start is called before the first frame update
@@ -188,6 +190,12 @@ public class UIBattleManager : MonoBehaviour
         OnNextReward?.Invoke(this);
         
         _goldsPanel.SetActive(false);
+    }
+    
+    private void DisplayNotEnoughManaTxt(BaseCard obj)
+    {
+        StopCoroutine(nameof(NotEnoughManaCo));
+        StartCoroutine(nameof(NotEnoughManaCo));
     }
     
     public IEnumerator NotEnoughManaCo()

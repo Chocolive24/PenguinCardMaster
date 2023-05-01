@@ -98,6 +98,8 @@ public abstract class BaseCard : MonoBehaviour
     protected UnitsManager _unitsManager;
     
     #endregion
+
+    [SerializeField] protected ScriptableCard _cardData;
     
     [SerializeField] protected TextMeshProUGUI _manaNbrTxt;
     [SerializeField] protected TextMeshProUGUI _cardEffectTxt;
@@ -109,9 +111,13 @@ public abstract class BaseCard : MonoBehaviour
     public static  event Action<BaseCard> OnPerformed; 
     public static event Action<BaseCard> OnCollected;
 
+    public static event Action<BaseCard> OnNoTEnoughMana;
+
     // Getters and Setters ---------------------------------------------------------------------------------------------
 
     #region Getters and Setters
+
+    public ScriptableCard CardData => _cardData;
 
     public Rarety Rarety => _rarety;
     public int ManaCost
@@ -306,8 +312,7 @@ public abstract class BaseCard : MonoBehaviour
     {
         if (_unitsManager.HeroPlayer.CurrentMana == 0)
         {
-            StopCoroutine(nameof(_uiBattleManager.NotEnoughManaCo));
-            StartCoroutine(nameof(_uiBattleManager.NotEnoughManaCo));
+            OnNoTEnoughMana?.Invoke(this);
         }
         
         return !_cardPlayedManager.HasACardOnIt && 

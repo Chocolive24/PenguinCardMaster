@@ -20,9 +20,11 @@ public class DungeonGenerator : MonoBehaviour
     // The size of a simple room.
     private Vector3Int _roomSize;
 
-    [Header("Room Attributes")]
-    [SerializeField][Range(5, 30)] private int _minNbrOfRooms = 7;
-    [SerializeField] [Range(5, 30)] private int _maxNbrOfRooms = 10;
+    [Header("Room Attributes")] 
+    [SerializeField] private IntReference _minNbrOfRooms;
+    [SerializeField] private IntReference _maxNbrOfRooms;
+    // [SerializeField][Range(5, 30)] private int _minNbrOfRooms = 7;
+    // [SerializeField] [Range(5, 30)] private int _maxNbrOfRooms = 10;
     private int _nbrOfRooms;
     
     [SerializeField][Range(1, 30)] private int _minEnemyWeight = 5, _maxEnemyWeight = 7;
@@ -51,6 +53,11 @@ public class DungeonGenerator : MonoBehaviour
 
     [SerializeField] private List<Tilemap> _wallTilemapPatterns;
 
+    [Header("Floor References")]
+    [SerializeField] private IntReference _maxNbrOfFloor;
+    [SerializeField] private IntReference _currentFloorNbr;
+    
+    [Header("Debug")]
     // Debug ---------------------
     [SerializeField] private GameObject _startRoomDebug;
     [SerializeField] private GameObject _endRoomDebug;
@@ -78,16 +85,7 @@ public class DungeonGenerator : MonoBehaviour
         _endRooms = new HashSet<RoomData>();
         _occupiedPositions = new HashSet<Vector3Int>();
 
-        if (_maxNbrOfRooms < _minNbrOfRooms)
-        {
-            _maxNbrOfRooms = _minNbrOfRooms;
-        }
-
-        _nbrOfRooms = _maxNbrOfRooms >= _minNbrOfRooms ?
-            Random.Range(_minNbrOfRooms, _maxNbrOfRooms + 1) : _minNbrOfRooms;
-        
-        _enemyWeight = _maxEnemyWeight >= _minEnemyWeight ?
-            Random.Range(_minEnemyWeight, _maxEnemyWeight + 1) : _minEnemyWeight;
+        HandleRoomNumber();
         
         do
         {
@@ -101,8 +99,30 @@ public class DungeonGenerator : MonoBehaviour
         
         _startRoom.SetDoorsOpen(true);
         _shopRoom.SetDoorsOpen(true);
+        
+        _currentFloorNbr.AddValue(1);
     }
-    
+
+    private void HandleRoomNumber()
+    {
+        if (_currentFloorNbr.Value > 0)
+        {
+            _minNbrOfRooms.AddValue(Random.Range(2, 4));
+            _maxNbrOfRooms.AddValue(Random.Range(2, 4));
+        }
+        
+        if (_maxNbrOfRooms.Value < _minNbrOfRooms.Value)
+        {
+            _maxNbrOfRooms = _minNbrOfRooms;
+        }
+
+        _nbrOfRooms = _maxNbrOfRooms.Value >= _minNbrOfRooms.Value ?
+            Random.Range(_minNbrOfRooms.Value, _maxNbrOfRooms.Value + 1) : _minNbrOfRooms.Value;
+        
+        _enemyWeight = _maxEnemyWeight >= _minEnemyWeight ?
+            Random.Range(_minEnemyWeight, _maxEnemyWeight + 1) : _minEnemyWeight;
+    }
+
     private void GenerateRooms()
     {
         Vector3Int startGridPos = new Vector3Int(_gridSizeMultipliedByRoomSize.x / 2, 

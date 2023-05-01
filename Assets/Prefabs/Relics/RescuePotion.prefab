@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 4025489868917581006}
-  _relicData: {fileID: 11400000, guid: f386ce6b0af9ae04a98e539518be6338, type: 2}
+  _relicDataRef: {fileID: 11400000, guid: f386ce6b0af9ae04a98e539518be6338, type: 2}
   _effectBox: {fileID: 324761650598517068}
   _heal: 10
 --- !u!114 &4025489868917581006 stripped

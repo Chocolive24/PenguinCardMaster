@@ -237,8 +237,6 @@ public class BattleManager : MonoBehaviour
         _currentGoldReward = Random.Range(_minGoldReward, _maxGoldReward);
         
         OnVictory?.Invoke(this, _currentGoldReward);
-        
-        
     }
 
     private void HandleNextReward(UIBattleManager obj)

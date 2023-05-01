@@ -33,11 +33,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 88.5
+      value: 80.5
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 40.5
+      value: 58.5
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -115,7 +115,7 @@ MonoBehaviour:
   _faction: 1
   _maxHP:
     _useConstant: 1
-    ConstantValue: 10
+    ConstantValue: 0
     Variable: {fileID: 0}
   _currentHP:
     _useConstant: 1
@@ -123,7 +123,7 @@ MonoBehaviour:
     Variable: {fileID: 0}
   _baseAttack:
     _useConstant: 1
-    ConstantValue: 5
+    ConstantValue: 0
     Variable: {fileID: 0}
   _currentAttack:
     _useConstant: 1
@@ -135,7 +135,7 @@ MonoBehaviour:
     Variable: {fileID: 0}
   _baseMovement:
     _useConstant: 1
-    ConstantValue: 5
+    ConstantValue: 0
     Variable: {fileID: 0}
   _currentMovement:
     _useConstant: 1
@@ -143,7 +143,7 @@ MonoBehaviour:
     Variable: {fileID: 0}
   _speed:
     _useConstant: 1
-    ConstantValue: 8
+    ConstantValue: 0
     Variable: {fileID: 0}
   _unitData: {fileID: 11400000, guid: 9d014845c5a9a534f8188b024aac5a38, type: 2}
   _type: 0

@@ -170,18 +170,21 @@ public class CardPlayedManager : MonoBehaviour
     public void HandlePlayedCard()
     {
         _unitsManager.HeroPlayer.CurrentMana -= _currentCard.ManaCost;
+
+        if (_currentCard)
+        {
+            // Free the current card slot.
+            _availableCardSlots[_currentCard.HandIndex] = true;
+
+            _currentCard.ResetProperties();
         
-        // Free the current card slot.
-        _availableCardSlots[_currentCard.HandIndex] = true;
+            ClearCurrentCardTilemap();
 
-        _currentCard.ResetProperties();
+            MoveCardToHisDiscardPile();
+
+            ClearCardLocation();
+        }
         
-        ClearCurrentCardTilemap();
-
-        MoveCardToHisDiscardPile();
-
-        ClearCardLocation();
-
         // TODO Change the mouse cursor
     }
     

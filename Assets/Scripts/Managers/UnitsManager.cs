@@ -65,8 +65,22 @@ public class UnitsManager : MonoBehaviour
         DoorTileCell.OnDoorTileEnter += SpawnHeroes;
         DoorTileCell.OnDoorTileEnter += SpawnRoomEnemies;
         ShopManager.OnShopExit += SpawnHeroOutsideShop;
+        TileCell.OnTileSelected += HandleSelectedEnemy;
 
         //Room.OnRoomEnter += SpawnEntities;
+    }
+
+    private void HandleSelectedEnemy(TileCell tile)
+    {
+        if (tile.OccupiedUnit)
+        {
+            BaseEnemy enemy = tile.OccupiedUnit.GetComponent<BaseEnemy>();
+
+            if (enemy)
+            {
+                enemy.IsSelected = !enemy.IsSelected;
+            }
+        }
     }
 
     private void OnDestroy()
@@ -195,7 +209,7 @@ public class UnitsManager : MonoBehaviour
     
     public void SpawnHeroes(DoorTileCell doorTile)
     {
-        _heroSpawnPos = doorTile.GetNextRoomSpawnPos();
+        _heroSpawnPos = _gridManager.WorldToCellCenter(doorTile.GetNextRoomSpawnPos());
         
         foreach (var hero in _heroes)
         {

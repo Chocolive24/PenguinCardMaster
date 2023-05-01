@@ -67,7 +67,7 @@ public class DoorTileCell : TileCell
             case Neighbourhood.Direction.NULL:
                 return Vector3.zero;
         }
-
+        
         return Vector3.zero;
     }
     

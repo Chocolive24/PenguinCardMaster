@@ -57,7 +57,12 @@ public class CardsManager : MonoBehaviour
         BaseCard.OnCollected -= AddCollectedCardToDeck;
     }
 
-    public BaseCard InstantiateCard(List<ScriptableCard> scriptableCards, Rarety rarety)
+    public BaseCard InstantiateACardFromData(ScriptableCard cardData)
+    {
+        return Instantiate(cardData.BaseCardPrefab);
+    }
+    
+    public BaseCard InstantiateARandomCard(List<ScriptableCard> scriptableCards, Rarety rarety)
     {
         var randomPrefab = GetRandomCard<BaseCard>(scriptableCards, rarety);
         var spawnedCard = Instantiate(randomPrefab);
@@ -141,10 +146,10 @@ public class CardsManager : MonoBehaviour
         switch (card.CardType)
         {
             case CardType.Attackcard:
-                _mainDeckContoller.AddCard(card);
+                _mainDeckContoller.AddCardWithData(card);
                 break;
             case CardType.MoveCard:
-                _movementDeckController.AddCard(card);
+                _movementDeckController.AddCardWithData(card);
                 break;
         }
     }

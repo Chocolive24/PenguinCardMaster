@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -10,6 +11,8 @@ public class IntReference
     public int ConstantValue;
     public IntVariable Variable;
 
+    private int _baseValue;
+    
     public int Value { get => _useConstant ? ConstantValue : Variable.Value; }
 
     // Events ----------------------------------------------------------------------------------------------------------
@@ -53,7 +56,4 @@ public class IntReference
             Variable.Value -= value;
         }
     }
-    
-    
-    
 }

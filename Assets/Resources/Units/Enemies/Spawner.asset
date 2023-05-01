@@ -16,18 +16,18 @@ MonoBehaviour:
   Faction: 0
   MaxHP:
     _useConstant: 1
-    ConstantValue: 0
+    ConstantValue: 10
     Variable: {fileID: 0}
   Attack:
     _useConstant: 1
-    ConstantValue: 0
+    ConstantValue: 3
     Variable: {fileID: 0}
   Movement:
     _useConstant: 1
-    ConstantValue: 0
+    ConstantValue: 5
     Variable: {fileID: 0}
   Speed:
     _useConstant: 1
-    ConstantValue: 0
+    ConstantValue: 8
     Variable: {fileID: 0}
   BaseUnitPrefab: {fileID: 0}

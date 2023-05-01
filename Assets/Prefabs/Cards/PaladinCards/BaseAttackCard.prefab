@@ -41,7 +41,7 @@ PrefabInstance:
       objectReference: {fileID: 352333241, guid: 0275bf86eafa15e4189c048f560e2f7b, type: 3}
     - target: {fileID: 3369712378919419960, guid: 0a8883d2370707d49807bd26b2e40736, type: 3}
       propertyPath: m_Name
-      value: SwordStrikeUI
+      value: BaseAttackCard
       objectReference: {fileID: 0}
     - target: {fileID: 3369712378919419961, guid: 0a8883d2370707d49807bd26b2e40736, type: 3}
       propertyPath: m_Pivot.x
@@ -203,6 +203,7 @@ MonoBehaviour:
   _heroClass: 0
   _aeraOfEffect: 1
   _moveTime: 0.2
+  _cardData: {fileID: 11400000, guid: 14a2ab3c3b1205a49bcf4a6151ee07b4, type: 2}
   _manaNbrTxt: {fileID: 1268095168952555347}
   _cardEffectTxt: {fileID: 1268095168742148044}
   _damage: 5

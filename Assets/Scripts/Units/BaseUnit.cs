@@ -102,9 +102,22 @@ public class BaseUnit : MonoBehaviour
 
     protected virtual void Start()
     {
-        _currentHP.SetValue(_maxHP.Value);
-        _currentAttack.SetValue(_baseAttack.Value);
-        _currentMovement.SetValue(_baseMovement.Value);
+        if (_currentHP.Value == 0)
+        {
+            _currentHP.SetValue(_maxHP.Value);
+        }
+
+        if (_currentAttack.Value == 0)
+        {
+            _currentAttack.SetValue(_baseAttack.Value);
+        }
+
+        if (_currentMovement.Value == 0)
+        {
+            _currentMovement.SetValue(_baseMovement.Value);
+        }
+        
+        _healthBar.UpdateHealthBar(_currentHP.Value, _maxHP.Value);
         
         _availableTiles = new Dictionary<Vector3, int>();
         _path = new List<Vector3>();

@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1708276804, guid: 2d318bb797e5ea14db40b3574cf9a7b9, type: 3}
+      propertyPath: _cardData
+      value: 
+      objectReference: {fileID: 11400000, guid: 0448a5dbd1187664f8aecfba59403b86, type: 2}
+    - target: {fileID: 1708276804, guid: 2d318bb797e5ea14db40b3574cf9a7b9, type: 3}
       propertyPath: _aeraOfEffect
       value: 10
       objectReference: {fileID: 0}

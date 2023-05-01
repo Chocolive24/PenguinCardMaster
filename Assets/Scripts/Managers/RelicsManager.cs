@@ -12,6 +12,8 @@ public class RelicsManager : MonoBehaviour
     private int _emplIdx = 0;
     
     // References ------------------------------------------------------------------------------------------------------
+    [SerializeField] private RelicInventoryData _relicInventoryData;
+    
     [SerializeField] private RectTransform[] _relicEmplacements;
 
     [SerializeField] private RectTransform[] _rewardLocation;
@@ -24,13 +26,28 @@ public class RelicsManager : MonoBehaviour
         _relicDataList = Resources.LoadAll<RelicData>("Relics").ToList();
     }
 
+    private void Start()
+    {
+        InstantiateRelics();
+    }
+
+    private void InstantiateRelics()
+    {
+        foreach (var relicData in _relicInventoryData.RelicData)
+        {
+            var relic = Instantiate(relicData.RelicPrefab);
+            
+            AddRelicWithoutData(relic);
+        }
+    }
+
     public Relic GetARandomRelic(Relic withoutthisRelic)
     {
         return _relicDataList.Where(relic => relic.RelicPrefab != withoutthisRelic).
         OrderBy(x => Random.value).First().RelicPrefab;
     }
 
-    public void AddRelicInInventory(Relic relic)
+    public void AddRelicWithData(Relic relic)
     {
         relic.GetComponent<RectTransform>().sizeDelta = new Vector2(60, 60);
         relic.EffectBox.SetActive(false);
@@ -40,10 +57,30 @@ public class RelicsManager : MonoBehaviour
             relic.transform.position = _relicEmplacements[_emplIdx].position;
             relic.transform.parent = _relicEmplacements[_emplIdx].transform;
 
+            relic.IsCollected = true;
+            
+            _relicInventoryData.AddRelicData(relic.RelicDataRef);
+            
             _emplIdx++;
         }
     }
 
+    public void AddRelicWithoutData(Relic relic)
+    {
+        relic.GetComponent<RectTransform>().sizeDelta = new Vector2(60, 60);
+        relic.EffectBox.SetActive(false);
+        
+        if (_emplIdx <= _relicEmplacements.Length)
+        {
+            relic.transform.position = _relicEmplacements[_emplIdx].position;
+            relic.transform.parent = _relicEmplacements[_emplIdx].transform;
+            
+            relic.IsCollected = true;
+            
+            _emplIdx++;
+        }
+    }
+    
     public List<Relic> CreateRelicRewards()
     {
         List<Relic> relics = new List<Relic>();
@@ -59,7 +96,7 @@ public class RelicsManager : MonoBehaviour
         {
             relic.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 100);
             
-            relic.OnCollected += AddRelicInInventory;
+            relic.OnCollected += AddRelicWithData;
         }
         
         return relics;

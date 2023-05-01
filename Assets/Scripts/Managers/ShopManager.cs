@@ -99,7 +99,7 @@ public class ShopManager : MonoBehaviour
         else if (obj.RelicRef)
         {
             obj.RelicRef.IsCollected = true;
-            _relicsManager.AddRelicInInventory(obj.RelicRef);
+            _relicsManager.AddRelicWithData(obj.RelicRef);
             
             OnObjectBuy?.Invoke(this, obj.ObjectCost);
         }
@@ -169,7 +169,7 @@ public class ShopManager : MonoBehaviour
     private void CreateACard(List<ScriptableCard> scrCards, Rarety rarety, RectTransform rect, TextMeshProUGUI costText,
         int minCost, int maxCost)
     {
-        BaseCard cardRare1 = _cardsManager.InstantiateCard(scrCards, rarety);
+        BaseCard cardRare1 = _cardsManager.InstantiateARandomCard(scrCards, rarety);
         cardRare1.transform.position = rect.position;
         cardRare1.transform.parent = rect.transform.parent;
 
@@ -195,7 +195,7 @@ public class ShopManager : MonoBehaviour
         int cost = GetARndCostInRange(minCost, maxCost);
         costText.text = cost.ToString();
 
-        relic.OnCollected += _relicsManager.AddRelicInInventory;
+        relic.OnCollected += _relicsManager.AddRelicWithData;
         
         ShopObject obj = Instantiate(_shopObjectPrefab, rect.position, Quaternion.identity, 
             rect.transform.parent).GetComponent<ShopObject>();

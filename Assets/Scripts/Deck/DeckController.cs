@@ -21,6 +21,8 @@ public abstract class DeckController : MonoBehaviour
     [SerializeField] protected Button _button;
 
     // References ------------------------------------------------------------------------------------------------------
+    [SerializeField] protected DeckData _deckData;
+    
     protected UnitsManager _unitsManager;
 
     [SerializeField] protected GameObject _parentObject;
@@ -82,15 +84,27 @@ public abstract class DeckController : MonoBehaviour
 
     public void InstantiateBasicCard(List<ScriptableCard> scriptableCards, int cardNbr)
     {
-        for (int i = 0; i < cardNbr; i++)
+        if (_deckData.CardDeckData.Count == 0)
         {
-            var card = CardsManager.Instance.InstantiateCard(scriptableCards, Rarety.Basic);
+            for (int i = 0; i < cardNbr; i++)
+            {
+                var card = CardsManager.Instance.InstantiateARandomCard(scriptableCards, Rarety.Basic);
             
-            AddCard(card);
+                AddCardWithData(card);
+            }
+        }
+        else
+        {
+            foreach (var cardData in _deckData.CardDeckData)
+            {
+                var card = CardsManager.Instance.InstantiateACardFromData(cardData);
+                
+                AddCardWithoutData(card);
+            }
         }
     }
     
-    public void AddCard(BaseCard card)
+    public void AddCardWithoutData(BaseCard card)
     {
         card.transform.parent = gameObject.transform;
 
@@ -103,15 +117,13 @@ public abstract class DeckController : MonoBehaviour
         _size++;
         
         UpdateCardTxtNbr();
+    }
 
-        // if (!card.IsHeroSubscibed)
-        // {
-        //     card.OnDrawn += UnitsManager.Instance.HeroPlayer.AddCardToHand;
-        //     card.OnPerformed += UnitsManager.Instance.HeroPlayer.RemoveCardFromHand;
-        //
-        //     card.IsHeroSubscibed = true;
-        // }
+    public void AddCardWithData(BaseCard card)
+    {
+        AddCardWithoutData(card);
         
+        _deckData.AddACardToData(card.CardData);
     }
 
     public void DrawACard()
