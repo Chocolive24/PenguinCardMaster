@@ -1,0 +1,138 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7783432022446730101
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -3931760679674690083, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3931760679674690083, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3931760679674690083, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341642365077544620, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: _playerMaxHP._useConstant
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341642365077544620, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: _playerCurrentHP._useConstant
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110644468454574276, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110644468454574276, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110644468454574276, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110644468454574276, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110644468454574276, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110644468454574276, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110644468454574276, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110644468454574276, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110644468454574276, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110644468454574276, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110644468454574276, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607855869782897736, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_Name
+      value: BaseEnemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -7884295254997317498, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+--- !u!1 &1977486373816229693 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8607855869782897736, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+  m_PrefabInstance: {fileID: 7783432022446730101}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1691780254251407065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977486373816229693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40e7d80ee78dccc419d0a88b5e924ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitName: Enemy
+  _faction: 1
+  _maxHP:
+    _useConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  _currentHP:
+    _useConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  _baseAttack:
+    _useConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  _currentAttack:
+    _useConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  _shield:
+    _useConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  _baseMovement:
+    _useConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  _currentMovement:
+    _useConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  _speed:
+    _useConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  _unitData: {fileID: 0}
+  _type: 0
+  _weight: 0
+  _attackRange: 0
+  _maxNbrOfAttackPerTurn: 1
+  _maxNbrOfMovementPerTurn: 1
+  _minimumPathCount: 1

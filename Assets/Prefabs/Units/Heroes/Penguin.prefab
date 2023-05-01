@@ -1,0 +1,247 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3876404196653356791
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2685418567601363304, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: _playerMaxHP.Variable
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d692dbc8b575c44296fcb88e6a6b271, type: 2}
+    - target: {fileID: 2685418567601363304, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: _playerCurrentHP.Variable
+      value: 
+      objectReference: {fileID: 11400000, guid: ac36d26e88ddf124bb2c248e8cdaff9f, type: 2}
+    - target: {fileID: 4075784539514193477, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5500090145586119193, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c3b953399404213488f89b724620eaf6, type: 3}
+    - target: {fileID: 5500090145586119193, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5500090145586119193, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5500090145586119193, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906176664036773632, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906176664036773632, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906176664036773632, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906176664036773632, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906176664036773632, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906176664036773632, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906176664036773632, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906176664036773632, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906176664036773632, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906176664036773632, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906176664036773632, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236685592814318476, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+      propertyPath: m_Name
+      value: Penguin
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5539158917072157092, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+--- !u!1 &5153618790123906427 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8236685592814318476, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+  m_PrefabInstance: {fileID: 3876404196653356791}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-2789361930267343899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5153618790123906427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14394d1022781eb46885ffb65a11eefb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitName: Paladin
+  _faction: 0
+  _maxHP:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 4d692dbc8b575c44296fcb88e6a6b271, type: 2}
+  _currentHP:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: ac36d26e88ddf124bb2c248e8cdaff9f, type: 2}
+  _baseAttack:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 4fb2bff2c7e868c40bd61d4021591daa, type: 2}
+  _currentAttack:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: dd3b2393547b17f44804ddd294d5cfdf, type: 2}
+  _shield:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: bc9d44cc035f66e4c8cc3d524dfd3689, type: 2}
+  _baseMovement:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 62c0e1bb0ecb4db4db61bb0776daeba5, type: 2}
+  _currentMovement:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: edfde8e601a095349abae03370d94b8e, type: 2}
+  _speed:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 4560b11ed34c93c44824028003737d6c, type: 2}
+  _unitData: {fileID: 11400000, guid: fc6b482a3e858e14fafdd8cf83a06ae6, type: 2}
+  _heroClass: 0
+  _maxMana:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  _exploreSpeed:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 9f01151e24b1be1438c1452b7198d614, type: 2}
+  _battleSpeed:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 4560b11ed34c93c44824028003737d6c, type: 2}
+  _maxNbrOfCardToDrawnPerTurn:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 3feaf518f5b93374c8fea93938b7450d, type: 2}
+  _golds:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 9210c534f36d0e1408aa288f2a95b252, type: 2}
+--- !u!114 &-632468933280581228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5153618790123906427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 5fdfa92c89ff4d140af2d8449abac740, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -2789361930267343899}
+        m_TargetAssemblyTypeName: BaseHero, Assembly-CSharp
+        m_MethodName: HandleExploreMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d2789714-0a63-4397-baf1-e9d2102ff53f
+    m_ActionName: Player/Move[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4a873983-e836-482e-a02c-7c37ac11f6bf
+    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f353a32a-14b5-422f-b434-46e716fa48a3
+    m_ActionName: UI/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fc7fa6d4-1484-4e92-9bb2-4ee336c82331
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 025d8073-21be-43c0-b4c0-3dc7132f6b96
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c4b1ca3f-d279-4352-8796-b5e028ec66f2
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 59e55ca5-3619-45c0-aad2-2b76a43d0808
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4223d094-11c0-4671-9400-2da8c9b80fb8
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4f7caebe-8d4b-46c5-93b6-b4c194743310
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0f7cade9-f3a4-465f-bf52-2bd4d2296925
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1bf96e84-c4b4-472d-a230-b495dba83e7f
+    m_ActionName: UI/TrackedDeviceOrientation
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

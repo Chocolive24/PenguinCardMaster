@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f353323b35669ad4783c03c1705b55c9, type: 3}
+  m_Name: PenguinData
+  m_EditorClassIdentifier: 
+  UnitName: Penguin
+  Faction: 0
+  MaxHP:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 4d692dbc8b575c44296fcb88e6a6b271, type: 2}
+  CurrentHP:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: ac36d26e88ddf124bb2c248e8cdaff9f, type: 2}
+  Attack:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 4fb2bff2c7e868c40bd61d4021591daa, type: 2}
+  Movement:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 62c0e1bb0ecb4db4db61bb0776daeba5, type: 2}
+  Speed:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 4560b11ed34c93c44824028003737d6c, type: 2}
+  BaseUnitPrefab: {fileID: -2789361930267343899, guid: f79088a470cdfca4b995e20f4fa4a2e1, type: 3}
+  HeroClass: 0
+  MaxMana:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 42a7f232c6572a148b387225795c7645, type: 2}
+  ExploreSpeed:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 9f01151e24b1be1438c1452b7198d614, type: 2}
+  BattleSpeed:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 4560b11ed34c93c44824028003737d6c, type: 2}

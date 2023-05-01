@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5013828544487552538
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1977486373816229693, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_Name
+      value: Archer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2696488847053827752, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2c233c81ac42e8a46b353a950cb0d6ee, type: 3}
+    - target: {fileID: 2696488847053827752, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2696488847053827752, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2696488847053827752, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 87.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 62.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511105756606608857, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: _playerMaxHP._useConstant
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511105756606608857, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: _playerCurrentHP._useConstant
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1691780254251407065, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+--- !u!1 &6838086143210760487 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1977486373816229693, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+  m_PrefabInstance: {fileID: 5013828544487552538}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-1586388896344264559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6838086143210760487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0af10ab8bd535654a91f7a82d041384c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6290915316528075013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6838086143210760487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84eeb2a4cb165c94ea1a5b2563f1dfae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitName: Archer
+  _faction: 1
+  _maxHP:
+    _useConstant: 1
+    ConstantValue: 8
+    Variable: {fileID: 0}
+  _currentHP:
+    _useConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  _baseAttack:
+    _useConstant: 1
+    ConstantValue: 3
+    Variable: {fileID: 0}
+  _currentAttack:
+    _useConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  _shield:
+    _useConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  _baseMovement:
+    _useConstant: 1
+    ConstantValue: 3
+    Variable: {fileID: 0}
+  _currentMovement:
+    _useConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  _speed:
+    _useConstant: 1
+    ConstantValue: 8
+    Variable: {fileID: 0}
+  _unitData: {fileID: 11400000, guid: a796b8f7c468cb84b8acec69b9b3bad5, type: 2}
+  _type: 1
+  _weight: 2
+  _attackRange: 3
+  _maxNbrOfAttackPerTurn: 1
+  _maxNbrOfMovementPerTurn: 1
+  _minimumPathCount: 0

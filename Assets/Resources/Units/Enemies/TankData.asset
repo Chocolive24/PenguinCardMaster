@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fdb0cfd76510a34b8a7a8e44142eb9d, type: 3}
+  m_Name: TankData
+  m_EditorClassIdentifier: 
+  UnitName: Tank
+  Faction: 1
+  MaxHP:
+    _useConstant: 1
+    ConstantValue: 30
+    Variable: {fileID: 0}
+  Attack:
+    _useConstant: 1
+    ConstantValue: 15
+    Variable: {fileID: 0}
+  Movement:
+    _useConstant: 1
+    ConstantValue: 2
+    Variable: {fileID: 0}
+  Speed:
+    _useConstant: 1
+    ConstantValue: 8
+    Variable: {fileID: 0}
+  BaseUnitPrefab: {fileID: 1725536866861916416, guid: 131c253a05bce9941b9c08298876e61b, type: 3}
+  Type: 2
+  Weight: 4
+  AttackRange: 1
+  MaxNbrOfAttackPerTurn: 1
+  MaxNbrOfMovementPerTurn: 1
+  MinimumPathCount: 1

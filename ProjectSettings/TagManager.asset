@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Card
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Cards
+  - Dungeon
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 1625783719
+    locked: 0
+  - name: Character
+    uniqueID: 1385843007
+    locked: 0
+  - name: CardLimit
+    uniqueID: 585550649
+    locked: 0
+  - name: Deck
+    uniqueID: 2683250557
+    locked: 0
+  - name: CardLocation
+    uniqueID: 3736345023
+    locked: 0
+  - name: Card
+    uniqueID: 1521065575
+    locked: 0
+  - name: UI
+    uniqueID: 1733562527
+    locked: 0
