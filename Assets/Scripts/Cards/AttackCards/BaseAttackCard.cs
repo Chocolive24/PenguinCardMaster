@@ -16,7 +16,7 @@ public class BaseAttackCard : BaseCard
     // Attributes ------------------------------------------------------------------------------------------------------
     [SerializeField] private int _damage;
 
-    private bool _hasPerformed;
+    protected bool _hasPerformed;
     
     // References ------------------------------------------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ public class BaseAttackCard : BaseCard
     {
         if (tile.OccupiedUnit)
         {
-            if (tile.OccupiedUnit.Faction == Faction.Enemy)
+            if (_cardType == CardType.BASE_ATTACK_CARD && tile.OccupiedUnit.Faction == Faction.Enemy)
             {
                 var enemy = (BaseEnemy)tile.OccupiedUnit;
 
@@ -52,10 +52,26 @@ public class BaseAttackCard : BaseCard
                 {
                     if (_availableTiles.ContainsKey(tile.transform.position) && enemy != null)
                     {
-                        enemy.IsSelected = false;
                         enemy.TakeDamage(_damage);
                         _hasPerformed = true;
                     }
+                }
+            }
+            else if (_cardType == CardType.AOE_ATTACK_CARD && tile.OccupiedUnit.Faction == Faction.Hero)
+            {
+                if (_unitsManager.HeroPlayer)
+                {
+                    foreach (var attackTile in _availableTiles)
+                    {
+                        var enemy = (BaseEnemy)_gridManager.GetTileAtPosition(attackTile.Key).OccupiedUnit;
+
+                        if (enemy)
+                        {
+                            enemy.TakeDamage(_damage);
+                        }
+                    }
+                    
+                    _hasPerformed = true;
                 }
             }
         }

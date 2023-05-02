@@ -17,7 +17,7 @@ public class TilemapsManager : MonoBehaviour
     [SerializeField] private RuleTile _movementRuleTile;
     [SerializeField] private RuleTile _attackRuleTile;
     [SerializeField] private RuleTile _enemyAttackRuleTile;
-    [SerializeField] private TileCell _attackTile;
+    [SerializeField] private RuleTile _aoeAttackRuleTile;
 
     [SerializeField] private Tilemap _cardAoeRenderer;
     
@@ -314,13 +314,18 @@ public class TilemapsManager : MonoBehaviour
     
     public RuleTile GetRuleTile(BaseCard baseCard)
     {
-        if (baseCard.CardType == CardType.MoveCard)
+        if (baseCard.CardType == CardType.MOVE_CARD)
         {
             return _movementRuleTile;
         }
-        if (baseCard.CardType == CardType.Attackcard)
+        else if (baseCard.CardType == CardType.BASE_ATTACK_CARD)
         {
             return _attackRuleTile;
+        }
+        else if (baseCard.CardType == CardType.AOE_ATTACK_CARD)
+
+        {
+            return _aoeAttackRuleTile;
         }
 
         return null;

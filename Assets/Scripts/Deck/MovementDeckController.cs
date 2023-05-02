@@ -15,7 +15,7 @@ public class MovementDeckController : DeckController
         if (!_unitsManager.HeroPlayer.MovementDeck)
         {
             _unitsManager.HeroPlayer.MovementDeck = this;
-            InstantiateBasicCard(CardsManager.Instance.ScrBasicMoveCards, _basicMoveCardNbr);
+            InstantiateBasicCard(CardsManager.Instance.ScrMoveCards, _basicMoveCardNbr);
         }
     }
 }

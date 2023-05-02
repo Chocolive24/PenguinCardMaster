@@ -169,10 +169,10 @@ public class CardPlayedManager : MonoBehaviour
     /// </summary>
     public void HandlePlayedCard()
     {
-        _unitsManager.HeroPlayer.CurrentMana -= _currentCard.ManaCost;
-
         if (_currentCard)
         {
+            _unitsManager.HeroPlayer.CurrentMana -= _currentCard.ManaCost;
+            
             // Free the current card slot.
             _availableCardSlots[_currentCard.HandIndex] = true;
 
@@ -196,7 +196,7 @@ public class CardPlayedManager : MonoBehaviour
             {
                 Destroy(_currentCard.AoeTilemap.gameObject);
 
-                if (_currentCard.CardType == CardType.MoveCard)
+                if (_currentCard.CardType == CardType.MOVE_CARD)
                 {
                     BaseMoveCard card = _currentCard.GetComponent<BaseMoveCard>();
             
@@ -212,14 +212,15 @@ public class CardPlayedManager : MonoBehaviour
     
     private void MoveCardToHisDiscardPile()
     {
-        if (_currentCard.CardType == CardType.MoveCard)
+        if (_currentCard.CardType == CardType.MOVE_CARD)
         {
             if (_currentCard.HeroClass == HeroClass.PALADIN)
             {
                 MoveToDiscardPile(_paladinMovDiscDeckContr, _unitsManager.HeroPlayer.MovementDeck);
             }
         }
-        else if (_currentCard.CardType == CardType.Attackcard)
+        else if (_currentCard.CardType == CardType.BASE_ATTACK_CARD || 
+                 _currentCard.CardType == CardType.AOE_ATTACK_CARD)
         {
             if (_currentCard.HeroClass == HeroClass.PALADIN)
             {

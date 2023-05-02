@@ -139,19 +139,19 @@ public class ShopManager : MonoBehaviour
 
     private void CreateObjects()
     {
-        CreateACard(_cardsManager.ScrBasicMoveCards, Rarety.Rare, _rareCard1RectTrans, 
+        CreateACard(_cardsManager.ScrMoveCards, Rarety.Rare, _rareCard1RectTrans, 
             _rareCard1Cost,50, 75);
-        CreateACard(_cardsManager.ScrBasicMoveCards, Rarety.Rare, _rareCard2RectTrans, 
+        CreateACard(_cardsManager.ScrMoveCards, Rarety.Rare, _rareCard2RectTrans, 
             _rareCard2Cost,50, 75);
         
-        CreateACard(_cardsManager.ScrBasicMoveCards, Rarety.Epic, _epicCard1RectTrans,
+        CreateACard(_cardsManager.ScrMoveCards, Rarety.Epic, _epicCard1RectTrans,
             _epicCard1Cost, 120, 160);
-        CreateACard(_cardsManager.ScrBasicMoveCards, Rarety.Epic, _epicCard2RectTrans, 
+        CreateACard(_cardsManager.ScrMoveCards, Rarety.Epic, _epicCard2RectTrans, 
             _epicCard2Cost,120, 160);
         
-        CreateACard(_cardsManager.ScrBasicMoveCards, Rarety.Legendary, _legCard1RectTrans, 
+        CreateACard(_cardsManager.ScrMoveCards, Rarety.Legendary, _legCard1RectTrans, 
             _legCard1Cost, 200, 250);
-        CreateACard(_cardsManager.ScrBasicMoveCards, Rarety.Legendary, _legCard2RectTrans, 
+        CreateACard(_cardsManager.ScrMoveCards, Rarety.Legendary, _legCard2RectTrans, 
             _legCard2Cost, 200, 250);
 
         Relic relic1 = CreateARelic(_relic1RectTrans, _relic1Cost, null);

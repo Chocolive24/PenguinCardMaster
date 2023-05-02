@@ -41,7 +41,14 @@ public class BaseMoveCard : BaseCard
     protected override void Awake()
     {
         base.Awake();
-        _cardEffectTxt.text = "Move " + _aeraOfEffect + "\n squares \n";
+        if (_aeraOfEffect > 15)
+        {
+            _cardEffectTxt.text = "Move freely in the room";
+        }
+        else
+        {
+            _cardEffectTxt.text = "Move " + _aeraOfEffect + "\n squares \n";
+        }
     }
 
     protected override void Start()

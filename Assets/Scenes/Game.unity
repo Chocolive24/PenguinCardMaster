@@ -24286,7 +24286,7 @@ MonoBehaviour:
   _movementRuleTile: {fileID: 11400000, guid: 76e58f6ae1caff24e9668d0df8a80a47, type: 2}
   _attackRuleTile: {fileID: 11400000, guid: c934b4ed2f2444b40bef72f3ace91d60, type: 2}
   _enemyAttackRuleTile: {fileID: 11400000, guid: 18ffe17d3b639fe4aaf78509880fd182, type: 2}
-  _attackTile: {fileID: 3407153308441798919, guid: 43a7ba30d866d854b8e889ebe8a41bf3, type: 3}
+  _aoeAttackRuleTile: {fileID: 11400000, guid: 060e242627dc1344bbd99a39ac0f979d, type: 2}
   _cardAoeRenderer: {fileID: 1020470168}
   _tilemapPrefab: {fileID: 1351230958147985002, guid: d2722399a10791c43ae9124d0462b3ae, type: 3}
 --- !u!1 &1740725378
@@ -25176,8 +25176,8 @@ MonoBehaviour:
     _useConstant: 1
     ConstantValue: 5
     Variable: {fileID: 11400000, guid: e926e3f6d47645d4b8d017563e1f7867, type: 2}
-  _minEnemyWeight: 1
-  _maxEnemyWeight: 1
+  _minEnemyWeight: 4
+  _maxEnemyWeight: 4
   _withWallsInside: 1
   _dungeonTilemap: {fileID: 1227949020}
   _groundRuleTile: {fileID: 11400000, guid: 58e28f01c75579a4bad6b16d48f78a11, type: 2}

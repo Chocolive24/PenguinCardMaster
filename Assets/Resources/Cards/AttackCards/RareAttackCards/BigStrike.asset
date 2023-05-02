@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d7f6b2bfb842f04ea76e791a339f173, type: 3}
+  m_Name: BigStrike
+  m_EditorClassIdentifier: 
+  _rarety: 7
+  _baseCardPrefab: {fileID: 175826822304769778, guid: 9a1acf18ed31ac649aaab1ab7434b77f, type: 3}

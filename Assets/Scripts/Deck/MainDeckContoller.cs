@@ -14,7 +14,7 @@ public class MainDeckContoller : DeckController
         if (!_unitsManager.HeroPlayer.MainDeck)
         {
             _unitsManager.HeroPlayer.MainDeck = this;
-            InstantiateBasicCard(CardsManager.Instance.ScrBasicAttackCards, _basicAttCardNbr);
+            InstantiateBasicCard(CardsManager.Instance.ScrAttackCards, _basicAttCardNbr);
         }
     }
 }

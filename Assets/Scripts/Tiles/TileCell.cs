@@ -154,7 +154,7 @@ public class TileCell : MonoBehaviour
         
         if (_cardPlayedManager.CurrentCard != null)
         {
-            if (_cardPlayedManager.CurrentCard.CardType == CardType.MoveCard &&
+            if (_cardPlayedManager.CurrentCard.CardType == CardType.MOVE_CARD &&
                 _cardPlayedManager.CurrentCard.AvailableTiles.ContainsKey(_position) &&
                 !_occupiedUnit)
             {
@@ -199,7 +199,7 @@ public class TileCell : MonoBehaviour
             _cardPlayedManager.CurrentCard.AvailableTiles.ContainsKey(_position) &&
             !_occupiedUnit)
         {
-            if (_cardPlayedManager.CurrentCard.CardType == CardType.MoveCard)
+            if (_cardPlayedManager.CurrentCard.CardType == CardType.MOVE_CARD)
             {
                 BaseMoveCard card = (BaseMoveCard)_cardPlayedManager.CurrentCard;
                 
@@ -242,7 +242,7 @@ public class TileCell : MonoBehaviour
                     enemy.MovementTilemap = _tilemapsManager.InstantiateTilemap("Enemy Movement");
 
                     enemy.AvailableTiles = enemy.GetAvailableTilesInRange(startingTile.Position,
-                        _occupiedUnit.GetComponent<BaseEnemy>().Movement.Value, false, false);
+                        _occupiedUnit.GetComponent<BaseEnemy>().Movement.Value, true, false);
                     
                     _tilemapsManager.DrawTilemap(enemy.AvailableTiles,
                         enemy.MovementTilemap, 

@@ -11,8 +11,8 @@ public class CardsManager : MonoBehaviour
     private static CardsManager _instance;
     public static CardsManager Instance => _instance;
 
-    private List<ScriptableCard> _scrBasicMoveCards;
-    private List<ScriptableCard> _scrBasicAttackCards;
+    private List<ScriptableCard> _scrMoveCards;
+    private List<ScriptableCard> _scrAttackCards;
     private List<ScriptableCard> _scrBasicDefenseCards;
 
     private int _totalRaretyWeight = (int)Rarety.Basic + (int)Rarety.Rare + (int)Rarety.Epic + (int)Rarety.Legendary;
@@ -29,8 +29,8 @@ public class CardsManager : MonoBehaviour
     [SerializeField] private GameObject _victoryPanel;
 
     // Getters and Setters ---------------------------------------------------------------------------------------------
-    public List<ScriptableCard> ScrBasicMoveCards => _scrBasicMoveCards;
-    public List<ScriptableCard> ScrBasicAttackCards => _scrBasicAttackCards;
+    public List<ScriptableCard> ScrMoveCards => _scrMoveCards;
+    public List<ScriptableCard> ScrAttackCards => _scrAttackCards;
     public List<ScriptableCard> ScrBasicDefenseCards => _scrBasicDefenseCards;
 
     // Methods ---------------------------------------------------------------------------------------------------------
@@ -45,9 +45,8 @@ public class CardsManager : MonoBehaviour
             _instance = this;
         }
         
-        _scrBasicMoveCards = Resources.LoadAll<ScriptableCard>("Cards/MoveCards/BasicMoveCards").ToList();
-        _scrBasicAttackCards = Resources.LoadAll<ScriptableCard>(
-            "Cards/AttackCards/PaladinCards/BasicAttackCards").ToList();
+        _scrMoveCards = Resources.LoadAll<ScriptableCard>("Cards/MoveCards").ToList();
+        _scrAttackCards = Resources.LoadAll<ScriptableCard>("Cards/AttackCards").ToList();
         
         Collectible.OnCollected += AddCollectedCardToDeck;
     }
@@ -74,67 +73,71 @@ public class CardsManager : MonoBehaviour
     {
         List<BaseCard> spawnedCards = new List<BaseCard>();
         
+        List<ScriptableCard> list = new List<ScriptableCard>();
+        
         for (int i = 0; i < rewardNbr; i++)
         {
-            int rndTypeNbr = Random.Range(1, 3);
-
-            List<ScriptableCard> rndList = new List<ScriptableCard>();
-
-            switch (rndTypeNbr)
+            switch (i)
             {
-                case 1:
-                {
-                    rndList = ScrBasicAttackCards;
+                case 0:
+                    list = ScrAttackCards;
                     break;
-                }
+                case 1:
+                    list = ScrMoveCards;
+                    break;
                 case 2:
-                    rndList = ScrBasicMoveCards;
+                    int rndTypeNbr = Random.Range(1, 3);
+                    
+                    switch (rndTypeNbr)
+                    {
+                        case 1:
+                        {
+                            list = ScrAttackCards;
+                            break;
+                        }
+                        case 2:
+                            list = ScrMoveCards;
+                            break;
+                    }
                     break;
             }
-
-            // int rndRaretyNbr = Random.Range(1, 101);
-            //
-            // switch (rndRaretyNbr)
-            // {
-            //     case <= 50:
-            //         InstantiateCard(rndList, Rarety.Basic);
-            //         break;
-            //     case <= 80:
-            //         InstantiateCard(rndList, Rarety.Rare);
-            //         break;
-            //     case <= 95:
-            //         InstantiateCard(rndList, Rarety.Epic);
-            //         break;
-            //     case <= 100:
-            //         InstantiateCard(rndList, Rarety.Legendary);
-            //         break;
-            // }
             
-            var card = GetRandomCard<BaseCard>(rndList, Rarety.Basic);
+            BaseCard cardData = null;
+            
+            int rndRaretyNbr = Random.Range(1, 101);
+            
+            switch (rndRaretyNbr)
+            {
+                case <= 50:
+                   cardData = GetRandomCard<BaseCard>(list, Rarety.Rare);
+                    break;
+                case <= 80:
+                    cardData = GetRandomCard<BaseCard>(list, Rarety.Epic);
+                    break;
+                case <= 100:
+                    cardData = GetRandomCard<BaseCard>(list, Rarety.Legendary);
+                    break;
+            }
+            
             BaseCard spawnedCard = null;
 
             switch (i)
             {
                 case 0:
-                    spawnedCard = Instantiate(card, _reward1Trans.position, Quaternion.identity);
+                    spawnedCard = Instantiate(cardData, _reward1Trans.position, Quaternion.identity);
                     spawnedCard.transform.parent = _reward1Trans.transform;
                     spawnedCards.Add(spawnedCard);
                     break;
                 case 1:
-                    spawnedCard = Instantiate(card, _reward2Trans.position, Quaternion.identity);
+                    spawnedCard = Instantiate(cardData, _reward2Trans.position, Quaternion.identity);
                     spawnedCard.transform.parent = _reward2Trans.transform;
                     spawnedCards.Add(spawnedCard);
                     break;
                 case 2:
-                    spawnedCard = Instantiate(card, _reward3Trans.position, Quaternion.identity);
+                    spawnedCard = Instantiate(cardData, _reward3Trans.position, Quaternion.identity);
                     spawnedCard.transform.parent = _reward3Trans.transform;
                     spawnedCards.Add(spawnedCard);
                     break;
-            }
-
-            if (spawnedCard)
-            {
-                //spawnedCard.OnCollected += AddCollectedCardToDeck;
             }
         }
         
@@ -149,10 +152,11 @@ public class CardsManager : MonoBehaviour
         {
             switch (card.CardType)
             {
-                case CardType.Attackcard:
+                case CardType.BASE_ATTACK_CARD:
+                case CardType.AOE_ATTACK_CARD:
                     _mainDeckContoller.AddCardWithData(card);
                     break;
-                case CardType.MoveCard:
+                case CardType.MOVE_CARD:
                     _movementDeckController.AddCardWithData(card);
                     break;
             } 

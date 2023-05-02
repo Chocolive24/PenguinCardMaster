@@ -88,6 +88,7 @@ public class UnitsManager : MonoBehaviour
         DoorTileCell.OnDoorTileEnter -= SpawnHeroes;
         DoorTileCell.OnDoorTileEnter -= SpawnRoomEnemies;
         ShopManager.OnShopExit -= SpawnHeroOutsideShop;
+        TileCell.OnTileSelected -= HandleSelectedEnemy;
     }
 
     private void SpawnRoomEnemies(DoorTileCell doorTile)

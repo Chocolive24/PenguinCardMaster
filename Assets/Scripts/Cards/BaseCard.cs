@@ -18,9 +18,9 @@ public enum Rarety
 
 public enum CardType
 {
-    MoveCard,
-    Attackcard,
-    DefendCard
+    MOVE_CARD,
+    BASE_ATTACK_CARD,
+    AOE_ATTACK_CARD,
 }
 
 public abstract class BaseCard : Collectible
@@ -323,7 +323,7 @@ public abstract class BaseCard : Collectible
     
     private bool CheckIfCanBePlayed()
     {
-        if (_unitsManager.HeroPlayer.CurrentMana == 0)
+        if (_manaCost > _unitsManager.HeroPlayer.CurrentMana)
         {
             OnNoTEnoughMana?.Invoke(this);
         }

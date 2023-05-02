@@ -237,7 +237,7 @@ public class BaseHero : BaseUnit
         _currentMana = _maxMana.Value;
     }
 
-    private void HealHP(RescuePotion arg1, int heal)
+    public void HealHP(RescuePotion arg1, int heal)
     {
         _currentHP.AddValue(heal);
 
@@ -305,11 +305,11 @@ public class BaseHero : BaseUnit
         
         foreach (var card in _cardHand)
         {
-            if (card.CardType == CardType.Attackcard)
+            if (card.CardType == CardType.BASE_ATTACK_CARD)
             {
                 _mainDeck.AddCardWithoutData(card);
             }
-            else if (card.CardType == CardType.MoveCard)
+            else if (card.CardType == CardType.MOVE_CARD)
             {
                 _movementDeck.AddCardWithoutData(card);
             }

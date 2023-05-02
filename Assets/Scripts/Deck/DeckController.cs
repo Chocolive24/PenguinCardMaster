@@ -88,7 +88,7 @@ public abstract class DeckController : MonoBehaviour
         {
             for (int i = 0; i < cardNbr; i++)
             {
-                var card = CardsManager.Instance.InstantiateARandomCard(scriptableCards, Rarety.Basic);
+                var card = CardsManager.Instance.InstantiateARandomCard(scriptableCards, Rarety.Legendary);
 
                 card.IsCollected = true;
                 
