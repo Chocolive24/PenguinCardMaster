@@ -23,7 +23,7 @@ public enum CardType
     DefendCard
 }
 
-public abstract class BaseCard : MonoBehaviour
+public abstract class BaseCard : Collectible
 {
     public BaseCard(string name, int manaCost, Rarety rarety, CardType cardType, HeroClass heroClass, 
                     int aeraOfEffect)
@@ -47,10 +47,13 @@ public abstract class BaseCard : MonoBehaviour
     [SerializeField] protected CardType _cardType;
     [SerializeField] protected HeroClass _heroClass;
     [SerializeField] protected int _aeraOfEffect;
+    [SerializeField] protected Neighbourhood.NeighboursType _neighboursType;
 
     // Other Values
     [SerializeField] private float _moveTime = 0.2f;
-    
+
+    protected Dictionary<Neighbourhood.Direction, Vector2> _neighboursData;
+
     #endregion
 
     #region Tile Attributes
@@ -72,10 +75,6 @@ public abstract class BaseCard : MonoBehaviour
     protected DiscardedCardState _discardedCardState;
 
     #endregion
-
-    protected bool _canBeCollected = true;
-    private bool _isCollected = false;
-    protected int _cost;
     
     protected int _handIndex;
 
@@ -108,8 +107,7 @@ public abstract class BaseCard : MonoBehaviour
     public static event Action<BaseCard> OnDrawn;
     public static event Action<BaseCard> OnPlayEnter; 
     public static event Action<BaseCard> OnPlayExit; 
-    public static  event Action<BaseCard> OnPerformed; 
-    public static event Action<BaseCard> OnCollected;
+    public static  event Action<BaseCard> OnPerformed;
 
     public static event Action<BaseCard> OnNoTEnoughMana;
 
@@ -137,19 +135,7 @@ public abstract class BaseCard : MonoBehaviour
         get => _aoeTilemap;
         set => _aoeTilemap = value;
     }
-
-    public bool CanBeCollected
-    {
-        get => _canBeCollected;
-        set => _canBeCollected = value;
-    }
-
-    public bool IsCollected
-    {
-        get => _isCollected;
-        set => _isCollected = value;
-    }
-
+    
     public bool HasBeenPlayed
     {
         get => _hasBeenPlayed;
@@ -167,18 +153,24 @@ public abstract class BaseCard : MonoBehaviour
     // Methods ---------------------------------------------------------------------------------------------------------
     protected virtual void Awake()
     {
+        base.Awake();
+        
         _availableTiles = new Dictionary<Vector3, int>();
         
         _boxCollider2D = GetComponent<BoxCollider2D>();
 
+        _neighboursData = Neighbourhood.NeighboursTypeToDico(_neighboursType);
+        
         GetTextes();
-
+        
         BaseHero.OnMovement += HandleTilemap;
         BaseHero.OnShuffleHandBackToDeck += ResetState;
     }
 
     private void OnDestroy()
     {
+        base.OnDestroy();
+        
         BaseHero.OnMovement -= HandleTilemap;
         BaseHero.OnShuffleHandBackToDeck -= ResetState;
     }
@@ -208,8 +200,6 @@ public abstract class BaseCard : MonoBehaviour
         ReferenceManagers();
         
         CreateStatePattern();
-
-        _canBeCollected = true;
     }
 
     private void ReferenceManagers()
@@ -253,7 +243,7 @@ public abstract class BaseCard : MonoBehaviour
         }
     }
     
-    public void OnClick()
+    public void OnCardClick()
     {
         if (_isCollected)
         {
@@ -261,8 +251,10 @@ public abstract class BaseCard : MonoBehaviour
         }
         else
         {
-            _isCollected = true;
-            OnCollected?.Invoke(this);
+            if (_aoeTilemap)
+            {
+                Destroy(_aoeTilemap.gameObject);
+            }
         }
     }
 
@@ -288,21 +280,42 @@ public abstract class BaseCard : MonoBehaviour
 
     public virtual void OnEventTriggerEnter()
     {
+        if (!_isCollected)
+        {
+            _aoeTilemap = _tilemapsManager.InstantiateTilemap(_name + " aoe");
+            
+            GetAvailableTilesInCardRenderer();
+            
+            this.DrawTilemap(_availableTiles, _aoeTilemap, _tilemapsManager.GetRuleTile(this));
+        }
+        
         _canDrawTilemap = true;
         
         if (!_aoeTilemap && _isCollected && _canDrawTilemap)
         {
             _aoeTilemap = _tilemapsManager.InstantiateTilemap(_name + " aoe");
-            
+
             this.GetAvailableTiles();
             
             this.DrawTilemap(_availableTiles, _aoeTilemap, _tilemapsManager.GetRuleTile(this));
         }
     }
 
+    protected virtual void GetAvailableTilesInCardRenderer()
+    {
+        _availableTiles = _tilemapsManager.GetAvailableTilesInCardRenderer(
+            _tilemapsManager.GetCardAoeRendererCenter(), _aeraOfEffect, _neighboursData,
+            false, true);
+    }
+
     public virtual void OnEventTriggerExit()
     {
-        if (_cardPlayedManager.CurrentCard != this && _aoeTilemap)
+        if (!_isCollected && _aoeTilemap)
+        {
+            Destroy(_aoeTilemap.gameObject);
+        }
+        
+        else if (_cardPlayedManager.CurrentCard != this && _aoeTilemap)
         {
             Destroy(_aoeTilemap.gameObject);
         }
@@ -331,7 +344,7 @@ public abstract class BaseCard : MonoBehaviour
     {
         _availableTiles = _tilemapsManager.GetAvailableTilesInRange(
             _gridManager.WorldToCellCenter(GetStartingTile().transform.position),
-            _aeraOfEffect, Neighbourhood.CardinalNeighbours, false, true);
+            _aeraOfEffect, _neighboursData, false, true);
     }
 
     public virtual void DrawTilemap(Dictionary<Vector3, int> availableNeighbours, 
@@ -366,7 +379,7 @@ public abstract class BaseCard : MonoBehaviour
     {
         float countTime = 0;
         
-        while( countTime <= _moveTime ) 
+        while( countTime <= _moveTime) 
         { 
             float percentTime = countTime / _moveTime;
             transform.position = Vector3.Lerp(startPos, endPos, percentTime);

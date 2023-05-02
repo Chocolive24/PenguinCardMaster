@@ -249,9 +249,9 @@ public class BaseHero : BaseUnit
         _healthBar.UpdateHealthBar(_currentHP.Value, _maxHP.Value);
     }
     
-    private void UpdateGolds(ShopManager arg1, int cost)
+    private void UpdateGolds(ShopManager arg1, Collectible obj)
     {
-        _golds.SubstractValue(cost);
+        _golds.SubstractValue(obj.ObjectCost);
     }
     
     // Update is called once per frame

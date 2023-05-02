@@ -49,12 +49,12 @@ public class CardsManager : MonoBehaviour
         _scrBasicAttackCards = Resources.LoadAll<ScriptableCard>(
             "Cards/AttackCards/PaladinCards/BasicAttackCards").ToList();
         
-        BaseCard.OnCollected += AddCollectedCardToDeck;
+        Collectible.OnCollected += AddCollectedCardToDeck;
     }
 
     private void OnDestroy()
     {
-        BaseCard.OnCollected -= AddCollectedCardToDeck;
+        Collectible.OnCollected -= AddCollectedCardToDeck;
     }
 
     public BaseCard InstantiateACardFromData(ScriptableCard cardData)
@@ -141,16 +141,21 @@ public class CardsManager : MonoBehaviour
         return spawnedCards;
     }
     
-    public void AddCollectedCardToDeck(BaseCard card)
+    public void AddCollectedCardToDeck(Collectible obj)
     {
-        switch (card.CardType)
+        BaseCard card = obj.GetComponent<BaseCard>();
+
+        if (card)
         {
-            case CardType.Attackcard:
-                _mainDeckContoller.AddCardWithData(card);
-                break;
-            case CardType.MoveCard:
-                _movementDeckController.AddCardWithData(card);
-                break;
+            switch (card.CardType)
+            {
+                case CardType.Attackcard:
+                    _mainDeckContoller.AddCardWithData(card);
+                    break;
+                case CardType.MoveCard:
+                    _movementDeckController.AddCardWithData(card);
+                    break;
+            } 
         }
     }
     

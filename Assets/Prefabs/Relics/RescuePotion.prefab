@@ -96,19 +96,47 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3247736833332960610, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247736833332960610, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247736833332960610, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7017130344992261492}
     - target: {fileID: 3247736833332960610, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 7017130344992261492}
+    - target: {fileID: 3247736833332960610, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247736833332960610, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnClick
+      value: OnRelicClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247736833332960610, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnCollectibleClick
       objectReference: {fileID: 0}
     - target: {fileID: 3247736833332960610, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Relic, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3247736833332960610, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Collectible, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247736833332960610, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247736833332960610, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3247736833332960611, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
@@ -149,6 +177,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a602e5e0cc9631e4ea6e362db165ba8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerGolds:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 9210c534f36d0e1408aa288f2a95b252, type: 2}
   _button: {fileID: 4025489868917581006}
   _relicDataRef: {fileID: 11400000, guid: f386ce6b0af9ae04a98e539518be6338, type: 2}
   _effectBox: {fileID: 324761650598517068}

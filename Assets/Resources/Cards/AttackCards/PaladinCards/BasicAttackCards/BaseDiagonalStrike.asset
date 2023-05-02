@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d7f6b2bfb842f04ea76e791a339f173, type: 3}
-  m_Name: SwordStrike
+  m_Name: BaseDiagonalStrike
   m_EditorClassIdentifier: 
-  _rarety: 1
-  _baseCardPrefab: {fileID: 769551569, guid: b645d0a8b02fd2c40aa6a0e7a7181f79, type: 3}
+  _rarety: 10
+  _baseCardPrefab: {fileID: 1749001720223253066, guid: e5d66ae67528c3f49aac85ef94429607, type: 3}

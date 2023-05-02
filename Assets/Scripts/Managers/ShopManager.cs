@@ -25,6 +25,8 @@ public class ShopManager : MonoBehaviour
     private bool _hasCreateObjects = false;
 
     private RelicsManager _relicsManager;
+
+    [SerializeField] private IntReference _playerGolds;
     
     [Header("Cards Rect Transform")]
     [SerializeField] private RectTransform _rareCard1RectTrans;
@@ -56,7 +58,7 @@ public class ShopManager : MonoBehaviour
     private UnitsManager _unitsManager;
 
     // Events ----------------------------------------------------------------------------------------------------------
-    public static event Action<ShopManager, int> OnObjectBuy; 
+    public static event Action<ShopManager, Collectible> OnObjectBuy; 
     public static event Action<ShopManager> OnShopExit; 
 
     // Getters ans Setters ---------------------------------------------------------------------------------------------
@@ -69,7 +71,7 @@ public class ShopManager : MonoBehaviour
     private void Awake()
     {
         DoorTileCell.OnDoorTileEnter += ActivateShop;
-        ShopObject.OnBuy += BuyObject;
+        Collectible.OnBuy += BuyObject;
     }
 
     private void Start()
@@ -84,24 +86,14 @@ public class ShopManager : MonoBehaviour
     private void OnDestroy()
     {
         DoorTileCell.OnDoorTileEnter -= ActivateShop;
-        ShopObject.OnBuy -= BuyObject;
+        Collectible.OnBuy -= BuyObject;
     }
 
-    private void BuyObject(ShopObject obj)
+    private void BuyObject(Collectible obj)
     {
-        if (obj.CardRef)
+        if (obj.ObjectCost <= _playerGolds.Value)
         {
-            obj.CardRef.IsCollected = true;
-            _cardsManager.AddCollectedCardToDeck(obj.CardRef);
-            
-            OnObjectBuy?.Invoke(this, obj.ObjectCost);
-        }
-        else if (obj.RelicRef)
-        {
-            obj.RelicRef.IsCollected = true;
-            _relicsManager.AddRelicWithData(obj.RelicRef);
-            
-            OnObjectBuy?.Invoke(this, obj.ObjectCost);
+            OnObjectBuy?.Invoke(this, obj);
         }
     }
 
@@ -162,8 +154,8 @@ public class ShopManager : MonoBehaviour
         CreateACard(_cardsManager.ScrBasicMoveCards, Rarety.Legendary, _legCard2RectTrans, 
             _legCard2Cost, 200, 250);
 
-        Relic relic1 = CreateARelic(_relic1RectTrans, 300, 350, _relic1Cost, null);
-        Relic relic2 = CreateARelic(_relic2RectTrans, 300, 350, _relic2Cost, relic1);
+        Relic relic1 = CreateARelic(_relic1RectTrans, _relic1Cost, null);
+        Relic relic2 = CreateARelic(_relic2RectTrans, _relic2Cost, relic1);
     }
     
     private void CreateACard(List<ScriptableCard> scrCards, Rarety rarety, RectTransform rect, TextMeshProUGUI costText,
@@ -173,38 +165,20 @@ public class ShopManager : MonoBehaviour
         cardRare1.transform.position = rect.position;
         cardRare1.transform.parent = rect.transform.parent;
 
-        int cost = GetARndCostInRange(minCost, maxCost);
+        cardRare1.Init(Collectible.CollectibleType.SHOP_OBJECT, Random.Range(minCost, maxCost));
         
-        costText.text = cost.ToString();
-        //cardRare1.OnCollected += _cardsManager.AddCollectedCardToDeck;
-        cardRare1.CanBeCollected = false;
-
-        ShopObject obj = Instantiate(_shopObjectPrefab, rect.position, Quaternion.identity, 
-            rect.transform.parent).GetComponent<ShopObject>();
-
-        obj.ObjectCost = cost;
-        obj.CardRef = cardRare1;
+        costText.text = cardRare1.ObjectCost.ToString();
     }
     
-    private Relic CreateARelic(RectTransform rect, int minCost, int maxCost, TextMeshProUGUI costText, 
-        Relic relicToAvoid)
+    private Relic CreateARelic(RectTransform rect, TextMeshProUGUI costText, Relic relicToAvoid)
     {
         Relic rndRelic = _relicsManager.GetARandomRelic(relicToAvoid);
         Relic relic = Instantiate(rndRelic, rect.position, Quaternion.identity, rect.transform);
 
-        int cost = GetARndCostInRange(minCost, maxCost);
-        costText.text = cost.ToString();
-
-        relic.OnCollected += _relicsManager.AddRelicWithData;
+        relic.Init(Collectible.CollectibleType.SHOP_OBJECT, Random.Range(300, 350));
         
-        ShopObject obj = Instantiate(_shopObjectPrefab, rect.position, Quaternion.identity, 
-            rect.transform.parent).GetComponent<ShopObject>();
-
-        obj.GetComponent<RectTransform>().sizeDelta = new Vector2(rect.sizeDelta.x, rect.sizeDelta.y);
+        costText.text = relic.ObjectCost.ToString();
         
-        obj.ObjectCost = cost;
-        obj.RelicRef = relic;
-
         return relic;
     }
 

@@ -125,7 +125,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3705435872159789035}
         m_TargetAssemblyTypeName: ShopObject, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnCollectibleClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

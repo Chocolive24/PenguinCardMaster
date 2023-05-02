@@ -89,7 +89,9 @@ public abstract class DeckController : MonoBehaviour
             for (int i = 0; i < cardNbr; i++)
             {
                 var card = CardsManager.Instance.InstantiateARandomCard(scriptableCards, Rarety.Basic);
-            
+
+                card.IsCollected = true;
+                
                 AddCardWithData(card);
             }
         }
@@ -98,6 +100,8 @@ public abstract class DeckController : MonoBehaviour
             foreach (var cardData in _deckData.CardDeckData)
             {
                 var card = CardsManager.Instance.InstantiateACardFromData(cardData);
+                
+                card.IsCollected = true;
                 
                 AddCardWithoutData(card);
             }

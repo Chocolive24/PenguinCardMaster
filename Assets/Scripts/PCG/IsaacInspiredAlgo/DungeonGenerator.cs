@@ -100,16 +100,16 @@ public class DungeonGenerator : MonoBehaviour
         _startRoom.SetDoorsOpen(true);
         _shopRoom.SetDoorsOpen(true);
         
-        _currentFloorNbr.AddValue(1);
+        //_currentFloorNbr.AddValue(1);
     }
 
     private void HandleRoomNumber()
     {
-        if (_currentFloorNbr.Value > 0)
-        {
-            _minNbrOfRooms.AddValue(Random.Range(2, 4));
-            _maxNbrOfRooms.AddValue(Random.Range(2, 4));
-        }
+        // if (_currentFloorNbr.Value > 0)
+        // {
+        //     _minNbrOfRooms.AddValue(Random.Range(2, 4));
+        //     _maxNbrOfRooms.AddValue(Random.Range(2, 4));
+        // }
         
         if (_maxNbrOfRooms.Value < _minNbrOfRooms.Value)
         {

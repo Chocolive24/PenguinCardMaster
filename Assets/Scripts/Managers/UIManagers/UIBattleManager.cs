@@ -29,6 +29,7 @@ public class UIBattleManager : MonoBehaviour
     [SerializeField] private GameObject _selectedHeroObject, _tileObject, _tileUnitObject;
     [SerializeField] private GameObject _goldsPanel;
     [SerializeField] private TextMeshProUGUI _golds;
+    [SerializeField] private GameObject _cardAoeRenderer;
     #endregion
 
     #region Managers
@@ -56,6 +57,8 @@ public class UIBattleManager : MonoBehaviour
     }
 
     public Button EndTurnButton => _endTurnButton;
+
+    public GameObject CardAoeRenderer => _cardAoeRenderer;
 
     #endregion
     
@@ -182,6 +185,7 @@ public class UIBattleManager : MonoBehaviour
     {
         _VictoryPanel.SetActive(true);
         _goldsPanel.SetActive(true);
+        _cardAoeRenderer.SetActive(false);
         _golds.text = "You received " + golds + " golds !";
     }
 
@@ -190,6 +194,7 @@ public class UIBattleManager : MonoBehaviour
         OnNextReward?.Invoke(this);
         
         _goldsPanel.SetActive(false);
+        _cardAoeRenderer.SetActive(true);
     }
     
     private void DisplayNotEnoughManaTxt(BaseCard obj)

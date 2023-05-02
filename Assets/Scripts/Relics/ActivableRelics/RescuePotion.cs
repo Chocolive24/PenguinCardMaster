@@ -15,15 +15,18 @@ public class RescuePotion : Relic
     public static event Action<RescuePotion, int> OnPerformEffect;
     
     // Methods ---------------------------------------------------------------------------------------------------------
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         BattleManager.OnBattleStart += SetValues;
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         BattleManager.OnBattleStart -= SetValues;
     }
+
 
     protected override void Start()
     {

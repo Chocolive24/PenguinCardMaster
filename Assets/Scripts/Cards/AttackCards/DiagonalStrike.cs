@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DiagonalStrike : BaseAttackCard
@@ -11,8 +12,19 @@ public class DiagonalStrike : BaseAttackCard
     }
     
     // Methods ---------------------------------------------------------------------------------------------------------
-    public override void GetAvailableTiles()
-    {
-        
-    }
+    // public override void GetAvailableTiles()
+    // {
+    //     _availableTiles = _tilemapsManager.GetAvailableTilesInRange(
+    //         _gridManager.WorldToCellCenter(GetStartingTile().transform.position),
+    //         _aeraOfEffect, Neighbourhood.DiagonalNeighbours, false, true);
+    // }
+    //
+    // protected override void GetAvailableTilesInCardRenderer()
+    // {
+    //     _availableTiles = _tilemapsManager.GetAvailableTilesInCardRenderer(
+    //         _tilemapsManager.GetCardAoeRendererCenter(), _aeraOfEffect, Neighbourhood.DiagonalNeighbours,
+    //         false, true);
+    //
+    //     _availableTiles.Remove(_availableTiles.First().Key);
+    // }
 }

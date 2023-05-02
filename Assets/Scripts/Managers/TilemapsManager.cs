@@ -10,17 +10,17 @@ public class TilemapsManager : MonoBehaviour
     public static TilemapsManager Instance { get { return _instance; } }
     
     // References ------------------------------------------------------------------------------------------------------
+    private Dictionary<Vector3, TileCell> _cardAoeRenderTiles;
 
     #region Tilemaps and Tiles
-
-    [SerializeField] private Tilemap _movementTilemap;
-    [SerializeField] private Tilemap _attackTilemap;
+    
     [SerializeField] private RuleTile _movementRuleTile;
     [SerializeField] private RuleTile _attackRuleTile;
     [SerializeField] private RuleTile _enemyAttackRuleTile;
-    [SerializeField] private TileCell _movementTile;
     [SerializeField] private TileCell _attackTile;
 
+    [SerializeField] private Tilemap _cardAoeRenderer;
+    
     [SerializeField] private GameObject _tilemapPrefab;
 
     #endregion
@@ -32,11 +32,11 @@ public class TilemapsManager : MonoBehaviour
     #endregion
 
     // Getters and Setters ---------------------------------------------------------------------------------------------
-    public Tilemap AttackTilemap => _attackTilemap;
     public RuleTile AttackRuleTile => _attackRuleTile;
 
     public RuleTile EnemyAttackRuleTile => _enemyAttackRuleTile;
-    public TileCell AttackTile => _attackTile;
+
+    public Tilemap CardAoeRenderer => _cardAoeRenderer;
 
     // -----------------------------------------------------------------------------------------------------------------
     
@@ -56,6 +56,8 @@ public class TilemapsManager : MonoBehaviour
     void Start()
     {
         _gridManager = GridManager.Instance;
+        
+        GetCardRenderTiles();
     }
 
     // Update is called once per frame
@@ -322,5 +324,95 @@ public class TilemapsManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void GetCardRenderTiles()
+    {
+        _cardAoeRenderTiles = new Dictionary<Vector3, TileCell>();
+        
+        TileCell[] dungeonTiles = _cardAoeRenderer.GetComponentsInChildren<TileCell>();
+        //TileCell[] roomTiles = _currentRoom.GetComponentsInChildren<TileCell>();
+
+        foreach (var tile in dungeonTiles)
+        {
+            _cardAoeRenderTiles[_gridManager.WorldToCellCenter(tile.transform.position)] = tile;
+        }
+    }
+
+    public Dictionary<Vector3, int> GetAvailableTilesInCardRenderer(Vector3 startPos, int range, 
+        Dictionary<Neighbourhood.Direction, Vector2> neighbourhood,
+        bool countHeroes, bool countEnemies)
+    {
+        var queue = new Queue<Vector3>();
+        var distances = new Dictionary<Vector3, int> { { startPos, 0 } };
+
+        queue.Enqueue(startPos);
+
+        while (queue.Count > 0)
+        {
+            var currentPos = queue.Dequeue();
+            
+            foreach (var direction in neighbourhood)
+            {
+                Vector3 dir = new Vector3(direction.Value.x, direction.Value.y, 0);
+                
+                var neighbor = _gridManager.WorldToCellCenter(currentPos + dir);
+
+                if (IsCardRendererPosAvalaible(neighbor, countHeroes, countEnemies) && 
+                    !distances.ContainsKey(neighbor))
+                {
+                    if (distances[currentPos] + 1 <= range)
+                    {
+                        distances.Add(neighbor, distances[currentPos] + 1);
+                        queue.Enqueue(neighbor);
+                    }
+                }
+            }
+        }
+        
+        return distances;
+    }
+
+    public bool IsCardRendererPosAvalaible(Vector3 position, bool countHeroes, bool countEnemies)
+    {
+        if (GetCardRendererTileAtPosition(position) != null)
+        {
+            TileCell tile = GetCardRendererTileAtPosition(position);
+            
+            if (countHeroes && tile.OccupiedUnit != null)
+            {
+                if (tile.OccupiedUnit.Faction == Faction.Hero)
+                {
+                    return true;
+                }
+                
+            }
+            if (countEnemies && tile.OccupiedUnit != null)
+            {
+                if (tile.OccupiedUnit.Faction == Faction.Enemy)
+                {
+                    return true;
+                }
+            }
+
+            return tile.Walkable;
+        }
+
+        return false;
+    }
+    
+    public TileCell GetCardRendererTileAtPosition(Vector3 pos)
+    {
+        if (_cardAoeRenderTiles.TryGetValue(pos, out TileCell tileCell))
+        {
+            return tileCell;
+        }
+        
+        return null;
+    }
+    
+    public Vector3 GetCardAoeRendererCenter()
+    {
+        return _cardAoeRenderer.cellBounds.center;
     }
 }

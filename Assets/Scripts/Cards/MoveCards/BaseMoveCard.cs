@@ -92,7 +92,7 @@ public class BaseMoveCard : BaseCard
     {
         _availableTiles = _tilemapsManager.GetAvailableTilesInRange(
             _gridManager.WorldToCellCenter(GetStartingTile().transform.position),
-            _aeraOfEffect, Neighbourhood.CardinalNeighbours, false, false);
+            _aeraOfEffect, _neighboursData, false, false);
     }
 
     public override void ResetProperties()

@@ -102,7 +102,8 @@ public class BattleManager : MonoBehaviour
         UIBattleManager.OnNextReward += HandleNextReward;
         UnitsManager.OnEnemiesTurnEnd += SetTurnToPlayerTurn;
         DoorTileCell.OnDoorTileEnter += GetRoomData;
-        BaseCard.OnCollected += DestroyCardRewards;
+        Collectible.OnCollected += DestroyCardRewards;
+        Collectible.OnCollected += DestroyRelicRewards;
     }
 
     private void OnDestroy()
@@ -110,7 +111,8 @@ public class BattleManager : MonoBehaviour
         UIBattleManager.OnNextReward -= HandleNextReward;
         UnitsManager.OnEnemiesTurnEnd -= SetTurnToPlayerTurn;
         DoorTileCell.OnDoorTileEnter -= GetRoomData;
-        BaseCard.OnCollected -= DestroyCardRewards;
+        Collectible.OnCollected -= DestroyCardRewards;
+        Collectible.OnCollected -= DestroyRelicRewards;
     }
 
     private void SetTurnToPlayerTurn()
@@ -246,64 +248,61 @@ public class BattleManager : MonoBehaviour
             _playerGolds.AddValue(_currentGoldReward);
             
             _cardRewards = _cardsManager.CreateCardRewards(_rewardsNbr);
-
-            foreach (var card in _cardRewards)
-            {
-                //card.OnCollected += DestroyCardRewards;
-            }
         }
     }
 
-    private void DestroyCardRewards(BaseCard obj)
+    private void DestroyCardRewards(Collectible obj)
     {
-        _cardRewards.Remove(obj);
-        
-        foreach (var card in _cardRewards)
-        {
-            Destroy(card.gameObject);
-        }
-        
-        _cardRewards.Clear();
+        BaseCard cardCollected = obj.GetComponent<BaseCard>();
 
-        if (_battleRoom.Type != RoomData.RoomType.END)
+        if (cardCollected && _cardRewards.Count > 0)
         {
-            if (Random.Range(1, 101) <= _relicRewardPercentage)
+            _cardRewards.Remove(cardCollected);
+        
+            foreach (var card in _cardRewards)
             {
-                _relicRewards = _relicsManager.CreateRelicRewards();
+                Destroy(card.gameObject);
+            }
+        
+            _cardRewards.Clear();
+        
+            _uiBattleManager.CardAoeRenderer.SetActive(false);
 
-                foreach (var relic in _relicRewards)
+            if (_battleRoom.Type != RoomData.RoomType.END)
+            {
+                if (Random.Range(1, 101) <= _relicRewardPercentage)
                 {
-                    relic.OnCollected += DestroyRelicRewards;
+                    _relicRewards = _relicsManager.CreateRelicRewards();
+                }
+                else
+                {
+                    _uiBattleManager.VictoryPanel.SetActive(false);
                 }
             }
             else
             {
-                _uiBattleManager.VictoryPanel.SetActive(false);
-            }
-        }
-        else
-        {
-            _relicRewards = _relicsManager.CreateRelicRewards();
-
-            foreach (var relic in _relicRewards)
-            {
-                relic.OnCollected += DestroyRelicRewards;
+                _relicRewards = _relicsManager.CreateRelicRewards();
             }
         }
     }
     
-    private void DestroyRelicRewards(Relic obj)
+    private void DestroyRelicRewards(Collectible obj)
     {
-        _relicRewards.Remove(obj);
-        
-        foreach (var relic in _relicRewards)
+        Relic relicCollected = obj.GetComponent<Relic>();
+
+        if (relicCollected && _relicRewards.Count > 0)
         {
-            Destroy(relic.gameObject);
+            _relicRewards.Remove(relicCollected);
+        
+            foreach (var relic in _relicRewards)
+            {
+                Destroy(relic.gameObject);
+            }
+        
+            _relicRewards.Clear();
+        
+            _uiBattleManager.VictoryPanel.SetActive(false);
         }
-        
-        _relicRewards.Clear();
-        
-        _uiBattleManager.VictoryPanel.SetActive(false);
     }
 
     public void ExitVictory()

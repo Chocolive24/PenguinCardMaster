@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,29 @@ public class Neighbourhood
         DOWN_LEFT,
         UP_LEFT,
         NULL
+    }
+    
+    public enum NeighboursType
+    {
+        CARDINAL_NEIGHBOURS,
+        DIGONAL_NEIGHBOURS,
+        ALL_NEIGHBOURS,
+        NULL
+    }
+
+    public static Dictionary<Direction, Vector2> NeighboursTypeToDico(NeighboursType type)
+    {
+        switch (type)
+        {
+            case NeighboursType.CARDINAL_NEIGHBOURS:
+                return CardinalNeighbours;
+            case NeighboursType.DIGONAL_NEIGHBOURS:
+                return DiagonalNeighbours;
+            case NeighboursType.ALL_NEIGHBOURS:
+                return AllNeighbours;
+            default:
+                return new Dictionary<Direction, Vector2>();
+        }
     }
     
     public static Dictionary<Direction, Vector2> CardinalNeighbours => new Dictionary<Direction, Vector2>()
