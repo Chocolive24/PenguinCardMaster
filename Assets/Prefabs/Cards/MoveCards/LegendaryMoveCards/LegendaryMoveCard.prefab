@@ -14,14 +14,14 @@ PrefabInstance:
     - target: {fileID: 1708276804, guid: 2d318bb797e5ea14db40b3574cf9a7b9, type: 3}
       propertyPath: _cardData
       value: 
-      objectReference: {fileID: 11400000, guid: 0448a5dbd1187664f8aecfba59403b86, type: 2}
+      objectReference: {fileID: 11400000, guid: 36f76d7cfbf2e594f963ba0292292e07, type: 2}
     - target: {fileID: 1708276804, guid: 2d318bb797e5ea14db40b3574cf9a7b9, type: 3}
       propertyPath: _manaCost
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1708276804, guid: 2d318bb797e5ea14db40b3574cf9a7b9, type: 3}
       propertyPath: _aeraOfEffect
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5447476175181462826, guid: 2d318bb797e5ea14db40b3574cf9a7b9, type: 3}
       propertyPath: m_Pivot.x

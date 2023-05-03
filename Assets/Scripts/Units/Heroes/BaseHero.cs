@@ -134,6 +134,7 @@ public class BaseHero : BaseUnit
         TileCell.OnTileSelected += FindExploringPath;
         DiscardDeckController.OnDiscarFull += ShuffleCardsBackToDeck;
         RescuePotion.OnPerformEffect += HealHP;
+        RescueMana.OnPerformEffect += RestoreMana;
         ShopManager.OnObjectBuy += UpdateGolds;
 
         BaseCard.OnDrawn += AddCardToHand;
@@ -141,7 +142,7 @@ public class BaseHero : BaseUnit
 
         _cardHand = new List<BaseCard>();
     }
-
+    
     private void OnDestroy()
     {
         GameManager.OnGameStateChange -= GameManagerOnOnGameStateChange;
@@ -151,6 +152,7 @@ public class BaseHero : BaseUnit
         TileCell.OnTileSelected -= FindExploringPath;
         DiscardDeckController.OnDiscarFull -= ShuffleCardsBackToDeck;
         RescuePotion.OnPerformEffect -= HealHP;
+        RescueMana.OnPerformEffect -= RestoreMana;
         ShopManager.OnObjectBuy -= UpdateGolds;
         
         BaseCard.OnDrawn -= AddCardToHand;
@@ -249,6 +251,11 @@ public class BaseHero : BaseUnit
         _healthBar.UpdateHealthBar(_currentHP.Value, _maxHP.Value);
     }
     
+    private void RestoreMana(RescueMana arg1, int arg2)
+    {
+        _currentMana += arg2;
+    }
+    
     private void UpdateGolds(ShopManager arg1, Collectible obj)
     {
         _golds.SubstractValue(obj.ObjectCost);
@@ -305,7 +312,7 @@ public class BaseHero : BaseUnit
         
         foreach (var card in _cardHand)
         {
-            if (card.CardType == CardType.BASE_ATTACK_CARD)
+            if (card.CardType == CardType.BASE_ATTACK_CARD || card.CardType == CardType.AOE_ATTACK_CARD)
             {
                 _mainDeck.AddCardWithoutData(card);
             }

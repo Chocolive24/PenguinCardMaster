@@ -41,7 +41,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3247736833332960609, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 60
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 3247736833332960609, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_SizeDelta.y
@@ -177,10 +177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a602e5e0cc9631e4ea6e362db165ba8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerGolds:
-    _useConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 11400000, guid: 9210c534f36d0e1408aa288f2a95b252, type: 2}
   _button: {fileID: 4025489868917581006}
   _relicDataRef: {fileID: 11400000, guid: f386ce6b0af9ae04a98e539518be6338, type: 2}
   _effectBox: {fileID: 324761650598517068}

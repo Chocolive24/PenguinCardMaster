@@ -269,4 +269,8 @@ MonoBehaviour:
   _cardData: {fileID: 11400000, guid: 28d3b5d4e1aa7db4c9666e7a8184bc7a, type: 2}
   _manaNbrTxt: {fileID: 3904962185654177219}
   _cardEffectTxt: {fileID: 3904962185596345692}
-  _damage: 20
+  _playerAttack:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 4fb2bff2c7e868c40bd61d4021591daa, type: 2}
+  _baseDamage: 15

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ManaStrike : BaseAttackCard
 {
     public ManaStrike(string name, int manaCost, Rarety rarety, CardType cardType, HeroClass heroClass, 
-        int aeraOfEffect, int damage) : base(name, manaCost, rarety, cardType, heroClass, aeraOfEffect, damage)
+        int aeraOfEffect, int baseDamage) : base(name, manaCost, rarety, cardType, heroClass, aeraOfEffect, baseDamage)
     {
     }
     

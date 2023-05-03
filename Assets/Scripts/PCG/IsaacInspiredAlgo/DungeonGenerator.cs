@@ -8,7 +8,6 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
-using Range = UnityEngine.SocialPlatforms.Range;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -96,6 +95,11 @@ public class DungeonGenerator : MonoBehaviour
         
         // Draw tiles
         PaintDungeon(_dungeonTilemap);
+
+        foreach (var room in _rooms)
+        {
+            SetupDoors(_dungeonTilemap, room.Value);
+        }
         
         _startRoom.SetDoorsOpen(true);
         _shopRoom.SetDoorsOpen(true);
@@ -374,7 +378,7 @@ public class DungeonGenerator : MonoBehaviour
         
         PaintTilesFromAListOfPositions(tilemap, _wallRuleTile, wallPositions);
 
-        PaintDoors(tilemap, room, roomDoorsPosition);
+        PaintDoors(tilemap, roomDoorsPosition);
 
         if (_withWallsInside)
         {
@@ -394,23 +398,11 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    private void PaintDoors(Tilemap tilemap, RoomData room, List<Vector3Int> roomDoorsPosition)
+    private void PaintDoors(Tilemap tilemap, List<Vector3Int> roomDoorsPosition)
     {
         foreach (var doorPos in roomDoorsPosition)
         {
             tilemap.SetTile(doorPos, _doorRuleTile);
-
-            var doorGameObject = tilemap.GetInstantiatedObject(doorPos);
-
-            DoorTileCell door = doorGameObject.GetComponent<DoorTileCell>();
-
-            door.Room = room;
-
-            room.DoorsData.TryGetValue(doorPos, out Neighbourhood.Direction direction);
-
-            door.SetDirection(direction);
-            
-            room.AddDoor(door);
         }
     }
 
@@ -422,6 +414,25 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
+    private void SetupDoors(Tilemap tilemap, RoomData room)
+    {
+        foreach (var doorPos in room.GetDoorPositions())
+        {
+            var doorGameObject = tilemap.GetInstantiatedObject(doorPos);
+            
+            if (doorGameObject.TryGetComponent<DoorTileCell>(out DoorTileCell door))
+            {
+                door.Room = room;
+
+                room.DoorsData.TryGetValue(doorPos, out Neighbourhood.Direction direction);
+
+                door.SetDirection(direction);
+
+                room.AddDoor(door);
+            }
+        }
+    }
+    
     private HashSet<Vector2Int> GetGroundPositions(RoomData room)
     {
         HashSet<Vector2Int> floor = new HashSet<Vector2Int>();

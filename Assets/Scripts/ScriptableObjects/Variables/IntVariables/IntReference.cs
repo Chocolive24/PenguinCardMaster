@@ -8,15 +8,15 @@ using UnityEngine;
 public class IntReference
 {
     [SerializeField] private bool _useConstant = false;
-    public int ConstantValue;
+    [SerializeField] private int _baseValue;
+    public int ConstantRunValue;
+    
     public IntVariable Variable;
 
-    private int _baseValue;
-    
-    public int Value { get => _useConstant ? ConstantValue : Variable.Value; }
+    public int Value { get => _useConstant ? ConstantRunValue : Variable.RunValue; }
 
     // Events ----------------------------------------------------------------------------------------------------------
-
+    public event Action OnValueChanged;
     // Getters and Setters ---------------------------------------------------------------------------------------------
     public bool UseConstant => _useConstant;
 
@@ -25,35 +25,47 @@ public class IntReference
     {
         if (_useConstant)
         {
-            ConstantValue = newValue;
+            ConstantRunValue = newValue;
         }
         else
         {
-            Variable.Value = newValue;
+            Variable.RunValue = newValue;
         }
+        
+        OnValueChanged?.Invoke();
     }
 
     public void AddValue(int value)
     {
         if (_useConstant)
         {
-            ConstantValue += value;
+            ConstantRunValue += value;
         }
         else
         {
-            Variable.Value += value;
+            Variable.RunValue += value;
         }
+        
+        OnValueChanged?.Invoke();
     }
     
     public void SubstractValue(int value)
     {
         if (_useConstant)
         {
-            ConstantValue -= value;
+            ConstantRunValue -= value;
         }
         else
         {
-            Variable.Value -= value;
+            Variable.RunValue -= value;
         }
+        
+        OnValueChanged?.Invoke();
     }
+
+    public void ResetValue()
+    {
+        SetValue(_baseValue);
+    }
+    
 }

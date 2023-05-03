@@ -72,74 +72,113 @@ public class CardsManager : MonoBehaviour
     public List<BaseCard> CreateCardRewards(int rewardNbr)
     {
         List<BaseCard> spawnedCards = new List<BaseCard>();
-        
-        List<ScriptableCard> list = new List<ScriptableCard>();
+
+        List<ScriptableCard> moveCardsNotSpawned = Resources.LoadAll<ScriptableCard>("Cards/MoveCards").ToList();;
+        List<ScriptableCard> attackCardsNotSpawned = Resources.LoadAll<ScriptableCard>("Cards/AttackCards").ToList();
+
+        List<ScriptableCard> scriptableCards = new List<ScriptableCard>();
+
+        RectTransform rect = new RectTransform();
+        Rarety rarety = Rarety.Rare;
+
+        switch (Random.Range(1, 101))
+        {
+            case <= 10:
+                rarety = Rarety.Legendary;
+                break;
+            case <= 20:
+                rarety = Rarety.Epic;
+                break;
+            case <= 100:
+                rarety = Rarety.Rare;
+                break;
+        }
         
         for (int i = 0; i < rewardNbr; i++)
         {
             switch (i)
             {
                 case 0:
-                    list = ScrAttackCards;
+                    scriptableCards = moveCardsNotSpawned;
+                    rect = _reward1Trans;
                     break;
                 case 1:
-                    list = ScrMoveCards;
+                    scriptableCards = attackCardsNotSpawned;
+                    rect = _reward2Trans;
                     break;
                 case 2:
-                    int rndTypeNbr = Random.Range(1, 3);
-                    
-                    switch (rndTypeNbr)
+                    switch (Random.Range(1, 3))
                     {
                         case 1:
-                        {
-                            list = ScrAttackCards;
+                            scriptableCards = moveCardsNotSpawned;
                             break;
-                        }
                         case 2:
-                            list = ScrMoveCards;
+                            scriptableCards = attackCardsNotSpawned;
                             break;
                     }
+                    rect = _reward3Trans;
                     break;
             }
             
-            BaseCard cardData = null;
-            
-            int rndRaretyNbr = Random.Range(1, 101);
-            
-            switch (rndRaretyNbr)
-            {
-                case <= 50:
-                   cardData = GetRandomCard<BaseCard>(list, Rarety.Rare);
-                    break;
-                case <= 80:
-                    cardData = GetRandomCard<BaseCard>(list, Rarety.Epic);
-                    break;
-                case <= 100:
-                    cardData = GetRandomCard<BaseCard>(list, Rarety.Legendary);
-                    break;
-            }
-            
-            BaseCard spawnedCard = null;
+            BaseCard cardData = GetRandomCard<BaseCard>(scriptableCards, rarety);
+            BaseCard spawnedCard = Instantiate(cardData, rect.position, Quaternion.identity);
+            spawnedCard.transform.parent = rect.transform;
+            spawnedCards.Add(spawnedCard);
 
-            switch (i)
+            switch (spawnedCard.CardType)
             {
-                case 0:
-                    spawnedCard = Instantiate(cardData, _reward1Trans.position, Quaternion.identity);
-                    spawnedCard.transform.parent = _reward1Trans.transform;
-                    spawnedCards.Add(spawnedCard);
+                case CardType.MOVE_CARD:
+                    moveCardsNotSpawned.Remove(spawnedCard.CardData);
                     break;
-                case 1:
-                    spawnedCard = Instantiate(cardData, _reward2Trans.position, Quaternion.identity);
-                    spawnedCard.transform.parent = _reward2Trans.transform;
-                    spawnedCards.Add(spawnedCard);
-                    break;
-                case 2:
-                    spawnedCard = Instantiate(cardData, _reward3Trans.position, Quaternion.identity);
-                    spawnedCard.transform.parent = _reward3Trans.transform;
-                    spawnedCards.Add(spawnedCard);
+                case CardType.BASE_ATTACK_CARD:
+                case CardType.AOE_ATTACK_CARD:
+                    attackCardsNotSpawned.Remove(spawnedCard.CardData);
                     break;
             }
         }
+        
+        
+        
+        // for (int i = 0; i < rewardNbr; i++)
+        // {
+        //     BaseCard cardData = null;
+        //     
+        //     int rndRaretyNbr = Random.Range(1, 101);
+        //     
+        //     switch (rndRaretyNbr)
+        //     {
+        //         case <= 50:
+        //            cardData = GetRandomCard<BaseCard>(scriptableCards, Rarety.Rare);
+        //             break;
+        //         case <= 80:
+        //             cardData = GetRandomCard<BaseCard>(scriptableCards, Rarety.Epic);
+        //             break;
+        //         case <= 100:
+        //             cardData = GetRandomCard<BaseCard>(scriptableCards, Rarety.Legendary);
+        //             break;
+        //     }
+        //     
+        //     BaseCard spawnedCard = null;
+
+        //     switch (i)
+        //     {
+        //         case 0:
+        //             spawnedCard = Instantiate(cardData, _reward1Trans.position, Quaternion.identity);
+        //             spawnedCard.transform.parent = _reward1Trans.transform;
+        //             spawnedCards.Add(spawnedCard);
+        //             break;
+        //         case 1:
+        //             spawnedCard = Instantiate(cardData, _reward2Trans.position, Quaternion.identity);
+        //             spawnedCard.transform.parent = _reward2Trans.transform;
+        //             spawnedCards.Add(spawnedCard);
+        //             break;
+        //         case 2:
+        //             spawnedCard = Instantiate(cardData, _reward3Trans.position, Quaternion.identity);
+        //             spawnedCard.transform.parent = _reward3Trans.transform;
+        //             spawnedCards.Add(spawnedCard);
+        //             break;
+        //     }
+        // }
         
         return spawnedCards;
     }

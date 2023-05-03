@@ -230,11 +230,16 @@ MonoBehaviour:
   _cardType: 1
   _heroClass: 0
   _aeraOfEffect: 1
+  _neighboursType: 0
   _moveTime: 0.2
   _cardData: {fileID: 11400000, guid: 14a2ab3c3b1205a49bcf4a6151ee07b4, type: 2}
   _manaNbrTxt: {fileID: 1268095168952555347}
   _cardEffectTxt: {fileID: 1268095168742148044}
-  _damage: 5
+  _playerAttack:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 4fb2bff2c7e868c40bd61d4021591daa, type: 2}
+  _baseDamage: 5
 --- !u!114 &1268095168742148044 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3369712380223483713, guid: 0a8883d2370707d49807bd26b2e40736, type: 3}

@@ -161,13 +161,15 @@ public abstract class BaseCard : Collectible
 
         _neighboursData = Neighbourhood.NeighboursTypeToDico(_neighboursType);
         
-        GetTextes();
+        UpdateText();
+        
+        _canDrawTilemap = true;
         
         BaseHero.OnMovement += HandleTilemap;
         BaseHero.OnShuffleHandBackToDeck += ResetState;
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         base.OnDestroy();
         
@@ -175,22 +177,13 @@ public abstract class BaseCard : Collectible
         BaseHero.OnShuffleHandBackToDeck -= ResetState;
     }
 
-    private void GetTextes()
+    private void OnEnable()
     {
-        // Get all TextMeshPro Components in children from the highest in the hierarchy to the lowest.
-        // So the element 0 would be the manaNbrTxt and the 1 would be the cardEffectTxt.
-        // _textes = GetComponentsInChildren<TextMeshPro>();
-        //
-        // _manaNbrTxt = _textes[0];
-        // _cardEffectTxt = _textes[1];
+        UpdateText();
+    }
 
-        // _manaNbrTxt.GetComponent<MeshRenderer>().sortingLayerName = "Card";
-        // _manaNbrTxt.GetComponent<MeshRenderer>().sortingOrder = 0;
-        // _cardEffectTxt.GetComponent<MeshRenderer>().sortingLayerName = "Card";
-        // _cardEffectTxt.GetComponent<MeshRenderer>().sortingOrder = 0;
-
-        _canDrawTilemap = true;
-        
+    protected virtual void UpdateText()
+    {
         _manaNbrTxt.text = _manaCost.ToString();
     }
 

@@ -33,11 +33,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 84.5
+      value: 60.5
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 59.5
+      value: 60.5
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -115,35 +115,43 @@ MonoBehaviour:
   _faction: 1
   _maxHP:
     _useConstant: 1
-    ConstantValue: 0
+    _baseValue: 10
+    ConstantRunValue: 10
     Variable: {fileID: 0}
   _currentHP:
     _useConstant: 1
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 0}
   _baseAttack:
     _useConstant: 1
-    ConstantValue: 0
+    _baseValue: 5
+    ConstantRunValue: 5
     Variable: {fileID: 0}
   _currentAttack:
     _useConstant: 1
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 0}
   _shield:
     _useConstant: 1
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 0}
   _baseMovement:
     _useConstant: 1
-    ConstantValue: 0
+    _baseValue: 5
+    ConstantRunValue: 5
     Variable: {fileID: 0}
   _currentMovement:
     _useConstant: 1
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 0}
   _speed:
     _useConstant: 1
-    ConstantValue: 0
+    _baseValue: 8
+    ConstantRunValue: 8
     Variable: {fileID: 0}
   _unitData: {fileID: 11400000, guid: 9d014845c5a9a534f8188b024aac5a38, type: 2}
   _type: 0

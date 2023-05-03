@@ -15,6 +15,7 @@ public abstract class DeckController : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI _carNbrTxt;
     [SerializeField] protected TextMeshProUGUI _cardNbrDrawnTxt;
     [SerializeField] protected TextMeshProUGUI _tooMuchCardDrawnTxt;
+    [SerializeField] protected Image _cardDrawnImage;
         
     [SerializeField] protected int _size;
 
@@ -28,7 +29,7 @@ public abstract class DeckController : MonoBehaviour
     [SerializeField] protected GameObject _parentObject;
 
     [SerializeField] protected IntReference _maxNbrOfCardToDrawnPerTurn;
-    
+
     // Events ----------------------------------------------------------------------------------------------------------
     public static event Action<DeckController> OnDeckEmpty;
 
@@ -173,8 +174,11 @@ public abstract class DeckController : MonoBehaviour
 
     private void UpdateNbrCardDrawnTxt()
     {
-        _cardNbrDrawnTxt.text = _unitsManager.HeroPlayer.NbrOfCardDrawnThisTurn + " / " + 
-                                _maxNbrOfCardToDrawnPerTurn.Value;
+        _cardNbrDrawnTxt.text = (_maxNbrOfCardToDrawnPerTurn.Value -
+                                 _unitsManager.HeroPlayer.NbrOfCardDrawnThisTurn).ToString();
+
+        _cardDrawnImage.fillAmount = (_maxNbrOfCardToDrawnPerTurn.Value -
+            _unitsManager.HeroPlayer.NbrOfCardDrawnThisTurn) / (float)_maxNbrOfCardToDrawnPerTurn.Value;
     }
     
     private IEnumerator TxtCo()

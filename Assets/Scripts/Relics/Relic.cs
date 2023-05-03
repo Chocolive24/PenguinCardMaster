@@ -43,11 +43,6 @@ public abstract class Relic : Collectible
 
     public void OnRelicClick()
     {
-        // if (!_isCollected)
-        // {
-        //     _isCollected = true;
-        //     OnCollected?.Invoke(this);
-        // }
         if (_isCollected && _relicType == RelicData.RelicType.ACTIVABLE)
         {
             PerformEffect();

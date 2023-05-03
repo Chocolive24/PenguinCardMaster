@@ -20,8 +20,10 @@ public class Archer : BaseEnemy
             {
                 var neighbor = _gridManager.WorldToCellCenter(currentPos + direction) ;
 
-                if (_tilemapsManager.IsPositionAvailable(neighbor, true, false) && 
-                    !distances.ContainsKey(neighbor))
+                bool isPosValid = _tilemapsManager.IsPositionAvailable(neighbor, true, false) ||
+                                  neighbor == transform.position;
+                
+                if ( isPosValid && !distances.ContainsKey(neighbor))
                 {
                     distances.Add(neighbor, distances[currentPos] + 1);
                     currentPos = neighbor;
@@ -150,64 +152,10 @@ public class Archer : BaseEnemy
             }
         }
         
-        base.FindAvailablePathToTarget(bestPos, _minimumPathCount, countHeroes, countEnemies, countWalls);
+        base.FindAvailablePathToTarget(bestPos, 0, countHeroes, countEnemies, countWalls);
 
-        // for (count = 1; count < _movement.Value + 2; count++)
-        // {
-        //     if (!foundBestPos)
-        //     {
-        //         // if (Math.Abs(Vector3.Distance(transform.position, targetPos) - _attackRange) < 0.01f)
-        //         // {
-        //         //     break;
-        //         // }
-        //
-        //         // if (Vector3.Distance(transform.position, targetPos) < 3)
-        //         // {
-        //         //     Vector3 fleeDirection = (transform.position - targetPos).normalized;
-        //         //
-        //         //     for (int i = _attackRange; i > 0 ; i--)
-        //         //     {
-        //         //         Vector3 pos = targetPos + (fleeDirection * i);
-        //         //     
-        //         //         if (IsPositionAvailable(pos, countHeroes, countEnemies) &&
-        //         //             Vector3.Distance(pos, transform.position) > 0.01)
-        //         //         {
-        //         //             targetPos = pos;
-        //         //             break;
-        //         //         }
-        //         //     }
-        //         //
-        //         //     break;
-        //         // }
-        //     
-        //         foreach (var direction in new Vector3[] { Vector3.up * count, Vector3.down * count, 
-        //                                                         Vector3.left * count, Vector3.right * count })
-        //         {
-        //             Vector3 neighbor = transform.position + direction;
-        //             
-        //             Vector3 attackPosition = neighbor;
-        //             Dictionary<Vector3, int> attackTiles = GetTilesInAttackRange(attackPosition, _attackRange);
-        //             
-        //             isPlayerInRange = attackTiles.ContainsKey(targetPos);
-        //         
-        //             isPositionValid = IsPositionAvailable(attackPosition, countHeroes, countEnemies);
-        //         
-        //             if (isPositionValid && isPlayerInRange)
-        //             {
-        //                 bestPos = attackPosition;
-        //                 foundBestPos = true;
-        //             }
-        //         }
-        //     }
-        //     
-        //     if (foundBestPos)
-        //         break;
-        //
-        // }
-        
         Debug.Log("IA == player pos :" + targetPos + " enemy pos : " + transform.position);
         Debug.Log("IA == Best pos : "+ bestPos + " isPlayerinRange "+ isPlayerInRange + " isPosValid" + isPositionValid);
-        //Debug.Log("IA == Count " + count);
     }
 
     private TileCell FindFleeTile()

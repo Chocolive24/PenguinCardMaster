@@ -36,7 +36,7 @@ public class DoorTileCell : TileCell
     // Methods ---------------------------------------------------------------------------------------------------------
     private void Awake()
     {
-        
+        Debug.Log("awake tile");
     }
 
     public override void SetUnit(BaseUnit unit)

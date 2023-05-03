@@ -26,6 +26,8 @@ public class UIBattleManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _currentTurnTxt;
     [SerializeField] private TextMeshProUGUI _notEnoughManaTxt;
     [SerializeField] private TextMeshProUGUI _manaNbrTxt;
+    [SerializeField] private Image _manaContainerImage;
+    [SerializeField] private IntReference _playerMaxMana;
     [SerializeField] private GameObject _selectedHeroObject, _tileObject, _tileUnitObject;
     [SerializeField] private GameObject _goldsPanel;
     [SerializeField] private TextMeshProUGUI _golds;
@@ -74,15 +76,14 @@ public class UIBattleManager : MonoBehaviour
             _instance = this;
         }
         
-        _battlePanel.SetActive(false);
+        //_battlePanel.SetActive(false);
         _VictoryPanel.SetActive(false);
         _notEnoughManaTxt.gameObject.SetActive(false);
 
         BattleManager.OnVictory += HandleVictoryUI;
         BaseCard.OnNoTEnoughMana += DisplayNotEnoughManaTxt;
     }
-
-
+    
     private void OnDestroy()
     {
         BattleManager.OnVictory -= HandleVictoryUI;
@@ -107,13 +108,13 @@ public class UIBattleManager : MonoBehaviour
             {
                 if (!_cardPlayedManager.HasACardOnIt)
                 {
-                    _manaNbrTxt.text = _unitsManager.HeroPlayer.CurrentMana.ToString() + " / " +
-                                       _unitsManager.HeroPlayer.MaxMana.Value.ToString();
+                    _manaNbrTxt.text = _unitsManager.HeroPlayer.CurrentMana.ToString();
+                    _manaContainerImage.fillAmount = _unitsManager.HeroPlayer.CurrentMana / (float)_playerMaxMana.Value;
                 }
                 else
                 {
-                    _manaNbrTxt.text = _unitsManager.HeroPlayer.CurrentMana.ToString() + " / " +
-                                       _unitsManager.HeroPlayer.MaxMana.Value.ToString();
+                    _manaNbrTxt.text = _unitsManager.HeroPlayer.CurrentMana.ToString();
+                    _manaContainerImage.fillAmount = _unitsManager.HeroPlayer.CurrentMana / (float)_playerMaxMana.Value;
                 }
             }
         }
@@ -123,18 +124,6 @@ public class UIBattleManager : MonoBehaviour
     {
         _battleManager.IsPlayerTurn = false;
     }
-    
-    // public void ShowSelectedHero(BaseHero hero)
-    // {
-    //     if (!hero)
-    //     {
-    //         _selectedHeroObject.SetActive(false);
-    //         return;
-    //     }
-    //     
-    //     _selectedHeroObject.GetComponentInChildren<TextMeshProUGUI>().text = hero.UnitName;
-    //     _selectedHeroObject.SetActive(true);
-    // }
 
     public void ShowTileInfo(TileCell tile)
     {

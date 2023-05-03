@@ -1,35 +1,54 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class BaseAttackCard : BaseCard
 {
     public BaseAttackCard(string name, int manaCost, Rarety rarety, CardType cardType, HeroClass heroClass, 
-                        int aeraOfEffect,int damage) 
+                        int aeraOfEffect,int baseDamage) 
         : base(name, manaCost, rarety, cardType, heroClass, aeraOfEffect)
     {
-        _damage = damage;
+        _baseDamage = baseDamage;
     }
 
     // Attributes ------------------------------------------------------------------------------------------------------
-    [SerializeField] private int _damage;
+    [SerializeField] private IntReference _playerAttack;
+    [SerializeField] private int _baseDamage;
 
+    public int CurrentDamage => _baseDamage + _playerAttack.Value;
+    
     protected bool _hasPerformed;
     
     // References ------------------------------------------------------------------------------------------------------
 
     // Getters and Setters ---------------------------------------------------------------------------------------------
-    public int Damage => _damage;
+    public int BaseDamage => _baseDamage;
 
     // Methods ---------------------------------------------------------------------------------------------------------
-    
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+    }
+
+    protected override void UpdateText()
+    {
+        base.UpdateText();
+        _cardEffectTxt.text = "Deal " + CurrentDamage + "\n damage \n";
+    }
+
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        _cardEffectTxt.text = "Deal " + _damage + "\n damage \n";
+        _cardEffectTxt.text = "Deal " + CurrentDamage + "\n damage \n";
     }
 
     // Update is called once per frame
@@ -52,7 +71,7 @@ public class BaseAttackCard : BaseCard
                 {
                     if (_availableTiles.ContainsKey(tile.transform.position) && enemy != null)
                     {
-                        enemy.TakeDamage(_damage);
+                        enemy.TakeDamage(CurrentDamage);
                         _hasPerformed = true;
                     }
                 }
@@ -61,13 +80,19 @@ public class BaseAttackCard : BaseCard
             {
                 if (_unitsManager.HeroPlayer)
                 {
+                    List<BaseEnemy> allreadyAttackedEnemies = new List<BaseEnemy>();
+
                     foreach (var attackTile in _availableTiles)
                     {
                         var enemy = (BaseEnemy)_gridManager.GetTileAtPosition(attackTile.Key).OccupiedUnit;
 
                         if (enemy)
                         {
-                            enemy.TakeDamage(_damage);
+                            if (!allreadyAttackedEnemies.Contains(enemy))
+                            {
+                                enemy.TakeDamage(CurrentDamage);
+                                allreadyAttackedEnemies.Add(enemy);
+                            }
                         }
                     }
                     

@@ -24,6 +24,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2456730619047760709, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
+      propertyPath: _baseDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456730619047760709, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
       propertyPath: _aeraOfEffect
       value: 20
       objectReference: {fileID: 0}
@@ -31,6 +35,10 @@ PrefabInstance:
       propertyPath: _neighboursType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2456730619047760709, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
+      propertyPath: _playerAttack.Variable
+      value: 
+      objectReference: {fileID: 11400000, guid: 4fb2bff2c7e868c40bd61d4021591daa, type: 2}
     - target: {fileID: 3904962186891751972, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

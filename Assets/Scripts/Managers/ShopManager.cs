@@ -27,6 +27,8 @@ public class ShopManager : MonoBehaviour
     private RelicsManager _relicsManager;
 
     [SerializeField] private IntReference _playerGolds;
+
+    [SerializeField] private TextMeshProUGUI _playerGoldsTxt;
     
     [Header("Cards Rect Transform")]
     [SerializeField] private RectTransform _rareCard1RectTrans;
@@ -74,6 +76,11 @@ public class ShopManager : MonoBehaviour
         Collectible.OnBuy += BuyObject;
     }
 
+    private void UpdateGoldsTxt()
+    {
+        _playerGoldsTxt.text = _playerGolds.Value.ToString();
+    }
+
     private void Start()
     {
         _cardsManager = CardsManager.Instance;
@@ -94,6 +101,7 @@ public class ShopManager : MonoBehaviour
         if (obj.ObjectCost <= _playerGolds.Value)
         {
             OnObjectBuy?.Invoke(this, obj);
+            UpdateGoldsTxt();
         }
     }
 
@@ -112,6 +120,8 @@ public class ShopManager : MonoBehaviour
             
             _shopPanel.SetActive(true);
             _exploringPanel.SetActive(false);
+            
+            UpdateGoldsTxt();
 
             DesactivateTiles(doorTile.GetRoomNeighbour());
 
@@ -141,17 +151,17 @@ public class ShopManager : MonoBehaviour
     {
         CreateACard(_cardsManager.ScrMoveCards, Rarety.Rare, _rareCard1RectTrans, 
             _rareCard1Cost,50, 75);
-        CreateACard(_cardsManager.ScrMoveCards, Rarety.Rare, _rareCard2RectTrans, 
+        CreateACard(_cardsManager.ScrAttackCards, Rarety.Rare, _rareCard2RectTrans, 
             _rareCard2Cost,50, 75);
         
         CreateACard(_cardsManager.ScrMoveCards, Rarety.Epic, _epicCard1RectTrans,
             _epicCard1Cost, 120, 160);
-        CreateACard(_cardsManager.ScrMoveCards, Rarety.Epic, _epicCard2RectTrans, 
+        CreateACard(_cardsManager.ScrAttackCards, Rarety.Epic, _epicCard2RectTrans, 
             _epicCard2Cost,120, 160);
         
         CreateACard(_cardsManager.ScrMoveCards, Rarety.Legendary, _legCard1RectTrans, 
             _legCard1Cost, 200, 250);
-        CreateACard(_cardsManager.ScrMoveCards, Rarety.Legendary, _legCard2RectTrans, 
+        CreateACard(_cardsManager.ScrAttackCards, Rarety.Legendary, _legCard2RectTrans, 
             _legCard2Cost, 200, 250);
 
         Relic relic1 = CreateARelic(_relic1RectTrans, _relic1Cost, null);

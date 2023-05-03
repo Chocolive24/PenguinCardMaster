@@ -226,5 +226,9 @@ MonoBehaviour:
   _cardData: {fileID: 11400000, guid: e908f74d827d1774094cf393cfe03024, type: 2}
   _manaNbrTxt: {fileID: 2550057470532442474}
   _cardEffectTxt: {fileID: 2550057469785623029}
-  _damage: 6
+  _playerAttack:
+    _useConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 4fb2bff2c7e868c40bd61d4021591daa, type: 2}
+  _baseDamage: 6
   _manaToAdd: 1

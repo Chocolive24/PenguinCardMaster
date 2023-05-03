@@ -146,7 +146,7 @@ public class RoomData
 
         for (int x = _bounds.xMin + 2; x < _bounds.xMax - 2; x++)
         {
-            for (int y = _bounds.yMin + 2; y < _bounds.yMax - 2; y++)
+            for (int y = _bounds.yMin + 2; y < _bounds.yMax - 3; y++)
             {
                 if (!_wallsPositions.Contains(new Vector3Int(x, y, 0)))
                 {

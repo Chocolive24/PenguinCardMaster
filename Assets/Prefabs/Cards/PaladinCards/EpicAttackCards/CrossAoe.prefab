@@ -24,6 +24,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2456730619047760709, guid: f0891bb707fc3c54086d52d3d6bbf1b7, type: 3}
+      propertyPath: _baseDamage
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456730619047760709, guid: f0891bb707fc3c54086d52d3d6bbf1b7, type: 3}
       propertyPath: _aeraOfEffect
       value: 5
       objectReference: {fileID: 0}
