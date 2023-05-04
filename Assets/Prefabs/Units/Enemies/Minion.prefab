@@ -28,6 +28,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1691780254251407065, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: _maxHP._baseValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1691780254251407065, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: _speed._baseValue
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1691780254251407065, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: _maxHP.UseConstant
       value: 1
       objectReference: {fileID: 0}
@@ -60,11 +68,27 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1691780254251407065, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: _baseAttack._baseValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1691780254251407065, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: _currentHP.UseConstant
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1691780254251407065, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: _maxHP.ConstantRunValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1691780254251407065, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: _movement.ConstantValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1691780254251407065, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: _speed.ConstantRunValue
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1691780254251407065, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: _baseMovement._baseValue
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1691780254251407065, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
@@ -77,6 +101,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1691780254251407065, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: _baseMovement.ConstantValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1691780254251407065, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: _baseAttack.ConstantRunValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1691780254251407065, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: _baseMovement.ConstantRunValue
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1977486373816229693, guid: 96564f87f22cc59478c479e065f325a8, type: 3}

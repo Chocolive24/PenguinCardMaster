@@ -18,6 +18,12 @@ public class ManaStrike : BaseAttackCard
         _cardEffectTxt.text += "Gain " + _manaToAdd + " Mana";
     }
     
+    protected override void UpdateText()
+    {
+        base.UpdateText();
+        _cardEffectTxt.text += "Gain " + _manaToAdd + " Mana";
+    }
+    
     public override void ActivateCardEffect(TileCell tile)
     {
         base.ActivateCardEffect(tile);

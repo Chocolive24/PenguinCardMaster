@@ -169,8 +169,7 @@ public class BaseHero : BaseUnit
         _maxMana = _heroData.MaxMana;
         _exploreSpeed = _heroData.ExploreSpeed;
         _battleSpeed = _heroData.BattleSpeed;
-        
-        _golds.SetValue(1000);
+      
     }
 
     private void FindExploringPath(TileCell tile)

@@ -104,79 +104,56 @@ public class UnitsManager : MonoBehaviour
         {
             int remainginWeight = _currentRoom.EnemySpawnWeight;
 
-            BaseEnemy enemy = GetAnEnemyByType(EnemyType.TANK);
-
-            var spawnedEnemy = Instantiate(enemy);
-            
-            Vector3Int randomSpawnPos = new Vector3Int();
-            randomSpawnPos = _currentRoom.GetARandomTilePosition();
-            
-            spawnedEnemy.transform.position = _gridManager.WorldToCellCenter(randomSpawnPos);
-            
-            spawnedEnemy.PreviousOccupiedTiles = spawnedEnemy.GetOccupiedTiles();
-            
-            foreach (var tile in spawnedEnemy.GetOccupiedTiles())
+            while (remainginWeight > 0)
             {
-                tile.SetUnit(spawnedEnemy);
+                //BaseEnemy enemy = GetAnEnemyByType(EnemyType.GOBLIN);
+                BaseEnemy enemy = GetRandomEnemyUnderWeight(remainginWeight);
+            
+                bool isPosValid = false;
+                
+                Vector3Int randomSpawnPos = new Vector3Int();
+                
+                do
+                {
+                    randomSpawnPos = _currentRoom.GetARandomTilePosition();
+                
+                    enemy.transform.position = _gridManager.WorldToCellCenter(randomSpawnPos);
+                    
+                    foreach (var tile in enemy.GetOccupiedTiles())
+                    {
+                        if (!_gridManager.GetTileAtPosition(_gridManager.WorldToCellCenter(tile.transform.position)))
+                        {
+                            break;
+                        }
+            
+                        if (!tile.Walkable)
+                        {
+                            break;
+                        }
+                        
+                        isPosValid = true;
+                    }
+                    
+                } while (!isPosValid);
+                
+                var spawnedEnemy = Instantiate(enemy);
+                
+                spawnedEnemy.transform.position = _gridManager.WorldToCellCenter(randomSpawnPos);
+            
+                spawnedEnemy.PreviousOccupiedTiles = spawnedEnemy.GetOccupiedTiles();
+            
+                foreach (var tile in spawnedEnemy.GetOccupiedTiles())
+                {
+                    tile.SetUnit(spawnedEnemy);
+                }
+            
+                _enemies.Add(spawnedEnemy);
+            
+                spawnedEnemy.OnTurnFinished += SetNextEnemyTurn;
+                spawnedEnemy.OnDeath += HandleEnemyDeath;
+            
+                remainginWeight -= spawnedEnemy.Weight;
             }
-            
-            _enemies.Add(spawnedEnemy);
-
-            spawnedEnemy.OnTurnFinished += SetNextEnemyTurn;
-            spawnedEnemy.OnDeath += HandleEnemyDeath;
-            
-            remainginWeight -= spawnedEnemy.Weight;
-            
-            // while (remainginWeight > 0)
-            // {
-            //     //BaseEnemy enemy = GetAnEnemyByType(EnemyType.GOBLIN);
-            //     BaseEnemy enemy = GetRandomEnemyUnderWeight(remainginWeight);
-            //
-            //     bool isPosValid = false;
-            //     
-            //     Vector3Int randomSpawnPos = new Vector3Int();
-            //     
-            //     do
-            //     {
-            //         randomSpawnPos = _currentRoom.GetARandomTilePosition();
-            //     
-            //         enemy.transform.position = _gridManager.WorldToCellCenter(randomSpawnPos);
-            //         
-            //         foreach (var tile in enemy.GetOccupiedTiles())
-            //         {
-            //             if (!_gridManager.GetTileAtPosition(_gridManager.WorldToCellCenter(tile.transform.position)))
-            //             {
-            //                 break;
-            //             }
-            //
-            //             if (!tile.Walkable)
-            //             {
-            //                 break;
-            //             }
-            //             
-            //             isPosValid = true;
-            //         }
-            //         
-            //     } while (!isPosValid);
-            //     
-            //     var spawnedEnemy = Instantiate(enemy);
-            //     
-            //     spawnedEnemy.transform.position = _gridManager.WorldToCellCenter(randomSpawnPos);
-            //
-            //     spawnedEnemy.PreviousOccupiedTiles = spawnedEnemy.GetOccupiedTiles();
-            //
-            //     foreach (var tile in spawnedEnemy.GetOccupiedTiles())
-            //     {
-            //         tile.SetUnit(spawnedEnemy);
-            //     }
-            //
-            //     _enemies.Add(spawnedEnemy);
-            //
-            //     spawnedEnemy.OnTurnFinished += SetNextEnemyTurn;
-            //     spawnedEnemy.OnDeath += HandleEnemyDeath;
-            //
-            //     remainginWeight -= spawnedEnemy.Weight;
-            // }
         }
     }
 

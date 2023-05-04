@@ -119,21 +119,27 @@ public class CardsManager : MonoBehaviour
                     rect = _reward3Trans;
                     break;
             }
-            
-            BaseCard cardData = GetRandomCard<BaseCard>(scriptableCards, rarety);
-            BaseCard spawnedCard = Instantiate(cardData, rect.position, Quaternion.identity);
-            spawnedCard.transform.parent = rect.transform;
-            spawnedCards.Add(spawnedCard);
 
-            switch (spawnedCard.CardType)
+            if (scriptableCards.Count > 0)
             {
-                case CardType.MOVE_CARD:
-                    moveCardsNotSpawned.Remove(spawnedCard.CardData);
-                    break;
-                case CardType.BASE_ATTACK_CARD:
-                case CardType.AOE_ATTACK_CARD:
-                    attackCardsNotSpawned.Remove(spawnedCard.CardData);
-                    break;
+                BaseCard cardData = GetRandomCard<BaseCard>(scriptableCards, rarety);
+                BaseCard spawnedCard = Instantiate(cardData, rect.position, Quaternion.identity);
+                spawnedCard.transform.parent = rect.transform;
+                spawnedCards.Add(spawnedCard);
+                
+                switch (spawnedCard.CardType)
+                {
+                    case CardType.MOVE_CARD:
+                        moveCardsNotSpawned.Remove(spawnedCard.CardData);
+                        break;
+                    case CardType.BASE_ATTACK_CARD:
+                    case CardType.AOE_ATTACK_CARD:
+                        if (rarety != Rarety.Legendary)
+                        {
+                            attackCardsNotSpawned.Remove(spawnedCard.CardData);
+                        }
+                        break;
+                }
             }
         }
         

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -85,15 +86,31 @@ public abstract class DeckController : MonoBehaviour
 
     public void InstantiateBasicCard(List<ScriptableCard> scriptableCards, int cardNbr)
     {
+        List<ScriptableCard> allreadySpawnedCards = new List<ScriptableCard>();
+        foreach (var card in scriptableCards)
+        {
+            allreadySpawnedCards.Add(card);
+        }
+
         if (_deckData.CardDeckData.Count == 0)
         {
             for (int i = 0; i < cardNbr; i++)
             {
-                var card = CardsManager.Instance.InstantiateARandomCard(scriptableCards, Rarety.Legendary);
+                // if (i == 3)
+                // {
+                //     foreach (var cardData in scriptableCards)
+                //     {
+                //         allreadySpawnedCards.Add(cardData);
+                //     }
+                // }
+                
+                var card = CardsManager.Instance.InstantiateARandomCard(allreadySpawnedCards, Rarety.Legendary);
 
                 card.IsCollected = true;
                 
                 AddCardWithData(card);
+
+                //allreadySpawnedCards.Remove(card.CardData);
             }
         }
         else

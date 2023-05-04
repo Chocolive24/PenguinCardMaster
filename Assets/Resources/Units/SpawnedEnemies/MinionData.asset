@@ -15,20 +15,24 @@ MonoBehaviour:
   UnitName: Minion
   Faction: 1
   MaxHP:
-    UseConstant: 1
-    ConstantValue: 5
+    _useConstant: 1
+    _baseValue: 5
+    ConstantRunValue: 5
     Variable: {fileID: 0}
   Attack:
-    UseConstant: 1
-    ConstantValue: 5
+    _useConstant: 1
+    _baseValue: 5
+    ConstantRunValue: 5
     Variable: {fileID: 0}
   Movement:
-    UseConstant: 1
-    ConstantValue: 5
+    _useConstant: 1
+    _baseValue: 5
+    ConstantRunValue: 5
     Variable: {fileID: 0}
   Speed:
-    UseConstant: 1
-    ConstantValue: 8
+    _useConstant: 1
+    _baseValue: 8
+    ConstantRunValue: 8
     Variable: {fileID: 0}
   BaseUnitPrefab: {fileID: 6139645978547884095, guid: 3de3c2f61c55fcd4eb8e7c30bf148ca0, type: 3}
   Type: 4

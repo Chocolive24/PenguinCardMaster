@@ -18,6 +18,12 @@ public class HealingStrike : BaseAttackCard
         _cardEffectTxt.text += "Heal " + _heal + " HP";
     }
 
+    protected override void UpdateText()
+    {
+        base.UpdateText();
+        _cardEffectTxt.text += "Heal " + _heal + " HP";
+    }
+
     public override void ActivateCardEffect(TileCell tile)
     {
         base.ActivateCardEffect(tile);
