@@ -106,7 +106,8 @@ public abstract class BaseCard : Collectible
     // Events ----------------------------------------------------------------------------------------------------------
     public static event Action<BaseCard> OnDrawn;
     public static event Action<BaseCard> OnPlayEnter; 
-    public static event Action<BaseCard> OnPlayExit; 
+    public static event Action<BaseCard> OnPlayExit;
+    public static event Action<BaseCard> OnSwitchCard;
     public static  event Action<BaseCard> OnPerformed;
 
     public static event Action<BaseCard> OnNoTEnoughMana;
@@ -253,12 +254,23 @@ public abstract class BaseCard : Collectible
 
     public void PlayCard()
     {
-        if (_cardPlayedManager.CurrentCard == this)
+        if (_cardPlayedManager.CurrentCard)
         {
-            transform.position = _cardPlayedManager.CardSlots[_handIndex].position;
-            OnPlayExit?.Invoke(this);
+            BaseCard currentCard = _cardPlayedManager.CurrentCard;
+            
+            if (currentCard == this)
+            {
+                transform.position = _cardPlayedManager.CardSlots[_handIndex].position;
+                OnPlayExit?.Invoke(this);
+            }
+            else
+            {
+                currentCard.transform.position = _cardPlayedManager.CardSlots[currentCard.HandIndex].position;
+                transform.position = _cardPlayedManager.CardLocation.position;
+                OnSwitchCard?.Invoke(this);
+            }
         }
-
+        
         else if (CheckIfCanBePlayed())
         {
             Vector3 pos = _cardPlayedManager.CardLocation.position;

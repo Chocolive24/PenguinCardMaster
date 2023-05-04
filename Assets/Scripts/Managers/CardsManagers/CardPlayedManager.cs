@@ -94,6 +94,7 @@ public class CardPlayedManager : MonoBehaviour
 
         BaseCard.OnPlayEnter += OnCardEnter;
         BaseCard.OnPlayExit += OnCardExit;
+        BaseCard.OnSwitchCard += SwitchCurrentCard;
         
         TileCell.OnTileSelected += PlayCurrentCard;
     }
@@ -102,6 +103,7 @@ public class CardPlayedManager : MonoBehaviour
     {
         BaseCard.OnPlayEnter -= OnCardEnter;
         BaseCard.OnPlayExit -= OnCardExit;
+        BaseCard.OnSwitchCard -= SwitchCurrentCard;
         
         TileCell.OnTileSelected -= PlayCurrentCard;
     }
@@ -184,8 +186,6 @@ public class CardPlayedManager : MonoBehaviour
 
             ClearCardLocation();
         }
-        
-        // TODO Change the mouse cursor
     }
     
     private void ClearCurrentCardTilemap()
@@ -245,6 +245,16 @@ public class CardPlayedManager : MonoBehaviour
         _hasADefendCardOnIt = false;
     }
 
+    private void SwitchCurrentCard(BaseCard card)
+    {
+        ClearCurrentCardTilemap();
+        
+        _currentCard = card;
+
+        _hasAMoveCardOnIt = card.GetComponent<BaseMoveCard>();
+        _hasAnAttackCardOnIt = card.GetComponent<BaseAttackCard>();
+    }
+    
     public void ResetSlots()
     {
         for (int i = 0; i < _availableCardSlots.Length; i++)
