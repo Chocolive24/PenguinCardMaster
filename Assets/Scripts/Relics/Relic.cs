@@ -10,6 +10,8 @@ public abstract class Relic : Collectible
     // Attributes ------------------------------------------------------------------------------------------------------
     protected RelicData.RelicType _relicType;
 
+    [SerializeField] protected Vector2 _baseSizeDelta;
+
     // References ------------------------------------------------------------------------------------------------------
     [SerializeField] protected Button _button;
 
@@ -24,6 +26,8 @@ public abstract class Relic : Collectible
     public RelicData RelicDataRef => _relicDataRef;
     
     public GameObject EffectBox => _effectBox;
+
+    public Vector2 BaseSizeDelta => _baseSizeDelta;
 
     //Methods ----------------------------------------------------------------------------------------------------------
     protected virtual void Awake()

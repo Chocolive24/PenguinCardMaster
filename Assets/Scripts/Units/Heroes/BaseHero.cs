@@ -64,7 +64,6 @@ public class BaseHero : BaseUnit
     private CardPlayedManager _cardPlayedManager;
     
     // Events ----------------------------------------------------------------------------------------------------------
-    public static event Action<BaseHero> OnMovement;
     public static event Action<BaseHero> OnShuffleHandBackToDeck;
 
     // Getters and Setters ---------------------------------------------------------------------------------------------
@@ -139,6 +138,7 @@ public class BaseHero : BaseUnit
 
         BaseCard.OnDrawn += AddCardToHand;
         BaseCard.OnPerformed += RemoveCardFromHand;
+        BaseMoveCard.OnPathStarted += DesactivateCardInHand;
 
         _cardHand = new List<BaseCard>();
     }
@@ -157,6 +157,15 @@ public class BaseHero : BaseUnit
         
         BaseCard.OnDrawn -= AddCardToHand;
         BaseCard.OnPerformed -= RemoveCardFromHand;
+        BaseMoveCard.OnPathStarted -= DesactivateCardInHand;
+    }
+
+    private void DesactivateCardInHand(BaseMoveCard obj)
+    {
+        foreach (var card in _cardHand)
+        {
+            card.CanBePlayed = false;
+        }
     }
 
     protected override void SetData()
@@ -181,7 +190,7 @@ public class BaseHero : BaseUnit
                 _exploringPath.Clear();
             }
             
-            Vector3 tileTargetPos = tile.transform.position;
+            Vector3 tileTargetPos = _gridManager.WorldToCellCenter(tile.transform.position);
 
             _exploringPath = FindPath(_gridManager.WorldToCellCenter(transform.position), tileTargetPos, 
                 false, false, false);
@@ -266,10 +275,11 @@ public class BaseHero : BaseUnit
         _speed = _gameManager.IsInBattleState ? _battleSpeed : _exploreSpeed;
         
         base.Update();
-        
-        MoveOnGrid();
+    }
 
-        Debug.Log(_cardHand.Count);
+    private void FixedUpdate()
+    {
+        MoveOnGrid();
     }
 
     public override void FindAvailablePathToTarget(Vector3 targetPos, int minimumPathCunt, 
@@ -280,7 +290,7 @@ public class BaseHero : BaseUnit
 
         if (_path.Count> 0)
         {
-            OnMovement?.Invoke(this);
+            
         }
     }
 
@@ -288,21 +298,15 @@ public class BaseHero : BaseUnit
     protected override void StopThePath()
     {
         base.StopThePath();
-        OnMovement?.Invoke(this);
+        foreach (var card in _cardHand)
+        {
+            card.CanBePlayed = true;
+        }
     }
 
     private void ShuffleCardsBackToDeck(DiscardDeckController discardDeckController)
     {
         discardDeckController.ShuffleCardsBackToDeck();
-        
-        // if (_movDiscardDeck.DiscardDeck.Count >= _movementDeck.Size)
-        // {
-        //     _movDiscardDeck.ShuffleCardsBackToDeck(_movementDeck);
-        // }
-        // else if (_mainDiscardDeck.DiscardDeck.Count >= _mainDeck.Size)
-        // {
-        //     _mainDiscardDeck.ShuffleCardsBackToDeck(_mainDeck);
-        // }
     }
     
     private void PutAllCardsInDecks(BattleManager obj, RoomData battleRoom)
@@ -338,5 +342,10 @@ public class BaseHero : BaseUnit
     public void RemoveCardFromHand(BaseCard card)
     {
         _cardHand.Remove(card);
+
+        // if (card.GetComponent<BaseMoveCard>())
+        // {
+        //     StopThePath();
+        // }
     }
 }

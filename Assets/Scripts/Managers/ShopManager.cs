@@ -186,6 +186,8 @@ public class ShopManager : MonoBehaviour
         Relic relic = Instantiate(rndRelic, rect.position, Quaternion.identity, rect.transform);
 
         relic.Init(Collectible.CollectibleType.SHOP_OBJECT, Random.Range(300, 350));
+
+        relic.GetComponent<RectTransform>().sizeDelta = 2 * relic.BaseSizeDelta;
         
         costText.text = relic.ObjectCost.ToString();
         

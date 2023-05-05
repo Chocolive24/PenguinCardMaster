@@ -11,7 +11,7 @@ public class FlyCard : BaseMoveCard
     public override void GetAvailableTiles()
     {
         _availableTiles = _tilemapsManager.GetAvailableTilesInRange(
-            _gridManager.WorldToCellCenter(GetStartingTile().transform.position),
+            _gridManager.WorldToCellCenter(GetStartingTile()),
             _aeraOfEffect, _neighboursData, false, false);
     }
 }

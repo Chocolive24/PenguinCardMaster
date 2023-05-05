@@ -103,6 +103,9 @@ public class DiscardDeckController : MonoBehaviour
     {
         _discardDeck.Add(card);
         
+        card.transform.parent = gameObject.transform;
+        card.GetComponent<RectTransform>().position = gameObject.GetComponent<RectTransform>().position;
+        
         if (_discardDeck.Count == deck.Size)
         {
             OnDiscarFull?.Invoke(this);
@@ -115,7 +118,7 @@ public class DiscardDeckController : MonoBehaviour
     {
         foreach (var card in _discardDeck)
         {
-            _deck.Deck.Add(card);
+            _deck.AddCardWithoutData(card);
         }
         
         _deck.UpdateCardTxtNbr();

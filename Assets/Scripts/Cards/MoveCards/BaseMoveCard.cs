@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,9 @@ public class BaseMoveCard : BaseCard
     
     private Dictionary<Vector3, int> _path;
     private Tilemap _pathTilemap;
+    
+    // Events ----------------------------------------------------------------------------------------------------------
+    public static event Action<BaseMoveCard> OnPathStarted;
     
     // Getters and Setters ---------------------------------------------------------------------------------------------
 
@@ -83,8 +87,11 @@ public class BaseMoveCard : BaseCard
 
                     if (_targetPos.HasValue)
                     {
-                        _unitsManager.HeroPlayer.FindAvailablePathToTarget(_targetPos.Value, 0,
+                        Vector3 targetPos = _gridManager.WorldToCellCenter(_targetPos.Value);
+                        _unitsManager.HeroPlayer.FindAvailablePathToTarget(targetPos, 0,
                             false, false, false);
+                        
+                        OnPathStarted.Invoke(this);
                     }
                 }
             }
@@ -104,7 +111,7 @@ public class BaseMoveCard : BaseCard
     public override void GetAvailableTiles()
     {
         _availableTiles = _tilemapsManager.GetAvailableTilesInRange(
-            _gridManager.WorldToCellCenter(GetStartingTile().transform.position),
+            _gridManager.WorldToCellCenter(GetStartingTile()),
             _aeraOfEffect, _neighboursData, false, false);
     }
 

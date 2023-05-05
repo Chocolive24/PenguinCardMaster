@@ -41,11 +41,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3247736833332960609, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 60
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3247736833332960609, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 60
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3247736833332960609, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -183,12 +183,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26bcbedba34fd0147aef39ef4a5913c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _baseSizeDelta: {x: 50, y: 50}
   _button: {fileID: 5588173875267320973}
   _relicDataRef: {fileID: 11400000, guid: 339a9a941c6d20441be896e5f1010381, type: 2}
   _effectBox: {fileID: 9138241512313782543}
   _playerAttack:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4fb2bff2c7e868c40bd61d4021591daa, type: 2}
   _damageToAdd: 3
 --- !u!1 &9138241512313782543 stripped

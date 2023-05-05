@@ -48,6 +48,8 @@ public abstract class DeckController : MonoBehaviour
     {
         BattleManager.OnBattleStart += SetDeck;
         BattleManager.OnPlayerTurnStart += ResetValues;
+        BaseMoveCard.OnPathStarted += DesactivateDeckButton;
+        BaseUnit.OnPathEnded += ActivateDeckButton;
     }
 
     protected virtual void SetDeck(BattleManager battleManager, RoomData room)
@@ -129,6 +131,7 @@ public abstract class DeckController : MonoBehaviour
     public void AddCardWithoutData(BaseCard card)
     {
         card.transform.parent = gameObject.transform;
+        card.GetComponent<RectTransform>().position = gameObject.GetComponent<RectTransform>().position;
 
         card.gameObject.SetActive(false);
 
@@ -136,14 +139,14 @@ public abstract class DeckController : MonoBehaviour
 
         _deck.Add(card);
 
-        _size++;
-        
         UpdateCardTxtNbr();
     }
 
     public void AddCardWithData(BaseCard card)
     {
         AddCardWithoutData(card);
+
+        _size++;
         
         _deckData.AddACardToData(card.CardData);
     }
@@ -211,5 +214,17 @@ public abstract class DeckController : MonoBehaviour
     {
         BattleManager.OnBattleStart -= SetDeck;
         BattleManager.OnPlayerTurnStart -= ResetValues;
+        BaseMoveCard.OnPathStarted -= DesactivateDeckButton;
+        BaseUnit.OnPathEnded -= ActivateDeckButton;
+    }
+
+    private void ActivateDeckButton(BaseUnit obj)
+    {
+        _button.interactable = true;
+    }
+
+    private void DesactivateDeckButton(BaseMoveCard obj)
+    {
+        _button.interactable = false;
     }
 }

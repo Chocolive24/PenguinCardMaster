@@ -53,6 +53,8 @@ public class BaseUnit : MonoBehaviour
     public event Action<BaseUnit, int> OnDamageTaken;
     public event Action<BaseUnit> OnDeath;
 
+    public static event Action<BaseUnit> OnPathEnded; 
+
     // Getters and Setters ---------------------------------------------------------------------------------------------
 
     #region Getters and Setters
@@ -131,7 +133,7 @@ public class BaseUnit : MonoBehaviour
 
     protected virtual void Update()
     {
-        //MoveOnGrid();
+        
     }
 
     protected virtual void SetData()
@@ -160,7 +162,8 @@ public class BaseUnit : MonoBehaviour
 
     public virtual List<TileCell> GetOccupiedTiles()
     {
-        return new List<TileCell>{GridManager.Instance.GetTileAtPosition(transform.position)};
+        return new List<TileCell>{GridManager.Instance.GetTileAtPosition(
+            GridManager.Instance.WorldToCellCenter(transform.position))};
     }
 
     // public virtual Dictionary<Vector3, int> GetAvailableTiles(Vector3 startPos, int range, 
@@ -172,7 +175,9 @@ public class BaseUnit : MonoBehaviour
     public virtual void FindAvailablePathToTarget(Vector3 targetPos, int minimumPathCount, 
         bool countHeroes, bool countEnemies, bool countWalls)
     {
-        _path = FindPath(transform.position, targetPos, countHeroes, countEnemies, countWalls);
+        Vector3 startPos = _gridManager.WorldToCellCenter(transform.position);
+        
+        _path = FindPath(startPos, targetPos, countHeroes, countEnemies, countWalls);
         
         if (_path.Count > 0)
         {
@@ -199,7 +204,7 @@ public class BaseUnit : MonoBehaviour
             // Then we set his position to the target position in order to be precise.
             if (Vector3.Distance(transform.position, _targetPos.Value) <= 0.01f)
             {
-                transform.position = _targetPos.Value;
+                transform.position = _gridManager.WorldToCellCenter(_targetPos.Value);
                 _targetPos = null;
 
                 // if (_gameManager.IsInBattleState)
@@ -259,6 +264,10 @@ public class BaseUnit : MonoBehaviour
         {
             _exploringPath.Clear();
         }
+
+        transform.position = _gridManager.WorldToCellCenter(transform.position);
+        
+        OnPathEnded?.Invoke(this);
     }
 
     public virtual void DisplayStats()
@@ -285,11 +294,12 @@ public class BaseUnit : MonoBehaviour
         List<Vector3> openList = new List<Vector3>();
         List<Vector3> closedList = new List<Vector3>();
         
-        openList.Add(startPos);
+        openList.Add(_gridManager.WorldToCellCenter(startPos));
 
         while (openList.Count > 0)
         {
-            Vector3 currentPos = openList.OrderBy(x => _gridManager.GetTileAtPosition(x).F).First();
+            Vector3 currentPos = openList.OrderBy(x => _gridManager.GetTileAtPosition(
+                _gridManager.WorldToCellCenter(x)).F).First();
 
             openList.Remove(currentPos);
             closedList.Add(currentPos);
@@ -315,7 +325,7 @@ public class BaseUnit : MonoBehaviour
 
                 if (!openList.Contains(neighbor))
                 {
-                    openList.Add(neighbor);
+                    openList.Add(_gridManager.WorldToCellCenter(neighbor));
                 }
             }
         }

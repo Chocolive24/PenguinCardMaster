@@ -82,12 +82,18 @@ public class UIBattleManager : MonoBehaviour
 
         BattleManager.OnVictory += HandleVictoryUI;
         BaseCard.OnNoTEnoughMana += DisplayNotEnoughManaTxt;
+        BaseMoveCard.OnPathStarted += DesactivateEndTurnButton;
+        BaseUnit.OnPathEnded += ActivateEndTurnButton;
     }
+
     
+
     private void OnDestroy()
     {
         BattleManager.OnVictory -= HandleVictoryUI;
         BaseCard.OnNoTEnoughMana -= DisplayNotEnoughManaTxt;
+        BaseMoveCard.OnPathStarted -= DesactivateEndTurnButton;
+        BaseUnit.OnPathEnded -= ActivateEndTurnButton;
     }
     
     // Start is called before the first frame update
@@ -170,6 +176,20 @@ public class UIBattleManager : MonoBehaviour
         }
     }
 
+    private void DesactivateEndTurnButton(BaseMoveCard obj)
+    {
+        _endTurnButton.interactable = false;
+    }
+    
+    private void ActivateEndTurnButton(BaseUnit unit)
+    {
+        if (unit.Faction == Faction.Hero)
+        {
+            _endTurnButton.interactable = true;
+        }
+        
+    }
+    
     private void HandleVictoryUI(BattleManager battleManager, int golds)
     {
         _VictoryPanel.SetActive(true);

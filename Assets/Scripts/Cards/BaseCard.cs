@@ -78,13 +78,13 @@ public abstract class BaseCard : Collectible
     
     protected int _handIndex;
 
-    protected bool _canDrawTilemap = true;
-
     protected bool _hasBeenPlayed = false;
 
     protected BoxCollider2D _boxCollider2D;
 
     protected bool _isHeroSubscibed = false;
+
+    protected bool _isMouveOver;
 
     // References ------------------------------------------------------------------------------------------------------
 
@@ -102,7 +102,8 @@ public abstract class BaseCard : Collectible
     
     [SerializeField] protected TextMeshProUGUI _manaNbrTxt;
     [SerializeField] protected TextMeshProUGUI _cardEffectTxt;
-    
+    private bool _canBePlayed;
+
     // Events ----------------------------------------------------------------------------------------------------------
     public static event Action<BaseCard> OnDrawn;
     public static event Action<BaseCard> OnPlayEnter; 
@@ -143,10 +144,10 @@ public abstract class BaseCard : Collectible
         set => _hasBeenPlayed = value;
     }
 
-    public bool IsHeroSubscibed
+    public bool CanBePlayed
     {
-        get => _isHeroSubscibed;
-        set => _isHeroSubscibed = value;
+        get => _canBePlayed;
+        set => _canBePlayed = value;
     }
 
     #endregion
@@ -164,18 +165,18 @@ public abstract class BaseCard : Collectible
         
         UpdateText();
         
-        _canDrawTilemap = true;
-        
-        BaseHero.OnMovement += HandleTilemap;
         BaseHero.OnShuffleHandBackToDeck += ResetState;
+
+        BaseUnit.OnPathEnded += UpdateAoeTilemap;
     }
 
     protected virtual void OnDestroy()
     {
         base.OnDestroy();
         
-        BaseHero.OnMovement -= HandleTilemap;
         BaseHero.OnShuffleHandBackToDeck -= ResetState;
+        
+        BaseUnit.OnPathEnded -= UpdateAoeTilemap;
     }
 
     private void OnEnable()
@@ -239,7 +240,7 @@ public abstract class BaseCard : Collectible
     
     public void OnCardClick()
     {
-        if (_isCollected)
+        if (_isCollected && _canBePlayed)
         {
             PlayCard();
         }
@@ -248,6 +249,7 @@ public abstract class BaseCard : Collectible
             if (_aoeTilemap)
             {
                 Destroy(_aoeTilemap.gameObject);
+                _isMouveOver = false;
             }
         }
     }
@@ -285,6 +287,8 @@ public abstract class BaseCard : Collectible
 
     public virtual void OnEventTriggerEnter()
     {
+        _isMouveOver = true;
+        
         if (!_isCollected)
         {
             _aoeTilemap = _tilemapsManager.InstantiateTilemap(_name + " aoe");
@@ -293,10 +297,8 @@ public abstract class BaseCard : Collectible
             
             this.DrawTilemap(_availableTiles, _aoeTilemap, _tilemapsManager.GetRuleTile(this));
         }
-        
-        _canDrawTilemap = true;
-        
-        if (!_aoeTilemap && _isCollected && _canDrawTilemap)
+
+        if (!_aoeTilemap && _isCollected && !_cardPlayedManager.CurrentCard)
         {
             _aoeTilemap = _tilemapsManager.InstantiateTilemap(_name + " aoe");
 
@@ -315,6 +317,8 @@ public abstract class BaseCard : Collectible
 
     public virtual void OnEventTriggerExit()
     {
+        _isMouveOver = false;
+        
         if (!_isCollected && _aoeTilemap)
         {
             Destroy(_aoeTilemap.gameObject);
@@ -334,7 +338,7 @@ public abstract class BaseCard : Collectible
         }
         
         return !_cardPlayedManager.HasACardOnIt && 
-               _unitsManager.HeroPlayer.CurrentMana > 0 && _unitsManager.HeroPlayer.CanPlay;
+               _unitsManager.HeroPlayer.CurrentMana >= _manaCost && _unitsManager.HeroPlayer.CanPlay;
     }
     
     protected virtual bool CheckIfIsPlayed()
@@ -348,7 +352,7 @@ public abstract class BaseCard : Collectible
     public virtual void GetAvailableTiles()
     {
         _availableTiles = _tilemapsManager.GetAvailableTilesInRange(
-            _gridManager.WorldToCellCenter(GetStartingTile().transform.position),
+            _gridManager.WorldToCellCenter(GetStartingTile()),
             _aeraOfEffect, _neighboursData, false, true);
     }
 
@@ -359,27 +363,41 @@ public abstract class BaseCard : Collectible
     }
 
     // TODO Would not work with cards that not start from the player !!!!
-    public virtual TileCell GetStartingTile()
+    public virtual Vector3 GetStartingTile()
     {
-        foreach (var item in _gridManager.Tiles)
+        return _gridManager.WorldToCellCenter(_unitsManager.HeroPlayer.transform.position);
+        
+        // foreach (var item in _gridManager.Tiles)
+        // {
+        //     if (item.Value.OccupiedUnit)
+        //     {
+        //         if (item.Value.OccupiedUnit.Faction == Faction.Hero)
+        //         {
+        //             return item.Value;
+        //         }
+        //     }
+        // }
+        //
+        // return null;
+    }
+    
+    private void UpdateAoeTilemap(BaseUnit obj)
+    {
+        if (_isMouveOver)
         {
-            if (item.Value.OccupiedUnit)
+            if (_aoeTilemap)
             {
-                if (item.Value.OccupiedUnit.Faction == Faction.Hero)
-                {
-                    return item.Value;
-                }
+                Destroy(_aoeTilemap.gameObject);
             }
-        }
+            
+            _aoeTilemap = _tilemapsManager.InstantiateTilemap(_name + " aoe");
 
-        return null;
+            this.GetAvailableTiles();
+            
+            this.DrawTilemap(_availableTiles, _aoeTilemap, _tilemapsManager.GetRuleTile(this));
+        }
     }
-    
-    private void HandleTilemap(BaseHero obj)
-    {
-        _canDrawTilemap = !_canDrawTilemap;
-    }
-    
+
     private IEnumerator InterpolateMoveCo(Vector3 startPos, Vector3 endPos) 
     {
         float countTime = 0;
@@ -404,6 +422,7 @@ public abstract class BaseCard : Collectible
         OnDrawn?.Invoke(this);
         gameObject.SetActive(true);
         _hasBeenPlayed = false;
+        _canBePlayed = true;
     }
 
     public void ExitPerform()

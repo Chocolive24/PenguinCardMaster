@@ -78,7 +78,6 @@ public class RelicsManager : MonoBehaviour
 
         if (relic)
         {
-            relic.GetComponent<RectTransform>().sizeDelta = new Vector2(60, 60);
             relic.EffectBox.SetActive(false);
         
             if (_emplIdx <= _relicEmplacements.Length)
@@ -86,6 +85,8 @@ public class RelicsManager : MonoBehaviour
                 relic.transform.position = _relicEmplacements[_emplIdx].position;
                 relic.transform.parent = _relicEmplacements[_emplIdx].transform;
 
+                relic.GetComponent<RectTransform>().sizeDelta = relic.BaseSizeDelta;
+                
                 relic.IsCollected = true;
             
                 _relicInventoryData.AddRelicData(relic.RelicDataRef);
@@ -97,13 +98,14 @@ public class RelicsManager : MonoBehaviour
     
     public void AddRelicWithoutData(Relic relic)
     {
-        relic.GetComponent<RectTransform>().sizeDelta = new Vector2(60, 60);
         relic.EffectBox.SetActive(false);
         
         if (_emplIdx <= _relicEmplacements.Length)
         {
             relic.transform.position = _relicEmplacements[_emplIdx].position;
             relic.transform.parent = _relicEmplacements[_emplIdx].transform;
+            
+            relic.GetComponent<RectTransform>().sizeDelta = relic.BaseSizeDelta;
             
             relic.IsCollected = true;
             
@@ -124,7 +126,7 @@ public class RelicsManager : MonoBehaviour
 
         foreach (var relic in relics)
         {
-            relic.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 100);
+            relic.GetComponent<RectTransform>().sizeDelta = 2 * relic.BaseSizeDelta;
             
             //relic.OnCollected += AddRelicWithData;
         }

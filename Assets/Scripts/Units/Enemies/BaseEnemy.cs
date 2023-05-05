@@ -238,7 +238,10 @@ public class BaseEnemy : BaseUnit
         _availableTiles = GetAvailableTilesInRange(transform.position, _currentMovement.Value, 
             false, false);
 
-        _path = FindPath(transform.position, targetPos, countHeroes, countEnemies, countWalls);
+        Vector3 startPos = _gridManager.WorldToCellCenter(transform.position);
+        Vector3 endPos = _gridManager.WorldToCellCenter(targetPos);
+        
+        _path = FindPath(startPos, endPos, countHeroes, countEnemies, countWalls);
 
         if (_path.Count == minimumPathCount)
         {

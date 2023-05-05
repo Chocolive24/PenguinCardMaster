@@ -110,10 +110,10 @@ public class BaseAttackCard : BaseCard
     public override void DrawTilemap(Dictionary<Vector3, int> availableNeighbours, Tilemap tilemap, RuleTile ruleTile)
     {
         if (availableNeighbours.ContainsKey(_gridManager.WorldToCellCenter(
-                GetStartingTile().transform.position)))
+                GetStartingTile())))
         {
             availableNeighbours.Remove(_gridManager.WorldToCellCenter(
-                GetStartingTile().transform.position));
+                GetStartingTile()));
         }
         
         base.DrawTilemap(availableNeighbours, tilemap, ruleTile);

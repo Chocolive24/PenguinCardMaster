@@ -148,14 +148,14 @@ public class CardPlayedManager : MonoBehaviour
     
     private void DrawCurrentCardTilemap(BaseCard card)
     {
-        if (!card.AoeTilemap)
-        {
-            card.AoeTilemap = _tilemapsManager.InstantiateTilemap(card.name + " aoe");
-            
-            card.GetAvailableTiles(); 
+        ClearCurrentCardTilemap();
         
-            card.DrawTilemap(card.AvailableTiles, card.AoeTilemap, _tilemapsManager.GetRuleTile(card));
-        }
+        card.AoeTilemap = _tilemapsManager.InstantiateTilemap(card.name + " aoe");
+        
+        card.GetAvailableTiles(); 
+    
+        card.DrawTilemap(card.AvailableTiles, card.AoeTilemap, _tilemapsManager.GetRuleTile(card));
+        
     }
     
     private void PlayCurrentCard(TileCell tile)
@@ -185,6 +185,8 @@ public class CardPlayedManager : MonoBehaviour
             MoveCardToHisDiscardPile();
 
             ClearCardLocation();
+            
+            Debug.Log(_paladinMovDiscDeckContr);
         }
     }
     
@@ -251,6 +253,8 @@ public class CardPlayedManager : MonoBehaviour
         
         _currentCard = card;
 
+        DrawCurrentCardTilemap(_currentCard);
+        
         _hasAMoveCardOnIt = card.GetComponent<BaseMoveCard>();
         _hasAnAttackCardOnIt = card.GetComponent<BaseAttackCard>();
     }

@@ -41,11 +41,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3247736833332960609, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3247736833332960609, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 60
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3247736833332960609, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d059455b6e9a44aa04411d81210fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _baseSizeDelta: {x: 35, y: 50}
   _button: {fileID: 7510435138152003924}
   _relicDataRef: {fileID: 11400000, guid: 15e0bf4db126f704f91b769ee5180799, type: 2}
   _effectBox: {fileID: 6586176090014041302}
