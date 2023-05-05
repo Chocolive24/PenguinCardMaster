@@ -18,6 +18,9 @@ public class Collectible : MonoBehaviour
 
     protected bool _isCollected;
     
+    // References ------------------------------------------------------------------------------------------------------
+    private GameObject _objectInShop;
+    
     // Events ----------------------------------------------------------------------------------------------------------
     public static event Action<Collectible> OnBuy;
     public static event Action<Collectible> OnCollected;
@@ -62,10 +65,11 @@ public class Collectible : MonoBehaviour
         }
     }
 
-    public void Init(CollectibleType collectibleType, int cost)
+    public void Init(CollectibleType collectibleType, int cost, GameObject objectInShop)
     {
         _collectibleType = collectibleType;
         _objectCost = cost;
+        _objectInShop = objectInShop;
     }
     
     private void SetToCollected(ShopManager shopManager, Collectible obj)
@@ -73,6 +77,7 @@ public class Collectible : MonoBehaviour
         if (obj == this)
         {
             OnCollected?.Invoke(this);
+            _objectInShop.SetActive(false);
         }
     }
 }

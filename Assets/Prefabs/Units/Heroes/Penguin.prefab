@@ -85,6 +85,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5539158917072157092, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+    - {fileID: 9019359478071148190, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
 --- !u!1 &5153618790123906427 stripped
 GameObject:
@@ -107,57 +108,70 @@ MonoBehaviour:
   _faction: 0
   _maxHP:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4d692dbc8b575c44296fcb88e6a6b271, type: 2}
   _currentHP:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: ac36d26e88ddf124bb2c248e8cdaff9f, type: 2}
   _baseAttack:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4fb2bff2c7e868c40bd61d4021591daa, type: 2}
   _currentAttack:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: dd3b2393547b17f44804ddd294d5cfdf, type: 2}
   _shield:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: bc9d44cc035f66e4c8cc3d524dfd3689, type: 2}
   _baseMovement:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 62c0e1bb0ecb4db4db61bb0776daeba5, type: 2}
   _currentMovement:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: edfde8e601a095349abae03370d94b8e, type: 2}
   _speed:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4560b11ed34c93c44824028003737d6c, type: 2}
   _unitData: {fileID: 11400000, guid: fc6b482a3e858e14fafdd8cf83a06ae6, type: 2}
   _heroClass: 0
   _maxMana:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 0}
   _exploreSpeed:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 9f01151e24b1be1438c1452b7198d614, type: 2}
   _battleSpeed:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4560b11ed34c93c44824028003737d6c, type: 2}
   _maxNbrOfCardToDrawnPerTurn:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 3feaf518f5b93374c8fea93938b7450d, type: 2}
   _golds:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 9210c534f36d0e1408aa288f2a95b252, type: 2}
 --- !u!114 &-632468933280581228
 MonoBehaviour:
@@ -240,8 +254,36 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1bf96e84-c4b4-472d-a230-b495dba83e7f
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5002511415035116822}
+        m_TargetAssemblyTypeName: PlayerInputs, Assembly-CSharp
+        m_MethodName: HandlePauseMenu
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 76b71459-b43d-4b61-a5b8-be4144f39ade
+    m_ActionName: Player/MenuScreen[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5002511415035116822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5153618790123906427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f803e97d515c4a74da36d85ceb9f6294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

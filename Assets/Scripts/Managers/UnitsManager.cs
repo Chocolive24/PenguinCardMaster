@@ -123,11 +123,13 @@ public class UnitsManager : MonoBehaviour
                     {
                         if (!_gridManager.GetTileAtPosition(_gridManager.WorldToCellCenter(tile.transform.position)))
                         {
+                            isPosValid = false;
                             break;
                         }
             
                         if (!tile.Walkable)
                         {
+                            isPosValid = false;
                             break;
                         }
                         
@@ -179,22 +181,27 @@ public class UnitsManager : MonoBehaviour
         
         // Instantiate the hero.
         var randomPrefab = GetRandomUnit<BaseHero>(Faction.Hero);
+
+        BaseHero heroPlayer = FindObjectOfType<BaseHero>();
+        
         var rndSpawnedTile = _gridManager.GetHeroSpawnTile();
 
-        var spawnedHero = Instantiate(randomPrefab, rndSpawnedTile.transform.position, Quaternion.identity);
+        //var spawnedHero = Instantiate(randomPrefab, rndSpawnedTile.transform.position, Quaternion.identity);
+
+        heroPlayer.transform.position = rndSpawnedTile.transform.position;
         
-        spawnedHero.OnDeath += HandleHeroDeath;
+        heroPlayer.OnDeath += HandleHeroDeath;
         
-        spawnedHero.PreviousOccupiedTiles = spawnedHero.GetOccupiedTiles();
+        heroPlayer.PreviousOccupiedTiles = heroPlayer.GetOccupiedTiles();
         
-        foreach (var tile in spawnedHero.GetOccupiedTiles())
+        foreach (var tile in heroPlayer.GetOccupiedTiles())
         {
-            tile.SetUnit(spawnedHero);
+            tile.SetUnit(heroPlayer);
         }
         
-        _heroes.Add(spawnedHero);
+        _heroes.Add(heroPlayer);
         
-        OnHeroSpawn?.Invoke(this, spawnedHero);
+        OnHeroSpawn?.Invoke(this, heroPlayer);
     }
 
     // Update is called once per frame

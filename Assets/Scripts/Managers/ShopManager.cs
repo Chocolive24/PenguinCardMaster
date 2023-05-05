@@ -175,7 +175,7 @@ public class ShopManager : MonoBehaviour
         cardRare1.transform.position = rect.position;
         cardRare1.transform.parent = rect.transform.parent;
 
-        cardRare1.Init(Collectible.CollectibleType.SHOP_OBJECT, Random.Range(minCost, maxCost));
+        cardRare1.Init(Collectible.CollectibleType.SHOP_OBJECT, Random.Range(minCost, maxCost), rect.gameObject);
         
         costText.text = cardRare1.ObjectCost.ToString();
     }
@@ -185,7 +185,7 @@ public class ShopManager : MonoBehaviour
         Relic rndRelic = _relicsManager.GetARandomRelic(relicToAvoid);
         Relic relic = Instantiate(rndRelic, rect.position, Quaternion.identity, rect.transform);
 
-        relic.Init(Collectible.CollectibleType.SHOP_OBJECT, Random.Range(300, 350));
+        relic.Init(Collectible.CollectibleType.SHOP_OBJECT, Random.Range(300, 350), rect.gameObject);
 
         relic.GetComponent<RectTransform>().sizeDelta = 2 * relic.BaseSizeDelta;
         
