@@ -48,16 +48,10 @@ public abstract class DeckController : MonoBehaviour
     {
         BattleManager.OnBattleStart += SetDeck;
         BattleManager.OnPlayerTurnStart += ResetValues;
-        BattleManager.OnPlayerTurnEnd += DisableDeck;
         BaseMoveCard.OnPathStarted += DesactivateDeckButton;
         BaseUnit.OnPathEnded += ActivateDeckButton;
     }
-
-    private void DisableDeck(BattleManager obj)
-    {
-        _button.interactable = false;
-    }
-
+    
     protected virtual void SetDeck(BattleManager battleManager, RoomData room)
     {
         if (!_unitsManager)
@@ -85,7 +79,6 @@ public abstract class DeckController : MonoBehaviour
     private void ResetValues(BattleManager obj)
     {
         UpdateNbrCardDrawnTxt();
-        _button.interactable = true;
     }
 
     public virtual void SetButtonInteractavity(bool interactable)
@@ -221,14 +214,16 @@ public abstract class DeckController : MonoBehaviour
     {
         BattleManager.OnBattleStart -= SetDeck;
         BattleManager.OnPlayerTurnStart -= ResetValues;
-        BattleManager.OnPlayerTurnEnd -= DisableDeck;
         BaseMoveCard.OnPathStarted -= DesactivateDeckButton;
         BaseUnit.OnPathEnded -= ActivateDeckButton;
     }
 
-    private void ActivateDeckButton(BaseUnit obj)
+    private void ActivateDeckButton(BaseUnit unit)
     {
-        _button.interactable = true;
+        if (unit.Faction == Faction.Hero)
+        {
+            _button.interactable = true;
+        }
     }
 
     private void DesactivateDeckButton(BaseMoveCard obj)

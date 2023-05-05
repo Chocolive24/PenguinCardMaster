@@ -21,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1708276804, guid: 2d318bb797e5ea14db40b3574cf9a7b9, type: 3}
       propertyPath: _aeraOfEffect
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5447476175181462826, guid: 2d318bb797e5ea14db40b3574cf9a7b9, type: 3}
       propertyPath: m_Pivot.x
@@ -109,7 +109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5447476175181462827, guid: 2d318bb797e5ea14db40b3574cf9a7b9, type: 3}
       propertyPath: m_Name
-      value: LegendaryMoveCard
+      value: Tp
       objectReference: {fileID: 0}
     - target: {fileID: 5447476175228162178, guid: 2d318bb797e5ea14db40b3574cf9a7b9, type: 3}
       propertyPath: m_Sprite

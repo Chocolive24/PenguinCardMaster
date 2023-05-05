@@ -54,23 +54,11 @@ public class RelicsManager : MonoBehaviour
         OrderBy(x => Random.value).First().RelicPrefab;
     }
 
-    // public void AddRelicWithData(Relic relic)
-    // {
-    //     relic.GetComponent<RectTransform>().sizeDelta = new Vector2(60, 60);
-    //     relic.EffectBox.SetActive(false);
-    //     
-    //     if (_emplIdx <= _relicEmplacements.Length)
-    //     {
-    //         relic.transform.position = _relicEmplacements[_emplIdx].position;
-    //         relic.transform.parent = _relicEmplacements[_emplIdx].transform;
-    //
-    //         relic.IsCollected = true;
-    //         
-    //         _relicInventoryData.AddRelicData(relic.RelicDataRef);
-    //         
-    //         _emplIdx++;
-    //     }
-    // }
+    public Relic GetARelicByType(RelicData.RelicType type)
+    {
+        return _relicDataList.Where(relic => relic.Type == type).
+            OrderBy(x => Random.value).First().RelicPrefab;
+    }
 
     public void AddRelicWithData(Collectible collectible)
     {
@@ -117,11 +105,18 @@ public class RelicsManager : MonoBehaviour
     {
         List<Relic> relics = new List<Relic>();
 
-        relics.Add(Instantiate(GetARandomRelic(null),
+        // relics.Add(Instantiate(GetARandomRelic(null),
+        //     _rewardLocation[0].position, Quaternion.identity, _rewardLocation[0].transform));
+        // relics.Add(Instantiate(GetARandomRelic(null),
+        //     _rewardLocation[1].position, Quaternion.identity, _rewardLocation[1].transform));
+        // relics.Add(Instantiate(GetARandomRelic(null),
+        //     _rewardLocation[2].position, Quaternion.identity, _rewardLocation[2].transform));
+        
+        relics.Add(Instantiate(GetARelicByType(RelicData.RelicType.PERMANENT),
             _rewardLocation[0].position, Quaternion.identity, _rewardLocation[0].transform));
-        relics.Add(Instantiate(GetARandomRelic(null),
+        relics.Add(Instantiate(GetARelicByType(RelicData.RelicType.PERMANENT),
             _rewardLocation[1].position, Quaternion.identity, _rewardLocation[1].transform));
-        relics.Add(Instantiate(GetARandomRelic(null),
+        relics.Add(Instantiate(GetARelicByType(RelicData.RelicType.PERMANENT),
             _rewardLocation[2].position, Quaternion.identity, _rewardLocation[2].transform));
 
         foreach (var relic in relics)

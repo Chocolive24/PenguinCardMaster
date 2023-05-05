@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &752227835574160562
+--- !u!1001 &4136989702957406322
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3247736833332960608, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_Name
-      value: ManaBook
+      value: MagnetCard
       objectReference: {fileID: 0}
     - target: {fileID: 3247736833332960609, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_Pivot.x
@@ -41,11 +41,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3247736833332960609, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 45
+      value: 46
       objectReference: {fileID: 0}
     - target: {fileID: 3247736833332960609, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 48
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3247736833332960609, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -98,7 +98,7 @@ PrefabInstance:
     - target: {fileID: 3247736833332960610, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2487772948792506510}
+      objectReference: {fileID: 8744290193985531099}
     - target: {fileID: 3247736833332960610, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnCollectibleClick
@@ -118,53 +118,73 @@ PrefabInstance:
     - target: {fileID: 3247736833332960611, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1363426281, guid: c77d59e8a4a726048a1ea5b5ab420618, type: 3}
+      objectReference: {fileID: 440745381, guid: 7fb5b8b525e84704d8197f18a3198d34, type: 3}
+    - target: {fileID: 3247736833332960611, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247736833332960611, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247736833332960611, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6262501306053553789, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
       propertyPath: m_text
-      value: "+ 1 permanent \nMana"
+      value: "+ 1 permanent \ncard to draw\nper turn"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6262501306053553789, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6262501306053553789, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
---- !u!1 &1458767153930988626 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2183937699488948448, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
-  m_PrefabInstance: {fileID: 752227835574160562}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2837888209563439568 stripped
+--- !u!114 &1475999003542471952 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3247736833332960610, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
-  m_PrefabInstance: {fileID: 752227835574160562}
+  m_PrefabInstance: {fileID: 4136989702957406322}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2837888209563439570}
+  m_GameObject: {fileID: 1475999003542471954}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2837888209563439570 stripped
+--- !u!1 &1475999003542471954 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3247736833332960608, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
-  m_PrefabInstance: {fileID: 752227835574160562}
+  m_PrefabInstance: {fileID: 4136989702957406322}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2487772948792506510
+--- !u!114 &8744290193985531099
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2837888209563439570}
+  m_GameObject: {fileID: 1475999003542471954}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25fc310453ea9574181e6d5ca9565ccc, type: 3}
+  m_Script: {fileID: 11500000, guid: fdd991cf9742c7a4487f8965b54bdc45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseSizeDelta: {x: 45, y: 48}
-  _button: {fileID: 2837888209563439568}
-  _relicDataRef: {fileID: 11400000, guid: 27147038c350cdf4bac09d4c6c559ea8, type: 2}
-  _effectBox: {fileID: 1458767153930988626}
-  _playerMaxMana:
+  _baseSizeDelta: {x: 46, y: 60}
+  _button: {fileID: 1475999003542471952}
+  _relicDataRef: {fileID: 11400000, guid: 90493eb10942c1240badde82b5b95671, type: 2}
+  _effectBox: {fileID: 2821344582311540882}
+  _playerMaxNbrOfCardToDrawPerTurn:
     _useConstant: 0
     _baseValue: 0
     ConstantRunValue: 0
-    Variable: {fileID: 11400000, guid: 42a7f232c6572a148b387225795c7645, type: 2}
-  _manaToAdd: 1
+    Variable: {fileID: 11400000, guid: 3feaf518f5b93374c8fea93938b7450d, type: 2}
+  _supplCardNbrToDraw: 1
+--- !u!1 &2821344582311540882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2183937699488948448, guid: 5f5e538c46b75f044afc0279e701f06f, type: 3}
+  m_PrefabInstance: {fileID: 4136989702957406322}
+  m_PrefabAsset: {fileID: 0}

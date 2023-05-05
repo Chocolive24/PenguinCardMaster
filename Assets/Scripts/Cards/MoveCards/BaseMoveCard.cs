@@ -19,6 +19,8 @@ public class BaseMoveCard : BaseCard
     
     private Dictionary<Vector3, int> _path;
     private Tilemap _pathTilemap;
+
+    protected bool _hasPlayerClickedOnATile;
     
     // Events ----------------------------------------------------------------------------------------------------------
     public static event Action<BaseMoveCard> OnPathStarted;
@@ -38,6 +40,8 @@ public class BaseMoveCard : BaseCard
         get => _pathTilemap;
         set => _pathTilemap = value;
     }
+
+    public bool HasPlayerClickedOnATile => _hasPlayerClickedOnATile;
 
     #endregion
     
@@ -74,7 +78,7 @@ public class BaseMoveCard : BaseCard
 
     public override void ActivateCardEffect(TileCell tile)
     {
-        if (!tile.OccupiedUnit)
+        if (!tile.OccupiedUnit && !_targetPos.HasValue)
         {
             //Check if we have a selected hero and if we have played a moveCard.
             if (_unitsManager.HeroPlayer)
@@ -92,6 +96,8 @@ public class BaseMoveCard : BaseCard
                             false, false, false);
                         
                         OnPathStarted.Invoke(this);
+
+                        _hasPlayerClickedOnATile = true;
                     }
                 }
             }
@@ -118,5 +124,6 @@ public class BaseMoveCard : BaseCard
     public override void ResetProperties()
     {
         _targetPos = null;
+        _hasPlayerClickedOnATile = false;
     }
 }

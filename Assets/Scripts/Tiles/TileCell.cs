@@ -120,25 +120,7 @@ public class TileCell : MonoBehaviour
 
     public virtual void SetUnit(BaseUnit unit)
     {
-        // if (unit.OccupiedTile)
-        // {
-        //     unit.OccupiedTile.OccupiedUnit = null;
-        // }
-        // _occupiedUnit = unit;
-        // unit.OccupiedTile = this;
-
-        // if (unit.OccupiedTiles.Count > 0)
-        // {
-        //     foreach (var tile in unit.OccupiedTiles)
-        //     {
-        //         tile.OccupiedUnit = null;
-        //     }
-        //     
-        //     unit.OccupiedTiles.Clear();
-        // }
-
         _occupiedUnit = unit;
-        //unit.OccupiedTiles.Add(this);
     }
     
     protected virtual void OnMouseEnter()
@@ -160,6 +142,11 @@ public class TileCell : MonoBehaviour
             {
                 BaseMoveCard card = (BaseMoveCard)_cardPlayedManager.CurrentCard;
 
+                if (card.HasPlayerClickedOnATile)
+                {
+                    return;
+                }
+                
                 card.Path = _tilemapsManager.FindPathWithinRange(_position, card.AvailableTiles);
         
                 _unitsManager.HeroPlayer.Path = card.Path.Keys.ToList();
@@ -181,7 +168,10 @@ public class TileCell : MonoBehaviour
                     var previousTile = i > 0 ? pathTiles[i - 1] : _unitsManager.HeroPlayer.GetOccupiedTiles().First();
                     var futureTile = i < pathTiles.Count - 1 ? pathTiles[i + 1] : null;
 
-                    _arrowTranslator.DrawArrowPath(previousTile, pathTiles[i], futureTile);
+                    if (!card.HasPlayerClickedOnATile)
+                    {
+                        _arrowTranslator.DrawArrowPath(previousTile, pathTiles[i], futureTile);
+                    }
                 }
             }
         }

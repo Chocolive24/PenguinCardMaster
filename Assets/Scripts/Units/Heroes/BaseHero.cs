@@ -132,8 +132,8 @@ public class BaseHero : BaseUnit
         BattleManager.OnBattleEnd += PutAllCardsInDecks;
         TileCell.OnTileSelected += FindExploringPath;
         DiscardDeckController.OnDiscarFull += ShuffleCardsBackToDeck;
-        RescuePotion.OnPerformEffect += HealHP;
-        RescueMana.OnPerformEffect += RestoreMana;
+        ActivableRelic.OnPerformEffect += HealWithPotion;
+        ActivableRelic.OnPerformEffect += RestoreMana;
         ShopManager.OnObjectBuy += UpdateGolds;
 
         BaseCard.OnDrawn += AddCardToHand;
@@ -151,8 +151,8 @@ public class BaseHero : BaseUnit
         BattleManager.OnBattleEnd -= PutAllCardsInDecks;
         TileCell.OnTileSelected -= FindExploringPath;
         DiscardDeckController.OnDiscarFull -= ShuffleCardsBackToDeck;
-        RescuePotion.OnPerformEffect -= HealHP;
-        RescueMana.OnPerformEffect -= RestoreMana;
+        ActivableRelic.OnPerformEffect -= HealWithPotion;
+        ActivableRelic.OnPerformEffect -= RestoreMana;
         ShopManager.OnObjectBuy -= UpdateGolds;
         
         BaseCard.OnDrawn -= AddCardToHand;
@@ -226,6 +226,11 @@ public class BaseHero : BaseUnit
             _mainDiscardDeck.Deck = _mainDeck;
             _movDiscardDeck.Deck = _movementDeck;
         }
+        
+        foreach (var card in _cardHand)
+        {
+            card.CanBePlayed = true;
+        }
     }
 
     private void EndTurn(BattleManager obj)
@@ -233,6 +238,12 @@ public class BaseHero : BaseUnit
         _canPlay = false;
         _mainDeck.SetButtonInteractavity(false);
         _movementDeck.SetButtonInteractavity(false);
+
+        foreach (var card in _cardHand)
+        {
+            card.CanBePlayed = false;
+        }
+        
         //_unitsManager.SetSelectedHero(null);
     }
     
@@ -247,7 +258,15 @@ public class BaseHero : BaseUnit
         _currentMana = _maxMana.Value;
     }
 
-    public void HealHP(RescuePotion arg1, int heal)
+    public void HealWithPotion(ActivableRelic relic)
+    {
+        if (relic.TryGetComponent(out RescuePotion rescuePotion))
+        {
+            HealHp(rescuePotion.Heal);
+        }
+    }
+
+    public void HealHp(int heal)
     {
         _currentHP.AddValue(heal);
 
@@ -255,13 +274,16 @@ public class BaseHero : BaseUnit
         {
             _currentHP.SetValue(_maxHP.Value);
         }
-        
+
         _healthBar.UpdateHealthBar(_currentHP.Value, _maxHP.Value);
     }
-    
-    private void RestoreMana(RescueMana arg1, int arg2)
+
+    private void RestoreMana(ActivableRelic relic)
     {
-        _currentMana += arg2;
+        if (relic.TryGetComponent(out RescueMana rescueMana))
+        {
+            _currentMana += rescueMana.ManaToRestore;
+        }
     }
     
     private void UpdateGolds(ShopManager arg1, Collectible obj)
@@ -285,13 +307,13 @@ public class BaseHero : BaseUnit
     public override void FindAvailablePathToTarget(Vector3 targetPos, int minimumPathCunt, 
         bool countHeroes, bool countEnemies, bool countWalls)
     {
+        if (_targetPos.HasValue && _cardPlayedManager.HasACardOnIt)
+        {
+            return;
+        }
+        
         _availableTiles = _cardPlayedManager.CurrentCard.AvailableTiles;
         base.FindAvailablePathToTarget(targetPos, 0, countHeroes, countEnemies, countWalls);
-
-        if (_path.Count> 0)
-        {
-            
-        }
     }
 
 

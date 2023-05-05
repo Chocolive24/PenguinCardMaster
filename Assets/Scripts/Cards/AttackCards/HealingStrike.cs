@@ -30,7 +30,7 @@ public class HealingStrike : BaseAttackCard
         
         if (_hasPerformed)
         {
-            _unitsManager.HeroPlayer.HealHP(null, _heal);
+            _unitsManager.HeroPlayer.HealHp(_heal);
         }
     }
 }
