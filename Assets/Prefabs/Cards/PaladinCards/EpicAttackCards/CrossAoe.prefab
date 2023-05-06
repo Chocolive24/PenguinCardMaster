@@ -119,5 +119,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrossAoe
       objectReference: {fileID: 0}
+    - target: {fileID: 3904962186973532001, guid: f0891bb707fc3c54086d52d3d6bbf1b7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 63c77a9b4d9009a4890fcce402cfd437, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0891bb707fc3c54086d52d3d6bbf1b7, type: 3}

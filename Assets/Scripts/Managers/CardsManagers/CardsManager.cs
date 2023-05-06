@@ -28,6 +28,9 @@ public class CardsManager : MonoBehaviour
 
     [SerializeField] private GameObject _victoryPanel;
 
+    [SerializeField] private IntReference _legCardPercent;
+    [SerializeField] private IntReference _epicCardPercent;
+    
     // Getters and Setters ---------------------------------------------------------------------------------------------
     public List<ScriptableCard> ScrMoveCards => _scrMoveCards;
     public List<ScriptableCard> ScrAttackCards => _scrAttackCards;
@@ -81,17 +84,19 @@ public class CardsManager : MonoBehaviour
         RectTransform rect = new RectTransform();
         Rarety rarety = Rarety.Rare;
 
-        switch (Random.Range(1, 101))
+        int rndNbr = Random.Range(1, 101);
+
+        if (rndNbr <= _legCardPercent.Value)
         {
-            case <= 10:
-                rarety = Rarety.Legendary;
-                break;
-            case <= 20:
-                rarety = Rarety.Epic;
-                break;
-            case <= 100:
-                rarety = Rarety.Rare;
-                break;
+            rarety = Rarety.Legendary;
+        }
+        else if (rndNbr <= _epicCardPercent.Value)
+        {
+            rarety = Rarety.Epic;
+        }
+        else
+        {
+            rarety = Rarety.Rare;
         }
         
         for (int i = 0; i < rewardNbr; i++)
@@ -142,49 +147,6 @@ public class CardsManager : MonoBehaviour
                 }
             }
         }
-        
-        
-        
-        // for (int i = 0; i < rewardNbr; i++)
-        // {
-        //     BaseCard cardData = null;
-        //     
-        //     int rndRaretyNbr = Random.Range(1, 101);
-        //     
-        //     switch (rndRaretyNbr)
-        //     {
-        //         case <= 50:
-        //            cardData = GetRandomCard<BaseCard>(scriptableCards, Rarety.Rare);
-        //             break;
-        //         case <= 80:
-        //             cardData = GetRandomCard<BaseCard>(scriptableCards, Rarety.Epic);
-        //             break;
-        //         case <= 100:
-        //             cardData = GetRandomCard<BaseCard>(scriptableCards, Rarety.Legendary);
-        //             break;
-        //     }
-        //     
-        //     BaseCard spawnedCard = null;
-
-        //     switch (i)
-        //     {
-        //         case 0:
-        //             spawnedCard = Instantiate(cardData, _reward1Trans.position, Quaternion.identity);
-        //             spawnedCard.transform.parent = _reward1Trans.transform;
-        //             spawnedCards.Add(spawnedCard);
-        //             break;
-        //         case 1:
-        //             spawnedCard = Instantiate(cardData, _reward2Trans.position, Quaternion.identity);
-        //             spawnedCard.transform.parent = _reward2Trans.transform;
-        //             spawnedCards.Add(spawnedCard);
-        //             break;
-        //         case 2:
-        //             spawnedCard = Instantiate(cardData, _reward3Trans.position, Quaternion.identity);
-        //             spawnedCard.transform.parent = _reward3Trans.transform;
-        //             spawnedCards.Add(spawnedCard);
-        //             break;
-        //     }
-        // }
         
         return spawnedCards;
     }

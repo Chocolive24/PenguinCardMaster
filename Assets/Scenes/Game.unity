@@ -1388,7 +1388,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 775, y: 100}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &157226572
 MonoBehaviour:
@@ -1403,15 +1403,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.094980404, g: 0.09964285, b: 0.21698111, a: 1}
+  m_Color: {r: 0.13136345, g: 0.13169074, b: 0.14150941, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 896108371, guid: b44d94ea05abeda47b8574719fe5c3f9, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2222,7 +2222,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 725, y: 100}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &308987857
 MonoBehaviour:
@@ -2237,14 +2237,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3087575, g: 0.8355761, b: 0.9245283, a: 1}
+  m_Color: {r: 0.8396226, g: 0.83487004, b: 0.83487004, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 896108371, guid: b44d94ea05abeda47b8574719fe5c3f9, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -29938,6 +29938,16 @@ MonoBehaviour:
   _reward2Trans: {fileID: 1195270773}
   _reward3Trans: {fileID: 1118279263}
   _victoryPanel: {fileID: 665476481}
+  _legCardPercent:
+    _useConstant: 0
+    _baseValue: 0
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 6f991931ea143af4293faa2e7084ae96, type: 2}
+  _epicCardPercent:
+    _useConstant: 0
+    _baseValue: 0
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 22774d709830ad542b790f3881b9f0ec, type: 2}
 --- !u!1 &1609612449
 GameObject:
   m_ObjectHideFlags: 0
@@ -31184,7 +31194,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 2.5, y: 0}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1742825512
@@ -31873,7 +31883,11 @@ MonoBehaviour:
   _minGoldReward: 75
   _maxGoldReward: 100
   _rewardsNbr: 3
-  _relicRewardPercentage: 100
+  _relicRewardPercentage:
+    _useConstant: 0
+    _baseValue: 0
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 319e35030d0fd334bb77b0fc89a0b074, type: 2}
   _playerGolds:
     _useConstant: 0
     _baseValue: 0

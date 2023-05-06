@@ -20,8 +20,6 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private int _minGoldReward = 75, _maxGoldReward = 100;
     [SerializeField] private int _rewardsNbr = 3;
 
-    [SerializeField] private int _relicRewardPercentage = 10;
-    
     private bool _isPlayerTurn;
 
     private List<BaseCard> _cardRewards = new List<BaseCard>();
@@ -47,6 +45,8 @@ public class BattleManager : MonoBehaviour
 
     #endregion
 
+    [SerializeField] private IntReference _relicRewardPercentage;
+    
     [SerializeField] private IntReference _playerGolds;
     
     // Events ----------------------------------------------------------------------------------------------------------
@@ -270,7 +270,7 @@ public class BattleManager : MonoBehaviour
 
             if (_battleRoom.Type != RoomData.RoomType.END)
             {
-                if (Random.Range(1, 101) <= _relicRewardPercentage)
+                if (Random.Range(1, 101) <= _relicRewardPercentage.Value)
                 {
                     _relicRewards = _relicsManager.CreateRelicRewards();
                 }

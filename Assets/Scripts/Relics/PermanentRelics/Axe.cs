@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RelicOfStrength : PermanentRelic
+public class Axe : PermanentRelic
 {
     [SerializeField] private IntReference _playerAttack;
     [SerializeField] private int _damageToAdd;

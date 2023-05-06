@@ -39,6 +39,10 @@ PrefabInstance:
       propertyPath: _neighboursType
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1268095167906026993, guid: b645d0a8b02fd2c40aa6a0e7a7181f79, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 63c77a9b4d9009a4890fcce402cfd437, type: 3}
     - target: {fileID: 1268095167975237812, guid: b645d0a8b02fd2c40aa6a0e7a7181f79, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

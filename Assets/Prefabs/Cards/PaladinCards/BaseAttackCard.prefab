@@ -151,6 +151,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3369712379896627166, guid: 0a8883d2370707d49807bd26b2e40736, type: 3}
+      propertyPath: m_text
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6501603814357099478, guid: 0a8883d2370707d49807bd26b2e40736, type: 3}
       propertyPath: m_Color.a
       value: 0
@@ -237,7 +241,8 @@ MonoBehaviour:
   _cardEffectTxt: {fileID: 1268095168742148044}
   _playerAttack:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4fb2bff2c7e868c40bd61d4021591daa, type: 2}
   _baseDamage: 5
 --- !u!114 &1268095168742148044 stripped

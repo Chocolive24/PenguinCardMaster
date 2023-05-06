@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -646698772, guid: 0275bf86eafa15e4189c048f560e2f7b, type: 3}
+    - target: {fileID: 3369712378846035324, guid: 0a8883d2370707d49807bd26b2e40736, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -479884801, guid: 5497938032b4b0645a501907cdd39b02, type: 3}
     - target: {fileID: 3369712378919419960, guid: 0a8883d2370707d49807bd26b2e40736, type: 3}
       propertyPath: m_Name
       value: BaseMoveCard
@@ -185,6 +189,11 @@ MonoBehaviour:
   _cardData: {fileID: 11400000, guid: 5c48d25bc3280ef4eb511fdb23304836, type: 2}
   _manaNbrTxt: {fileID: 5447476176158966477}
   _cardEffectTxt: {fileID: 5447476176099889746}
+  _playerMovement:
+    _useConstant: 0
+    _baseValue: 0
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 62c0e1bb0ecb4db4db61bb0776daeba5, type: 2}
 --- !u!114 &5447476176099889746 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3369712380223483713, guid: 0a8883d2370707d49807bd26b2e40736, type: 3}

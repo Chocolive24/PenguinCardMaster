@@ -217,7 +217,7 @@ public class BaseHero : BaseUnit
         _currentMana = _maxMana.Value;
         _canPlay = true;
         _nbrOfCardDrawnThisTurn = 0;
-        
+
         _mainDeck.SetButtonInteractavity(true);
         _movementDeck.SetButtonInteractavity(true);
 

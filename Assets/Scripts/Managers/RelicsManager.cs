@@ -60,6 +60,19 @@ public class RelicsManager : MonoBehaviour
             OrderBy(x => Random.value).First().RelicPrefab;
     }
 
+    public Relic GetARelicByComponent()
+    {
+        foreach (var relic in _relicDataList)
+        {
+            if (relic.RelicPrefab.TryGetComponent(out Boots boots))
+            {
+                return boots;
+            }
+        }
+
+        return null;
+    }
+
     public void AddRelicWithData(Collectible collectible)
     {
         Relic relic = collectible.GetComponent<Relic>();
@@ -112,11 +125,11 @@ public class RelicsManager : MonoBehaviour
         // relics.Add(Instantiate(GetARandomRelic(null),
         //     _rewardLocation[2].position, Quaternion.identity, _rewardLocation[2].transform));
         
-        relics.Add(Instantiate(GetARelicByType(RelicData.RelicType.PERMANENT),
+        relics.Add(Instantiate(GetARelicByComponent(),
             _rewardLocation[0].position, Quaternion.identity, _rewardLocation[0].transform));
-        relics.Add(Instantiate(GetARelicByType(RelicData.RelicType.PERMANENT),
+        relics.Add(Instantiate(GetARelicByComponent(),
             _rewardLocation[1].position, Quaternion.identity, _rewardLocation[1].transform));
-        relics.Add(Instantiate(GetARelicByType(RelicData.RelicType.PERMANENT),
+        relics.Add(Instantiate(GetARelicByComponent(),
             _rewardLocation[2].position, Quaternion.identity, _rewardLocation[2].transform));
 
         foreach (var relic in relics)

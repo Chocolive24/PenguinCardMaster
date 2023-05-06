@@ -22,6 +22,9 @@ public class BaseMoveCard : BaseCard
 
     protected bool _hasPlayerClickedOnATile;
     
+    // References ------------------------------------------------------------------------------------------------------
+    [SerializeField] private IntReference _playerMovement;
+    
     // Events ----------------------------------------------------------------------------------------------------------
     public static event Action<BaseMoveCard> OnPathStarted;
     
@@ -29,6 +32,8 @@ public class BaseMoveCard : BaseCard
 
     #region Getters and Setters
 
+    public int CurrentMovement => _aeraOfEffect + _playerMovement.Value;
+    
     public Dictionary<Vector3, int> Path
     {
         get => _path;
@@ -61,7 +66,7 @@ public class BaseMoveCard : BaseCard
         }
         else
         {
-            _cardEffectTxt.text = "Move " + _aeraOfEffect + "\n squares \n";
+            _cardEffectTxt.text = "Move " + CurrentMovement + "\n squares \n";
         }
     }
 
@@ -118,7 +123,14 @@ public class BaseMoveCard : BaseCard
     {
         _availableTiles = _tilemapsManager.GetAvailableTilesInRange(
             _gridManager.WorldToCellCenter(GetStartingTile()),
-            _aeraOfEffect, _neighboursData, false, false);
+            CurrentMovement , _neighboursData, false, false);
+    }
+
+    protected override void GetAvailableTilesInCardRenderer()
+    {
+        _availableTiles = _tilemapsManager.GetAvailableTilesInCardRenderer(
+            _tilemapsManager.GetCardAoeRendererCenter(), CurrentMovement, _neighboursData,
+            false, true);
     }
 
     public override void ResetProperties()

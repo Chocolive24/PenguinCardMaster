@@ -127,5 +127,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Earthquake
       objectReference: {fileID: 0}
+    - target: {fileID: 3904962186973532001, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 63c77a9b4d9009a4890fcce402cfd437, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
