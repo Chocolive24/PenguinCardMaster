@@ -474,7 +474,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1796877525}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: Quit
+        m_MethodName: QuiteWithSave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

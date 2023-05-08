@@ -21,4 +21,16 @@ public class UnitData : ScriptableObject
     public IntReference Speed;
     
     public BaseUnit BaseUnitPrefab;
+
+    public List<IntReference> IntReferences;
+
+    protected virtual void OnEnable()
+    {
+        IntReferences = new List<IntReference>();
+        
+        IntReferences.Add(MaxHP);
+        IntReferences.Add(Attack);
+        IntReferences.Add(Movement);
+        IntReferences.Add(Speed);
+    }
 }

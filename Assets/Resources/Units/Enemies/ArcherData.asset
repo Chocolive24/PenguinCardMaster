@@ -35,8 +35,25 @@ MonoBehaviour:
     ConstantRunValue: 8
     Variable: {fileID: 0}
   BaseUnitPrefab: {fileID: 6290915316528075013, guid: c6f4453c4b5903f428f021d864f0fdba, type: 3}
+  IntReferences:
+  - _useConstant: 1
+    _baseValue: 8
+    ConstantRunValue: 8
+    Variable: {fileID: 0}
+  - _useConstant: 1
+    _baseValue: 3
+    ConstantRunValue: 3
+    Variable: {fileID: 0}
+  - _useConstant: 1
+    _baseValue: 3
+    ConstantRunValue: 3
+    Variable: {fileID: 0}
+  - _useConstant: 1
+    _baseValue: 8
+    ConstantRunValue: 8
+    Variable: {fileID: 0}
   Type: 1
-  Weight: 2
+  Weight: 1
   AttackRange: 3
   MaxNbrOfAttackPerTurn: 1
   MaxNbrOfMovementPerTurn: 1

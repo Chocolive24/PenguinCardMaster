@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class BattleManager : MonoBehaviour
@@ -317,5 +318,10 @@ public class BattleManager : MonoBehaviour
         _uiBattleManager.VictoryPanel.SetActive(false);
         
         _gameManager.IsInBattleState = false;
+
+        if (_battleRoom.Type == RoomData.RoomType.END)
+        {
+            SceneManager.LoadScene("Game");
+        }
     }
 }

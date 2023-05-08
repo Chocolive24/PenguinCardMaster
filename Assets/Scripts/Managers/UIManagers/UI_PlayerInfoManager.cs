@@ -21,6 +21,11 @@ public class UI_PlayerInfoManager : MonoBehaviour
         UpdateTextes();
     }
 
+    private void Start()
+    {
+        UpdateTextes();
+    }
+
     private void UpdateTextes()
     {
         _playerGoldsTxt.text = _playerGolds.Value.ToString();

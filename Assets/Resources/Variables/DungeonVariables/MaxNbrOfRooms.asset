@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ce14a34cd0da7c42af811f273a40e54, type: 3}
   m_Name: MaxNbrOfRooms
   m_EditorClassIdentifier: 
-  Value: 5
+  RunValue: 5

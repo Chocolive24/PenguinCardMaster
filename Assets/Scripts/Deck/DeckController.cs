@@ -125,6 +125,8 @@ public abstract class DeckController : MonoBehaviour
                 
                 AddCardWithoutData(card);
             }
+
+            _size = Deck.Count;
         }
     }
     

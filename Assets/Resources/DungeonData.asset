@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57941fb722a01c1478c1fe1a2bcdc6f6, type: 3}
+  m_Name: DungeonData
+  m_EditorClassIdentifier: 
+  MinNbrOfRooms:
+    _useConstant: 0
+    _baseValue: 5
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: da3e5c5e06103b242bbc43daf3d5f440, type: 2}
+  MaxNbrOfRooms:
+    _useConstant: 0
+    _baseValue: 5
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: e926e3f6d47645d4b8d017563e1f7867, type: 2}
+  MinEnemyWeight:
+    _useConstant: 1
+    _baseValue: 7
+    ConstantRunValue: 7
+    Variable: {fileID: 0}
+  MaxEnemyWeight:
+    _useConstant: 1
+    _baseValue: 8
+    ConstantRunValue: 8
+    Variable: {fileID: 0}
+  CurrentFloor:
+    _useConstant: 0
+    _baseValue: 0
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 9bd453d89d459b745900fcab494e149f, type: 2}
+  MaxNbrOfFloors:
+    _useConstant: 0
+    _baseValue: 3
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: daaab032512a20b45970c355124c3a65, type: 2}
+  EpicCardPercent:
+    _useConstant: 0
+    _baseValue: 20
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 22774d709830ad542b790f3881b9f0ec, type: 2}
+  LegCardPercent:
+    _useConstant: 0
+    _baseValue: 5
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 6f991931ea143af4293faa2e7084ae96, type: 2}
+  RelicPercent:
+    _useConstant: 0
+    _baseValue: 10
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 319e35030d0fd334bb77b0fc89a0b074, type: 2}
+  IntReferences: []

@@ -15,36 +15,86 @@ MonoBehaviour:
   UnitName: Penguin
   Faction: 0
   MaxHP:
-    UseConstant: 0
-    ConstantValue: 0
+    _useConstant: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4d692dbc8b575c44296fcb88e6a6b271, type: 2}
-  CurrentHP:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 11400000, guid: ac36d26e88ddf124bb2c248e8cdaff9f, type: 2}
   Attack:
-    UseConstant: 0
-    ConstantValue: 0
+    _useConstant: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4fb2bff2c7e868c40bd61d4021591daa, type: 2}
   Movement:
-    UseConstant: 0
-    ConstantValue: 0
+    _useConstant: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 62c0e1bb0ecb4db4db61bb0776daeba5, type: 2}
   Speed:
-    UseConstant: 0
-    ConstantValue: 0
+    _useConstant: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4560b11ed34c93c44824028003737d6c, type: 2}
   BaseUnitPrefab: {fileID: -2789361930267343899, guid: f79088a470cdfca4b995e20f4fa4a2e1, type: 3}
+  IntReferences:
+  - _useConstant: 0
+    _baseValue: 0
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 4d692dbc8b575c44296fcb88e6a6b271, type: 2}
+  - _useConstant: 0
+    _baseValue: 0
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 4fb2bff2c7e868c40bd61d4021591daa, type: 2}
+  - _useConstant: 0
+    _baseValue: 0
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 62c0e1bb0ecb4db4db61bb0776daeba5, type: 2}
+  - _useConstant: 0
+    _baseValue: 0
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 4560b11ed34c93c44824028003737d6c, type: 2}
+  - _useConstant: 0
+    _baseValue: 100
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: ac36d26e88ddf124bb2c248e8cdaff9f, type: 2}
+  - _useConstant: 0
+    _baseValue: 0
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 9210c534f36d0e1408aa288f2a95b252, type: 2}
+  - _useConstant: 0
+    _baseValue: 5
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 42a7f232c6572a148b387225795c7645, type: 2}
+  - _useConstant: 0
+    _baseValue: 10
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 9f01151e24b1be1438c1452b7198d614, type: 2}
+  - _useConstant: 0
+    _baseValue: 8
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 4560b11ed34c93c44824028003737d6c, type: 2}
   HeroClass: 0
+  CurrentHp:
+    _useConstant: 0
+    _baseValue: 100
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: ac36d26e88ddf124bb2c248e8cdaff9f, type: 2}
+  Golds:
+    _useConstant: 0
+    _baseValue: 0
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 9210c534f36d0e1408aa288f2a95b252, type: 2}
   MaxMana:
-    UseConstant: 0
-    ConstantValue: 0
+    _useConstant: 0
+    _baseValue: 5
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 42a7f232c6572a148b387225795c7645, type: 2}
   ExploreSpeed:
-    UseConstant: 0
-    ConstantValue: 0
+    _useConstant: 0
+    _baseValue: 10
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 9f01151e24b1be1438c1452b7198d614, type: 2}
   BattleSpeed:
-    UseConstant: 0
-    ConstantValue: 0
+    _useConstant: 0
+    _baseValue: 8
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4560b11ed34c93c44824028003737d6c, type: 2}

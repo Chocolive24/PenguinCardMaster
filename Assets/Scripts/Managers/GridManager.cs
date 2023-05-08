@@ -52,6 +52,11 @@ public class GridManager : MonoBehaviour
             _instance = this;
         }
 
+        
+    }
+
+    private void OnEnable()
+    {
         GenerateGrid();
     }
 

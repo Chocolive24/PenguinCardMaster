@@ -13,6 +13,7 @@ public class UnitsManager : MonoBehaviour
     // Attributes ------------------------------------------------------------------------------------------------------
     private List<HeroData> _heroesData;
     private List<EnemyData> _enemiesData;
+    private List<EnemyData> _spawnedEnemiesData;
 
     private List<BaseHero> _heroes;
     private List<BaseEnemy> _enemies;
@@ -21,7 +22,10 @@ public class UnitsManager : MonoBehaviour
 
     private int _enemyCount = 0;
 
+    private int _roomVisitedNbr = 0;
+
     // References ------------------------------------------------------------------------------------------------------
+
     private GridManager _gridManager;
     private UIBattleManager _uiBattleManager;
 
@@ -56,8 +60,9 @@ public class UnitsManager : MonoBehaviour
             _instance = this;
         }
 
-        _heroesData = Resources.LoadAll<HeroData>("Units").ToList();
+        _heroesData = Resources.LoadAll<HeroData>("Units/Heroes").ToList();
         _enemiesData = Resources.LoadAll<EnemyData>("Units/Enemies").ToList();
+        _spawnedEnemiesData = Resources.LoadAll<EnemyData>("Units/SpawnedEnemies").ToList();
         
         _heroes = new List<BaseHero>();
         _enemies = new List<BaseEnemy>();
@@ -66,8 +71,6 @@ public class UnitsManager : MonoBehaviour
         DoorTileCell.OnDoorTileEnter += SpawnRoomEnemies;
         ShopManager.OnShopExit += SpawnHeroOutsideShop;
         TileCell.OnTileSelected += HandleSelectedEnemy;
-
-        //Room.OnRoomEnter += SpawnEntities;
     }
 
     private void HandleSelectedEnemy(TileCell tile)
@@ -102,6 +105,8 @@ public class UnitsManager : MonoBehaviour
         
         if (_currentRoom.HasEnemiesToFight)
         {
+            HandleEnemyStatBoost();
+
             int remainginWeight = _currentRoom.EnemySpawnWeight;
 
             while (remainginWeight > 0)
@@ -159,6 +164,45 @@ public class UnitsManager : MonoBehaviour
         }
     }
 
+    private void HandleEnemyStatBoost()
+    {
+        _roomVisitedNbr++;
+
+        if (_currentRoom.Type == RoomData.RoomType.END)
+        {
+            foreach (var enemyData in _enemiesData)
+            {
+                enemyData.MaxHP.AddValue(Random.Range(5, 10));
+                enemyData.Attack.AddValue(Random.Range(4, 5));
+            }
+
+            foreach (var spawnedEnemyData in _spawnedEnemiesData)
+            {
+                spawnedEnemyData.MaxHP.AddValue(Random.Range(3, 4));
+                spawnedEnemyData.Attack.AddValue(Random.Range(2, 3));
+            }
+        }
+        else
+        {
+            if (_roomVisitedNbr > 2)
+            {
+                _roomVisitedNbr = 0;
+
+                foreach (var enemyData in _enemiesData)
+                {
+                    enemyData.MaxHP.AddValue(Random.Range(2, 3));
+                    enemyData.Attack.AddValue(Random.Range(1, 2));
+                }
+
+                foreach (var spawnedEnemyData in _spawnedEnemiesData)
+                {
+                    spawnedEnemyData.MaxHP.AddValue(Random.Range(1, 2));
+                    spawnedEnemyData.Attack.AddValue(Random.Range(1, 2));
+                }
+            }
+        }
+    }
+
     private BaseEnemy GetRandomEnemyUnderWeight(int weight)
     {
         return (BaseEnemy)(_enemiesData.Where(enemyUnit => (
@@ -166,13 +210,6 @@ public class UnitsManager : MonoBehaviour
             o => Random.value).First()).BaseUnitPrefab;
     }
     
-    // private void SpawnEntities(Room room)
-    // {
-    //     SpawnHeroes();
-    //     HandleSpawnEnemies();
-    // }
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -385,9 +422,7 @@ public class UnitsManager : MonoBehaviour
             spawnedEnemy.OnDeath += HandleEnemyDeath;
         }
     }
-
     
-
     public void SetNextEnemyTurn()
     {
         StartCoroutine(WaitBeforeNextActionCo());
@@ -429,7 +464,6 @@ public class UnitsManager : MonoBehaviour
         {
             _enemyCount++;
             _currentEnemyPlaying = _enemies[_enemyCount];
-            //_currentEnemyPlaying.BehaviorTree.SetupTree();
         }
         else
         {
@@ -437,10 +471,4 @@ public class UnitsManager : MonoBehaviour
             _enemyCount = 0;
         }
     }
-    
-    // public void SetSelectedHero(BaseHero hero)
-    // {
-    //     _selectedHero = hero;
-    //     _uiBattleManager.ShowSelectedHero(hero);
-    // }
 }
