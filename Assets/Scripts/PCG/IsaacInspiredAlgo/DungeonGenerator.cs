@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
@@ -42,8 +43,13 @@ public class DungeonGenerator : MonoBehaviour
     private HashSet<Vector2Int> _wallPositions;
 
     private Vector2Int _gridSizeMultipliedByRoomSize;
+    
+    private bool _hasFloorChanged;
+    private int _nbrRoomCreated;
 
     // References ------------------------------------------------------------------------------------------------------
+
+    [SerializeField] private SO_RoomsData _so_RoomsData;
 
     [Header("Tiles References")]
     [SerializeField] private Tilemap _dungeonTilemap;
@@ -61,13 +67,30 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private GameObject _startRoomDebug;
     [SerializeField] private GameObject _endRoomDebug;
     [SerializeField] private GameObject _shopRoomDebug;
+    
 
     // Getters and Setters ---------------------------------------------------------------------------------------------
     public Dictionary<Vector3Int, RoomData> Rooms => _rooms;
 
     // Methods ---------------------------------------------------------------------------------------------------------
+    private void Awake()
+    {
+        BattleManager.OnVictoryExit += CheckIfHasChangedFloor;
+    }
+
+    private void CheckIfHasChangedFloor(BattleManager arg1, RoomData room)
+    {
+        if (room.Type == RoomData.RoomType.END)
+        {
+            _hasFloorChanged = true;
+        }
+    }
+
     private void Start()
     {
+        _hasFloorChanged = false;
+        _nbrRoomCreated = 0;
+        
         _startRoomDebug.SetActive(false);
         _endRoomDebug.SetActive(false);
         _shopRoomDebug.SetActive(false);
@@ -81,11 +104,12 @@ public class DungeonGenerator : MonoBehaviour
         _gridSizeMultipliedByRoomSize.y = _gridSize.y * _roomSize.y;
         
         _rooms = new Dictionary<Vector3Int, RoomData>();
+
         _endRooms = new HashSet<RoomData>();
         _occupiedPositions = new HashSet<Vector3Int>();
 
         HandleRoomNumber();
-        
+    
         do
         {
             GenerateRooms();
@@ -93,18 +117,19 @@ public class DungeonGenerator : MonoBehaviour
 
         SetUpRooms();
         
+
         // Draw tiles
         PaintDungeon(_dungeonTilemap);
-
+        
         foreach (var room in _rooms)
         {
             SetupDoors(_dungeonTilemap, room.Value);
         }
-        
-        _startRoom.SetDoorsOpen(true);
-        _shopRoom.SetDoorsOpen(true);
-        
-       _currentFloorNbr.AddValue(1);
+    
+        // _startRoom.SetDoorsOpen(true);
+        // _shopRoom.SetDoorsOpen(true);
+
+        _currentFloorNbr.AddValue(1);
     }
 
     private void HandleRoomNumber()
@@ -140,6 +165,7 @@ public class DungeonGenerator : MonoBehaviour
         if (_rooms.Count == 0)
         {
             _rooms[startGridPos] = startRoom;
+            _so_RoomsData.Rooms.Add(startRoom);
         }
         
         _occupiedPositions.Add(startGridPos);
@@ -169,7 +195,10 @@ public class DungeonGenerator : MonoBehaviour
                                                 enemySpawnWeight, true);
 
                 roomQueue.Enqueue(newRoom);
+                
                 _rooms[roomNeighbourPos] = newRoom;
+                _so_RoomsData.Rooms.Add(newRoom);
+
                 _occupiedPositions.Add(roomNeighbourPos);
 
                 // Add neighbours to the current Room.
@@ -198,8 +227,23 @@ public class DungeonGenerator : MonoBehaviour
     private RoomData CreateRoom(Vector3Int roomNeighbourPos, int distanceFromStart, 
                                 int enemySpawnWeight, bool hasEnemiesToFight)
     {
-        return new RoomData(new BoundsInt(roomNeighbourPos, _roomSize), distanceFromStart,
-                            enemySpawnWeight, hasEnemiesToFight);
+        RoomData room = ScriptableObject.CreateInstance<RoomData>();
+        
+        room.Init(new BoundsInt(roomNeighbourPos, _roomSize), distanceFromStart,
+             enemySpawnWeight, hasEnemiesToFight);
+        
+        // RoomData room = ScriptableObject.CreateInstance<RoomData>();
+        //
+        // // room.Init(new BoundsInt(roomNeighbourPos, _roomSize), distanceFromStart,
+        // //     enemySpawnWeight, hasEnemiesToFight);
+        // //
+        // // _nbrRoomCreated++;
+        // //
+        // // AssetDatabase.CreateAsset(room, "Assets/Resources/Dungeon/Rooms/room" + _nbrRoomCreated +".asset");
+        // //
+        // // AssetDatabase.SaveAssets();
+
+        return room;
     }
 
     private bool CheckForAbandon(Vector3Int position, HashSet<Vector3Int> occupiedPositions,
@@ -416,19 +460,28 @@ public class DungeonGenerator : MonoBehaviour
 
     private void SetupDoors(Tilemap tilemap, RoomData room)
     {
-        foreach (var doorPos in room.GetDoorPositions())
+        room.CreateDoorsDataDico();
+        
+        foreach (var doorPos in room.DoorsData)
         {
-            var doorGameObject = tilemap.GetInstantiatedObject(doorPos);
+            Vector3Int instantiedDoorPos = new Vector3Int((int)doorPos.Key.x, (int)doorPos.Key.y, (int)doorPos.Key.z);
+
+            var doorGameObject = tilemap.GetInstantiatedObject(instantiedDoorPos);
             
             if (doorGameObject.TryGetComponent<DoorTileCell>(out DoorTileCell door))
             {
                 door.Room = room;
 
-                room.DoorsData.TryGetValue(doorPos, out Neighbourhood.Direction direction);
+                room.DoorsData.TryGetValue(instantiedDoorPos, out Neighbourhood.Direction direction);
 
                 door.SetDirection(direction);
 
                 room.AddDoor(door);
+
+                if (!room.HasEnemiesToFight)
+                {
+                    room.SetDoorsOpen(true);
+                }
             }
         }
     }

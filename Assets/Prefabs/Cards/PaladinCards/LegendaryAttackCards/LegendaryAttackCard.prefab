@@ -259,14 +259,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: 
-  _manaCost: 1
-  _rarety: 3
+  _manaCost: 3
+  _rarety: 1
   _cardType: 1
   _heroClass: 0
   _aeraOfEffect: 1
-  _neighboursType: 0
+  _neighboursType: 2
   _moveTime: 0
-  _cardData: {fileID: 0}
+  _cardData: {fileID: 11400000, guid: 42f8160fd14cfbb4d9b5a83da61992a0, type: 2}
   _manaNbrTxt: {fileID: 3904962185654177219}
   _cardEffectTxt: {fileID: 3904962185596345692}
   _playerAttack:
@@ -274,4 +274,4 @@ MonoBehaviour:
     _baseValue: 0
     ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4fb2bff2c7e868c40bd61d4021591daa, type: 2}
-  _baseDamage: 0
+  _baseDamage: 35

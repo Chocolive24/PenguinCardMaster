@@ -57,7 +57,9 @@ public class BattleManager : MonoBehaviour
     public static event Action<BattleManager> OnEnemyTurnStart;
     public static event Action<BattleManager> OnEnemyTurnEnd;
     public static event Action<BattleManager, RoomData> OnBattleEnd;
-    public static event Action<BattleManager, int> OnVictory; 
+    public static event Action<BattleManager, int> OnVictoryEnter;
+
+    public static event Action<BattleManager, RoomData> OnVictoryExit; 
 
     // State Pattern ---------------------------------------------------------------------------------------------------
     
@@ -196,6 +198,8 @@ public class BattleManager : MonoBehaviour
 
         _canStartBattle = false;
         
+        _battleRoom.SetDoorsOpen(true);
+        
         OnBattleEnd?.Invoke(this, _battleRoom);
     }
     
@@ -239,7 +243,7 @@ public class BattleManager : MonoBehaviour
 
         _currentGoldReward = Random.Range(_minGoldReward, _maxGoldReward);
         
-        OnVictory?.Invoke(this, _currentGoldReward);
+        OnVictoryEnter?.Invoke(this, _currentGoldReward);
     }
 
     private void HandleNextReward(UIBattleManager obj)
@@ -319,6 +323,8 @@ public class BattleManager : MonoBehaviour
         
         _gameManager.IsInBattleState = false;
 
+        OnVictoryExit?.Invoke(this, _battleRoom);
+        
         if (_battleRoom.Type == RoomData.RoomType.END)
         {
             SceneManager.LoadScene("Game");

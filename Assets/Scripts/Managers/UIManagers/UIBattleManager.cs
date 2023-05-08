@@ -80,7 +80,7 @@ public class UIBattleManager : MonoBehaviour
         _VictoryPanel.SetActive(false);
         _notEnoughManaTxt.gameObject.SetActive(false);
 
-        BattleManager.OnVictory += HandleVictoryUI;
+        BattleManager.OnVictoryEnter += HandleVictoryEnterUI;
         BaseCard.OnNoTEnoughMana += DisplayNotEnoughManaTxt;
         BaseMoveCard.OnPathStarted += DesactivateEndTurnButton;
         BaseUnit.OnPathEnded += ActivateEndTurnButton;
@@ -90,7 +90,7 @@ public class UIBattleManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        BattleManager.OnVictory -= HandleVictoryUI;
+        BattleManager.OnVictoryEnter -= HandleVictoryEnterUI;
         BaseCard.OnNoTEnoughMana -= DisplayNotEnoughManaTxt;
         BaseMoveCard.OnPathStarted -= DesactivateEndTurnButton;
         BaseUnit.OnPathEnded -= ActivateEndTurnButton;
@@ -190,7 +190,7 @@ public class UIBattleManager : MonoBehaviour
         
     }
     
-    private void HandleVictoryUI(BattleManager battleManager, int golds)
+    private void HandleVictoryEnterUI(BattleManager battleManager, int golds)
     {
         _VictoryPanel.SetActive(true);
         _goldsPanel.SetActive(true);

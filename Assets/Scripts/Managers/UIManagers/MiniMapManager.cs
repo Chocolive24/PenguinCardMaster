@@ -83,6 +83,7 @@ public class MiniMapManager : MonoBehaviour
     private void CreateRoomNeighboursInMiniMap(RoomData room)
     {
         RoomData roomNeighbour = room;
+        roomNeighbour.CreateDoorsDataDico();
         var roomNeighbourDoors = roomNeighbour.DoorsData;
 
         foreach (var door in roomNeighbourDoors)
@@ -93,23 +94,41 @@ public class MiniMapManager : MonoBehaviour
             {
                 Color color = new Color(0.35f, 0.35f, 0.35f, 1f);
 
-                foreach (var neighbour in roomNeighbour.RoomNeighbours)
+                foreach (var neighbour in roomNeighbour.RoomNeighboursData)
                 {
-                    foreach (var neighbourDoor in neighbour.Value.DoorsData)
+                    foreach (var neighbourDoor in neighbour.DoorsData)
                     {
                         var position = new Vector3(
                             Neighbourhood.CardinalNeighbours[neighbourDoor.Value].x,
                             Neighbourhood.CardinalNeighbours[neighbourDoor.Value].y, 0);
 
-                        if (neighbour.Value.DoorsData.ContainsKey(door.Key - position))
+                        if (neighbour.DoorsData.ContainsKey(door.Key - position))
                         {
-                            if (neighbour.Value.Type == RoomData.RoomType.END)
+                            if (neighbour.Type == RoomData.RoomType.END)
                             {
                                 color = Color.red;
                             }
                         }
                     }
                 }
+                
+                // foreach (var neighbour in roomNeighbour.RoomNeighbours)
+                // {
+                //     foreach (var neighbourDoor in neighbour.Value.DoorsData)
+                //     {
+                //         var position = new Vector3(
+                //             Neighbourhood.CardinalNeighbours[neighbourDoor.Value].x,
+                //             Neighbourhood.CardinalNeighbours[neighbourDoor.Value].y, 0);
+                //
+                //         if (neighbour.Value.DoorsData.ContainsKey(door.Key - position))
+                //         {
+                //             if (neighbour.Value.Type == RoomData.RoomType.END)
+                //             {
+                //                 color = Color.red;
+                //             }
+                //         }
+                //     }
+                // }
 
                 CreateRoomInMiniMap(neighbourPosInMiniMap, color);
             }

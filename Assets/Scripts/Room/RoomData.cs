@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
-public class RoomData
+public class RoomData : ScriptableObject
 {
     public enum RoomType
     {
@@ -15,51 +15,38 @@ public class RoomData
         SHOP,
         END
     }
-    
-    public RoomData(BoundsInt bounds, int distanceFromStart, int enemySpawnWeight, bool hasEnemiesToFight)
-    {
-        _bounds = bounds;
-        _distanceFromStart = distanceFromStart;
-        _enemySpawnWeight = enemySpawnWeight;
-        _hasEnemiesToFight = hasEnemiesToFight;
 
-        _roomNeighbours = new Dictionary<Vector3Int, RoomData>();
-        
-        _doorsData = new Dictionary<Vector3, Neighbourhood.Direction>();
-        _doors = new List<DoorTileCell>();
-        SetDoorsOpen(false);
-
-        _wallsPositions = new List<Vector3Int>();
-
-        _tilePositions = new List<Vector3Int>();
-    }
-    
     // Attributes ------------------------------------------------------------------------------------------------------
     #region Positions Attributes
 
-    private BoundsInt _bounds;
-    private List<Vector3Int> _tilePositions;
-    private Dictionary<Vector3Int, RoomData> _roomNeighbours;
+    [SerializeField] private BoundsInt _bounds;
+    [SerializeField] private List<Vector3Int> _tilePositions;
+    [SerializeField] private Dictionary<Vector3Int, RoomData> _roomNeighbours;
 
-    private int _distanceFromStart;
+    [SerializeField] private List<RoomData> _roomNeighboursData;
+
+    [SerializeField]private int _distanceFromStart;
 
     private Dictionary<Vector3, Neighbourhood.Direction> _doorsData;
-    private List<DoorTileCell> _doors;
+    [SerializeField] private List<Vector3> _doorsDataPos;
+    [SerializeField] private List<Neighbourhood.Direction> _doorsDataDir;
 
-    private List<Vector3Int> _wallsPositions;
+    [SerializeField]private List<DoorTileCell> _doors;
+
+    [SerializeField] private List<Vector3Int> _wallsPositions;
 
     #endregion;
     
     #region Enemies Attributes
     
-    private int _enemySpawnWeight;
+    [SerializeField]private int _enemySpawnWeight;
 
-    private bool _hasEnemiesToFight;
+    [SerializeField]private bool _hasEnemiesToFight;
     
 
     #endregion
     
-    private RoomType _type;
+    [SerializeField]private RoomType _type;
 
     // Getters and Setters ---------------------------------------------------------------------------------------------
 
@@ -89,6 +76,8 @@ public class RoomData
 
     public Dictionary<Vector3Int, RoomData> RoomNeighbours => _roomNeighbours;
 
+    public List<RoomData> RoomNeighboursData => _roomNeighboursData;
+
     public List<Vector3Int> DoorPositions => new List<Vector3Int>()
     {
         // Up Door.
@@ -101,15 +90,55 @@ public class RoomData
         new (_bounds.xMin + (_bounds.size.x / 2), _bounds.yMin, 0),
     };
 
-    public Dictionary<Vector3, Neighbourhood.Direction> DoorsData => _doorsData;
+    public Dictionary<Vector3, Neighbourhood.Direction>  DoorsData => _doorsData;
+
+    public List<Vector3> DoorsDataPos => _doorsDataPos;
+
+    public List<Neighbourhood.Direction> DoorsDataDir => _doorsDataDir;
 
     public List<Vector3Int> WallsPositions => _wallsPositions;
 
     public List<Vector3Int> TilePositions => _tilePositions;
 
+    public List<DoorTileCell> Doors => _doors;
+
     #endregion
 
     // Methods ---------------------------------------------------------------------------------------------------------
+    public void Init(BoundsInt bounds, int distanceFromStart, int enemySpawnWeight, bool hasEnemiesToFight)
+    {
+        _bounds = bounds;
+        _distanceFromStart = distanceFromStart;
+        _enemySpawnWeight = enemySpawnWeight;
+        _hasEnemiesToFight = hasEnemiesToFight;
+
+        _roomNeighbours = new Dictionary<Vector3Int, RoomData>();
+
+        if (_roomNeighboursData == null)
+        {
+            _roomNeighboursData = new List<RoomData>();
+        }
+        
+        _doorsData = new Dictionary<Vector3, Neighbourhood.Direction>();
+
+        if (_doorsDataPos == null)
+        {
+            _doorsDataPos = new List<Vector3>();
+        }
+
+        if (_doorsDataDir == null)
+        {
+            _doorsDataDir = new List<Neighbourhood.Direction>();
+        }
+        
+        _doors = new List<DoorTileCell>();
+        SetDoorsOpen(false);
+
+        _wallsPositions = new List<Vector3Int>();
+
+        _tilePositions = new List<Vector3Int>();
+    }
+    
     public void SetType(RoomType type, Tilemap rndWallPattern)
     {
         _type = type;
@@ -138,6 +167,21 @@ public class RoomData
                 SetAllTilePositions();
                 break;
         }
+    }
+
+    public void CreateDoorsDataDico()
+    {
+        if (_doorsData == null)
+        {
+            _doorsData = new Dictionary<Vector3, Neighbourhood.Direction>();
+            
+            for (int i = 0; i < _doorsDataPos.Count; i++)
+            {
+                _doorsData.Add(_doorsDataPos[i], _doorsDataDir[i]);
+            }
+        }
+        
+        
     }
     
     private void SetAllTilePositions()
@@ -194,16 +238,33 @@ public class RoomData
 
             Vector3Int roomNeighbourPos = _bounds.position + gridNeighbour;
 
-            if (_roomNeighbours != null)
+            if (_roomNeighboursData != null)
             {
-                if (_roomNeighbours.ContainsKey(roomNeighbourPos))
+                foreach (var roomNeighbour in _roomNeighboursData)
                 {
-                    Vector3 doorPos = DoorPositions[(int)neighbour.Key];
-                    
-                    doorPositions.Add(new Vector3Int((int)doorPos.x, (int)doorPos.y, 0));
-                    _doorsData[doorPos] = neighbour.Key;
+                    if (roomNeighbour.Bounds.position == roomNeighbourPos)
+                    {
+                        Vector3 doorPos = DoorPositions[(int)neighbour.Key];
+                        
+                        doorPositions.Add(new Vector3Int((int)doorPos.x, (int)doorPos.y, 0));
+                        _doorsData[doorPos] = neighbour.Key;
+                        
+                        _doorsDataPos.Add(doorPos);
+                        _doorsDataDir.Add(neighbour.Key);
+                    }
                 }
             }
+            
+            // if (_roomNeighbours != null)
+            // {
+            //     if (_roomNeighbours.ContainsKey(roomNeighbourPos))
+            //     {
+            //         Vector3 doorPos = DoorPositions[(int)neighbour.Key];
+            //         
+            //         doorPositions.Add(new Vector3Int((int)doorPos.x, (int)doorPos.y, 0));
+            //         _doorsData[doorPos] = neighbour.Key;
+            //     }
+            // }
         }
         
         return doorPositions;
@@ -225,6 +286,7 @@ public class RoomData
     public void AddRoomNeighbour(Vector3Int neighbourPos, RoomData roomNeighbour)
     {
         _roomNeighbours[neighbourPos] = roomNeighbour;
+        _roomNeighboursData.Add(roomNeighbour);
     }
 
     public RoomData GetRoomNeighbourByAPosition(Vector3Int position)

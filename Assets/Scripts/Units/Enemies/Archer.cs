@@ -8,6 +8,41 @@ using UnityEngine;
 
 public class Archer : BaseEnemy
 {
+    [SerializeField] private GameObject _projectilePrefab;
+    
+    public override void Attack(BaseHero heroTarget)
+    {
+        Projectile projectile = Instantiate(_projectilePrefab, transform.position, 
+            Quaternion.identity).GetComponent<Projectile>();
+
+        BaseHero player = _unitsManager.HeroPlayer;
+
+        if (transform.position.x > player.transform.position.x)
+        {
+            projectile.transform.Rotate(0, 0, 180f);
+        }
+        else if (transform.position.y > player.transform.position.y)
+        {
+            projectile.transform.Rotate(0, 0, 270f);
+        }
+        if (transform.position.y < player.transform.position.y)
+        {
+            projectile.transform.Rotate(0, 0, 90f);
+        }
+        
+        StartCoroutine(projectile.InterpolateMoveCo(transform.position, 
+            player.transform.position));
+
+        StartCoroutine(WaitForProjCo(heroTarget));
+    }
+
+    private IEnumerator WaitForProjCo(BaseHero heroTarget)
+    {
+        _nbrOfAttackPerformed++;
+        yield return new WaitForSeconds(0.5f);
+        base.Attack(heroTarget);
+    }
+
     public override Dictionary<Vector3, int> GetTilesInAttackRange(Vector3 startPos, int range)
     {
         var distances = new Dictionary<Vector3, int> { { startPos, 0 } };

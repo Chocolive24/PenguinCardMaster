@@ -33,11 +33,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 82.5
+      value: 88.5
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 60.5
+      value: 62.5
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -160,3 +160,4 @@ MonoBehaviour:
   _maxNbrOfAttackPerTurn: 1
   _maxNbrOfMovementPerTurn: 1
   _minimumPathCount: 0
+  _projectilePrefab: {fileID: 3725872308840492126, guid: db6390412ce4f2946ad83b107f1c9c02, type: 3}

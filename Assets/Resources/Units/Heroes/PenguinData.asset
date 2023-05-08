@@ -16,7 +16,7 @@ MonoBehaviour:
   Faction: 0
   MaxHP:
     _useConstant: 0
-    _baseValue: 0
+    _baseValue: 100
     ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4d692dbc8b575c44296fcb88e6a6b271, type: 2}
   Attack:
@@ -37,7 +37,7 @@ MonoBehaviour:
   BaseUnitPrefab: {fileID: -2789361930267343899, guid: f79088a470cdfca4b995e20f4fa4a2e1, type: 3}
   IntReferences:
   - _useConstant: 0
-    _baseValue: 0
+    _baseValue: 100
     ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4d692dbc8b575c44296fcb88e6a6b271, type: 2}
   - _useConstant: 0

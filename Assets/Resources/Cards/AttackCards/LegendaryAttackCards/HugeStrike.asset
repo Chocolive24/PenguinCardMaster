@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d7f6b2bfb842f04ea76e791a339f173, type: 3}
+  m_Name: HugeStrike
+  m_EditorClassIdentifier: 
+  _rarety: 1
+  _baseCardPrefab: {fileID: 2456730619047760709, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
