@@ -16,5 +16,17 @@ public class MainDeckContoller : DeckController
             _unitsManager.HeroPlayer.MainDeck = this;
             InstantiateBasicCard(CardsManager.Instance.ScrAttackCards, _basicAttCardNbr);
         }
+        
+        if (_deck.Count != _size)
+        {
+            var cards = FindObjectsOfType<BaseAttackCard>();
+            _deck.Clear();
+            foreach (var card in cards)
+            {
+                AddCardWithoutData(card);
+            }
+        }
+        
+        UpdateCardTxtNbr();
     }
 }

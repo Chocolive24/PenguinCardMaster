@@ -228,7 +228,10 @@ MonoBehaviour:
   _cardEffectTxt: {fileID: 2550057469785623029}
   _playerAttack:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4fb2bff2c7e868c40bd61d4021591daa, type: 2}
   _baseDamage: 6
+  _swordSlashPrefab: {fileID: 8105644184425396122, guid: 081e33887ad019146bcdcff89f517d46, type: 3}
+  _swordSlashLifeTime: 0.5
   _manaToAdd: 1

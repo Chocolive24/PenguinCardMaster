@@ -127,6 +127,7 @@ public class BaseHero : BaseUnit
     {
         base.Awake();
         GameManager.OnGameStateChange += GameManagerOnOnGameStateChange;
+        BattleManager.OnBattleStart += PutAllCardsInDecks;
         BattleManager.OnPlayerTurnStart += StartTurn;
         BattleManager.OnPlayerTurnEnd += EndTurn;
         BattleManager.OnBattleEnd += PutAllCardsInDecks;
@@ -142,10 +143,11 @@ public class BaseHero : BaseUnit
 
         _cardHand = new List<BaseCard>();
     }
-    
+
     private void OnDestroy()
     {
         GameManager.OnGameStateChange -= GameManagerOnOnGameStateChange;
+        BattleManager.OnBattleStart -= PutAllCardsInDecks;
         BattleManager.OnPlayerTurnStart -= StartTurn;
         BattleManager.OnPlayerTurnEnd -= EndTurn;
         BattleManager.OnBattleEnd -= PutAllCardsInDecks;
@@ -339,26 +341,31 @@ public class BaseHero : BaseUnit
     private void PutAllCardsInDecks(BattleManager obj, RoomData battleRoom)
     {
         OnShuffleHandBackToDeck?.Invoke(this);
-        
-        foreach (var card in _cardHand)
+
+        if (_movementDeck)
         {
-            if (card.CardType == CardType.BASE_ATTACK_CARD || card.CardType == CardType.AOE_ATTACK_CARD)
+            foreach (var card in _cardHand)
             {
-                _mainDeck.AddCardWithoutData(card);
-            }
-            else if (card.CardType == CardType.MOVE_CARD)
-            {
-                _movementDeck.AddCardWithoutData(card);
+                if (card.CardType == CardType.BASE_ATTACK_CARD || card.CardType == CardType.AOE_ATTACK_CARD)
+                {
+                    _mainDeck.AddCardWithoutData(card);
+                }
+                else if (card.CardType == CardType.MOVE_CARD)
+                {
+                    _movementDeck.AddCardWithoutData(card);
+                }
+
+                _cardPlayedManager.ResetSlots();
             }
 
-            _cardPlayedManager.ResetSlots();
+            _cardHand.Clear();
         }
-
-        _cardHand.Clear();
-
         
-        _movDiscardDeck.ShuffleCardsBackToDeck();
-        _mainDiscardDeck.ShuffleCardsBackToDeck();
+        if (_movDiscardDeck)
+        {
+            _movDiscardDeck.ShuffleCardsBackToDeck();
+            _mainDiscardDeck.ShuffleCardsBackToDeck();
+        }
     }
 
     public void AddCardToHand(BaseCard card)

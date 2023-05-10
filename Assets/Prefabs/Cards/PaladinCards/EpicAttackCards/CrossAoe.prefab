@@ -31,6 +31,14 @@ PrefabInstance:
       propertyPath: _aeraOfEffect
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2456730619047760709, guid: f0891bb707fc3c54086d52d3d6bbf1b7, type: 3}
+      propertyPath: _swordSlashPrefab
+      value: 
+      objectReference: {fileID: 8105644184425396122, guid: 081e33887ad019146bcdcff89f517d46, type: 3}
+    - target: {fileID: 2456730619047760709, guid: f0891bb707fc3c54086d52d3d6bbf1b7, type: 3}
+      propertyPath: _swordSlashLifeTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3904962186891751972, guid: f0891bb707fc3c54086d52d3d6bbf1b7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

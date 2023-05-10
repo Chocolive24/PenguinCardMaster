@@ -17,5 +17,17 @@ public class MovementDeckController : DeckController
             _unitsManager.HeroPlayer.MovementDeck = this;
             InstantiateBasicCard(CardsManager.Instance.ScrMoveCards, _basicMoveCardNbr);
         }
+        
+        if (_deck.Count != _size)
+        {
+            var cards = FindObjectsOfType<BaseMoveCard>();
+            _deck.Clear();
+            foreach (var card in cards)
+            {
+                AddCardWithoutData(card);
+            }
+        }
+        
+        UpdateCardTxtNbr();
     }
 }

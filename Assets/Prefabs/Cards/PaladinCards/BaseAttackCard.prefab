@@ -245,6 +245,8 @@ MonoBehaviour:
     ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4fb2bff2c7e868c40bd61d4021591daa, type: 2}
   _baseDamage: 5
+  _swordSlashPrefab: {fileID: 8105644184425396122, guid: 081e33887ad019146bcdcff89f517d46, type: 3}
+  _swordSlashLifeTime: 0.5
 --- !u!114 &1268095168742148044 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3369712380223483713, guid: 0a8883d2370707d49807bd26b2e40736, type: 3}

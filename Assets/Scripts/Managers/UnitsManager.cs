@@ -459,6 +459,16 @@ public class UnitsManager : MonoBehaviour
 
     private void HandleEnemyDeath(BaseUnit obj)
     {
+        StartCoroutine(UnitDeathCo(obj));
+    }
+
+    private IEnumerator UnitDeathCo(BaseUnit obj)
+    {
+        obj.GetComponent<BaseEnemy>().OnTurnFinished -= SetNextEnemyTurn;
+        obj.GetComponent<BaseEnemy>().OnDeath -= HandleEnemyDeath;
+        
+        yield return new WaitForSeconds(0.4f);
+        
         _enemies.Remove((BaseEnemy)obj);
 
         if (_enemies.Count == 0)
@@ -466,9 +476,6 @@ public class UnitsManager : MonoBehaviour
             _currentRoom.HasEnemiesToFight = false;
             _currentRoom.SetDoorsOpen(true);
         }
-
-        obj.GetComponent<BaseEnemy>().OnTurnFinished -= SetNextEnemyTurn;
-        obj.GetComponent<BaseEnemy>().OnDeath -= HandleEnemyDeath;
     }
     
     private T GetRandomUnit<T>(Faction faction) where T : BaseUnit

@@ -97,6 +97,8 @@ public class BaseUnit : MonoBehaviour
 
     public List<Vector3> AvailablePath => _avalaiblePath;
 
+    public float DeathParticleTime => _deathParticleTime;
+
     #endregion
 
     // Methods ---------------------------------------------------------------------------------------------------------
@@ -294,7 +296,7 @@ public class BaseUnit : MonoBehaviour
     {
         _deathVisualEffect.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(_deathParticleTime);
+        yield return new WaitForSeconds(0.5f);
         
         OnDeath?.Invoke(this);
         Destroy(this.gameObject);

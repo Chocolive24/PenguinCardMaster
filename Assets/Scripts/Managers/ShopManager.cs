@@ -12,7 +12,6 @@ public class ShopManager : MonoBehaviour
 {
     // Attributes ------------------------------------------------------------------------------------------------------
     
-    
     // References ------------------------------------------------------------------------------------------------------
     [SerializeField] private GameObject _shopPanel;
     [SerializeField] private GameObject _exploringPanel;
@@ -164,8 +163,13 @@ public class ShopManager : MonoBehaviour
         CreateACard(_cardsManager.ScrAttackCards, Rarety.Legendary, _legCard2RectTrans, 
             _legCard2Cost, 200, 250);
 
-        Relic relic1 = CreateARelic(_relic1RectTrans, _relic1Cost, null);
-        Relic relic2 = CreateARelic(_relic2RectTrans, _relic2Cost, relic1);
+        List<RelicData> alreadySpawnedRelics = Resources.LoadAll<RelicData>("Relics").ToList();
+
+        Relic relic1 = CreateARelic(_relic1RectTrans, _relic1Cost, alreadySpawnedRelics);
+        
+        alreadySpawnedRelics.Remove(relic1.RelicDataRef);
+        
+        Relic relic2 = CreateARelic(_relic2RectTrans, _relic2Cost, alreadySpawnedRelics);
     }
     
     private void CreateACard(List<ScriptableCard> scrCards, Rarety rarety, RectTransform rect, TextMeshProUGUI costText,
@@ -180,9 +184,9 @@ public class ShopManager : MonoBehaviour
         costText.text = cardRare1.ObjectCost.ToString();
     }
     
-    private Relic CreateARelic(RectTransform rect, TextMeshProUGUI costText, Relic relicToAvoid)
+    private Relic CreateARelic(RectTransform rect, TextMeshProUGUI costText, List<RelicData> alreadySpawnedRelics)
     {
-        Relic rndRelic = _relicsManager.GetARandomRelic(relicToAvoid);
+        Relic rndRelic = _relicsManager.GetARandomRelic(alreadySpawnedRelics);
         Relic relic = Instantiate(rndRelic, rect.position, Quaternion.identity, rect.transform);
 
         relic.Init(Collectible.CollectibleType.SHOP_OBJECT, Random.Range(300, 350), rect.gameObject);

@@ -28,6 +28,9 @@ public class Hearth : Relic
 
     private void HealPlayer(BattleManager arg1, RoomData arg2)
     {
-        _unitsManager.HeroPlayer.HealHp(_heal);
+        if (_unitsManager.HeroPlayer)
+        {
+            _unitsManager.HeroPlayer.HealHp(_heal);
+        }
     }
 }

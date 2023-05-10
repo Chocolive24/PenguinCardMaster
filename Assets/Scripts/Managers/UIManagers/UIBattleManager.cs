@@ -32,6 +32,9 @@ public class UIBattleManager : MonoBehaviour
     [SerializeField] private GameObject _goldsPanel;
     [SerializeField] private TextMeshProUGUI _golds;
     [SerializeField] private GameObject _cardAoeRenderer;
+
+    [SerializeField] private GameObject _gameOverPanel;
+    
     #endregion
 
     #region Managers
@@ -103,6 +106,15 @@ public class UIBattleManager : MonoBehaviour
         _cardPlayedManager = CardPlayedManager.Instance;
         _unitsManager = UnitsManager.Instance;
         _gameManager = GameManager.Instance;
+
+        _unitsManager.HeroPlayer.OnDeath += SetGameOverPanel;
+    }
+
+    private void SetGameOverPanel(BaseUnit obj)
+    {
+        obj.OnDeath -= SetGameOverPanel;
+        
+        _gameOverPanel.SetActive(true);
     }
 
     // Update is called once per frame

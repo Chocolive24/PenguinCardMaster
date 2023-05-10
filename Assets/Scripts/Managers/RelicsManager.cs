@@ -48,10 +48,9 @@ public class RelicsManager : MonoBehaviour
         }
     }
 
-    public Relic GetARandomRelic(Relic withoutthisRelic)
+    public Relic GetARandomRelic(List<RelicData> relicDataList)
     {
-        return _relicDataList.Where(relic => relic.RelicPrefab != withoutthisRelic).
-        OrderBy(x => Random.value).First().RelicPrefab;
+        return relicDataList.OrderBy(x => Random.value).First().RelicPrefab;
     }
 
     public Relic GetARelicByType(RelicData.RelicType type)
@@ -117,21 +116,27 @@ public class RelicsManager : MonoBehaviour
     public List<Relic> CreateRelicRewards()
     {
         List<Relic> relics = new List<Relic>();
-
-        // relics.Add(Instantiate(GetARandomRelic(null),
-        //     _rewardLocation[0].position, Quaternion.identity, _rewardLocation[0].transform));
-        // relics.Add(Instantiate(GetARandomRelic(null),
-        //     _rewardLocation[1].position, Quaternion.identity, _rewardLocation[1].transform));
-        // relics.Add(Instantiate(GetARandomRelic(null),
-        //     _rewardLocation[2].position, Quaternion.identity, _rewardLocation[2].transform));
         
-        relics.Add(Instantiate(GetARelicByComponent(),
-            _rewardLocation[0].position, Quaternion.identity, _rewardLocation[0].transform));
-        relics.Add(Instantiate(GetARelicByComponent(),
-            _rewardLocation[1].position, Quaternion.identity, _rewardLocation[1].transform));
-        relics.Add(Instantiate(GetARelicByComponent(),
-            _rewardLocation[2].position, Quaternion.identity, _rewardLocation[2].transform));
+        List<RelicData> alreadySpawnedRelics = Resources.LoadAll<RelicData>("Relics").ToList();
 
+        var relic1 = Instantiate(GetARandomRelic(alreadySpawnedRelics),
+            _rewardLocation[0].position, Quaternion.identity, _rewardLocation[0].transform);
+
+        relics.Add(relic1);
+        alreadySpawnedRelics.Remove(relic1.RelicDataRef);
+
+        var relic2 = Instantiate(GetARandomRelic(alreadySpawnedRelics),
+            _rewardLocation[1].position, Quaternion.identity, _rewardLocation[1].transform);
+        
+        relics.Add(relic2);
+        alreadySpawnedRelics.Remove(relic2.RelicDataRef);
+
+        var relic3 = Instantiate(GetARandomRelic(alreadySpawnedRelics),
+            _rewardLocation[2].position, Quaternion.identity, _rewardLocation[2].transform);
+        
+        relics.Add(relic3);
+        alreadySpawnedRelics.Remove(relic3.RelicDataRef);
+        
         foreach (var relic in relics)
         {
             relic.GetComponent<RectTransform>().sizeDelta = 2 * relic.BaseSizeDelta;

@@ -36,6 +36,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2456730619047760709, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
+      propertyPath: _swordSlashPrefab
+      value: 
+      objectReference: {fileID: 8105644184425396122, guid: 081e33887ad019146bcdcff89f517d46, type: 3}
+    - target: {fileID: 2456730619047760709, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
+      propertyPath: _swordSlashLifeTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456730619047760709, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
       propertyPath: _playerAttack.Variable
       value: 
       objectReference: {fileID: 11400000, guid: 4fb2bff2c7e868c40bd61d4021591daa, type: 2}

@@ -33,11 +33,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 82.5
+      value: 78.5
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 59.5
+      value: 71.5
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -166,7 +166,7 @@ MonoBehaviour:
     _baseValue: 8
     ConstantRunValue: 8
     Variable: {fileID: 0}
-  _deathParticleTime: 0.2
+  _deathParticleTime: 1
   _unitData: {fileID: 11400000, guid: 9d014845c5a9a534f8188b024aac5a38, type: 2}
   _visualEffect: {fileID: 4974012669770824339}
   _deathVisualEffect: {fileID: 7913317390071357448}
