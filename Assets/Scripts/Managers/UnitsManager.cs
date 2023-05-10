@@ -71,6 +71,8 @@ public class UnitsManager : MonoBehaviour
         DoorTileCell.OnDoorTileEnter += SpawnRoomEnemies;
         ShopManager.OnShopExit += SpawnHeroOutsideShop;
         TileCell.OnTileSelected += HandleSelectedEnemy;
+
+        BattleManager.OnVictoryEnter += DebuffEnemies;
     }
 
     private void HandleSelectedEnemy(TileCell tile)
@@ -92,8 +94,9 @@ public class UnitsManager : MonoBehaviour
         DoorTileCell.OnDoorTileEnter -= SpawnRoomEnemies;
         ShopManager.OnShopExit -= SpawnHeroOutsideShop;
         TileCell.OnTileSelected -= HandleSelectedEnemy;
+        BattleManager.OnVictoryEnter -= DebuffEnemies;
     }
-
+    
     private void SpawnRoomEnemies(DoorTileCell doorTile)
     {
         _currentRoom = doorTile.GetRoomNeighbour();
@@ -106,7 +109,7 @@ public class UnitsManager : MonoBehaviour
         if (_currentRoom.HasEnemiesToFight)
         {
             HandleEnemyStatBoost();
-
+            
             int remainginWeight = _currentRoom.EnemySpawnWeight;
 
             while (remainginWeight > 0)
@@ -162,6 +165,14 @@ public class UnitsManager : MonoBehaviour
                 remainginWeight -= spawnedEnemy.Weight;
             }
         }
+        
+        if (_currentRoom.Type == RoomData.RoomType.END)
+        {
+            foreach (var enemy in _enemies)
+            {
+                enemy.SetParticleSystemActive(true);
+            }
+        }
     }
 
     private void HandleEnemyStatBoost()
@@ -203,6 +214,24 @@ public class UnitsManager : MonoBehaviour
         }
     }
 
+    private void DebuffEnemies(BattleManager arg1, int arg2)
+    {
+        if (_currentRoom.Type == RoomData.RoomType.END)
+        {
+            foreach (var enemyData in _enemiesData)
+            {
+                enemyData.MaxHP.SubstractValue(5);
+                enemyData.Attack.SubstractValue(3);
+            }
+
+            foreach (var spawnedEnemyData in _spawnedEnemiesData)
+            {
+                spawnedEnemyData.MaxHP.SubstractValue(3);
+                spawnedEnemyData.Attack.SubstractValue(2);
+            }
+        }
+    }
+    
     private BaseEnemy GetRandomEnemyUnderWeight(int weight)
     {
         return (BaseEnemy)(_enemiesData.Where(enemyUnit => (

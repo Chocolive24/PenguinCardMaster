@@ -129,51 +129,69 @@ MonoBehaviour:
   _faction: 0
   _maxHP:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 0}
   _currentHP:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 0}
   _baseAttack:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 0}
   _currentAttack:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 0}
   _shield:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 0}
   _baseMovement:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 0}
   _currentMovement:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 0}
   _speed:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 0}
   _unitData: {fileID: 0}
+  _visualEffect: {fileID: 0}
   _heroClass: 0
   _maxMana:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 0}
   _exploreSpeed:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 0}
   _battleSpeed:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
+    Variable: {fileID: 0}
+  _maxNbrOfCardToDrawnPerTurn:
+    _useConstant: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 0}
   _golds:
     _useConstant: 0
-    ConstantValue: 0
+    _baseValue: 0
+    ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 9210c534f36d0e1408aa288f2a95b252, type: 2}

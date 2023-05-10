@@ -58,7 +58,11 @@ public class RoomData : ScriptableObject
         set => _bounds = value;
     }
 
-    public int EnemySpawnWeight => _enemySpawnWeight;
+    public int EnemySpawnWeight
+    {
+        get => _enemySpawnWeight;
+        set => _enemySpawnWeight = value;
+    }
 
     public bool HasEnemiesToFight
     {

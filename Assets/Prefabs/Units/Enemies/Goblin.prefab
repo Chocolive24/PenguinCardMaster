@@ -33,11 +33,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 92.5
+      value: 82.5
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 60.5
+      value: 59.5
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -71,6 +71,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4503678127866994291, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5511105756606608857, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: _playerMaxHP._useConstant
       value: 1
@@ -79,9 +83,18 @@ PrefabInstance:
       propertyPath: _playerCurrentHP._useConstant
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6728745599289589388, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1691780254251407065, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+--- !u!2083052967 &4974012669770824339 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 4355076098712501587, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+  m_PrefabInstance: {fileID: 8752579335358384064}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7063361556025432317 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1977486373816229693, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
@@ -153,10 +166,18 @@ MonoBehaviour:
     _baseValue: 8
     ConstantRunValue: 8
     Variable: {fileID: 0}
+  _deathParticleTime: 0.2
   _unitData: {fileID: 11400000, guid: 9d014845c5a9a534f8188b024aac5a38, type: 2}
+  _visualEffect: {fileID: 4974012669770824339}
+  _deathVisualEffect: {fileID: 7913317390071357448}
   _type: 0
   _weight: 1
   _attackRange: 1
   _maxNbrOfAttackPerTurn: 1
   _maxNbrOfMovementPerTurn: 1
   _minimumPathCount: 1
+--- !u!2083052967 &7913317390071357448 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 1488062222611113928, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+  m_PrefabInstance: {fileID: 8752579335358384064}
+  m_PrefabAsset: {fileID: 0}

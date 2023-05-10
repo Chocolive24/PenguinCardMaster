@@ -23,6 +23,8 @@ public class BaseAttackCard : BaseCard
     protected bool _hasPerformed;
     
     // References ------------------------------------------------------------------------------------------------------
+    [SerializeField] private GameObject _swordSlashPrefab;
+    [SerializeField] private float _swordSlashLifeTime = 0.5f;
 
     // Getters and Setters ---------------------------------------------------------------------------------------------
     public int BaseDamage => _baseDamage;
@@ -59,6 +61,8 @@ public class BaseAttackCard : BaseCard
 
     public override void ActivateCardEffect(TileCell tile)
     {
+        List<GameObject> swordSlashes = new List<GameObject>();
+
         if (tile.OccupiedUnit)
         {
             if (_cardType == CardType.BASE_ATTACK_CARD && tile.OccupiedUnit.Faction == Faction.Enemy)
@@ -72,16 +76,28 @@ public class BaseAttackCard : BaseCard
                     if (_availableTiles.ContainsKey(tile.transform.position) && enemy != null)
                     {
                         enemy.TakeDamage(CurrentDamage);
+
+                        HandleSwordSlashes(tile, swordSlashes);
                         _hasPerformed = true;
                     }
                 }
             }
-            else if (_cardType == CardType.AOE_ATTACK_CARD && tile.OccupiedUnit.Faction == Faction.Hero)
+        }
+        if (_cardType == CardType.AOE_ATTACK_CARD && _availableTiles.ContainsKey(tile.transform.position))
+        {
+            if (_availableTiles.ContainsKey(tile.transform.position) || tile.OccupiedUnit)
             {
                 if (_unitsManager.HeroPlayer)
                 {
                     List<BaseEnemy> allreadyAttackedEnemies = new List<BaseEnemy>();
 
+                    var baseEnemy = (BaseEnemy)tile.OccupiedUnit;
+
+                    if (baseEnemy)
+                    {
+                        baseEnemy.IsSelected = !baseEnemy.IsSelected;
+                    }
+                    
                     foreach (var attackTile in _availableTiles)
                     {
                         var enemy = (BaseEnemy)_gridManager.GetTileAtPosition(attackTile.Key).OccupiedUnit;
@@ -95,11 +111,25 @@ public class BaseAttackCard : BaseCard
                             }
                         }
                     }
-                    
+
+                    HandleSwordSlashes(tile, swordSlashes);
                     _hasPerformed = true;
                 }
             }
         }
+    }
+
+    private void HandleSwordSlashes(TileCell tile, List<GameObject> swordSlashes)
+    {
+        swordSlashes.Add(Instantiate(_swordSlashPrefab, tile.transform.position,
+            Quaternion.identity));
+
+        foreach (var swordSlash in swordSlashes)
+        {
+            swordSlash.GetComponent<Animator>().SetBool("HasAttack", true);
+        }
+
+        StartCoroutine(SwordSlashCo(swordSlashes));
     }
 
     protected override bool CheckIfHasPerformed()
@@ -122,5 +152,15 @@ public class BaseAttackCard : BaseCard
     public override void ResetProperties()
     {
         _hasPerformed = false;
+    }
+
+    private IEnumerator SwordSlashCo(List<GameObject> swordSlashes)
+    {
+        yield return new WaitForSeconds(_swordSlashLifeTime);
+
+        foreach (var swordSlash in swordSlashes)
+        {
+            Destroy(swordSlash);
+        }
     }
 }

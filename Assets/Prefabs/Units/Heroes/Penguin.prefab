@@ -146,7 +146,10 @@ MonoBehaviour:
     _baseValue: 0
     ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4560b11ed34c93c44824028003737d6c, type: 2}
+  _deathParticleTime: 0.2
   _unitData: {fileID: 11400000, guid: fc6b482a3e858e14fafdd8cf83a06ae6, type: 2}
+  _visualEffect: {fileID: 6954810434959279893}
+  _deathVisualEffect: {fileID: 5211382922296761742}
   _heroClass: 0
   _maxMana:
     _useConstant: 0
@@ -287,3 +290,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f803e97d515c4a74da36d85ceb9f6294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!2083052967 &5211382922296761742 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 9050348746949413753, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+  m_PrefabInstance: {fileID: 3876404196653356791}
+  m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &6954810434959279893 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 6147327910458348002, guid: 2d4ce61089d2b6944ab02f0b72330f1a, type: 3}
+  m_PrefabInstance: {fileID: 3876404196653356791}
+  m_PrefabAsset: {fileID: 0}

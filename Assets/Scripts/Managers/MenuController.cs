@@ -33,7 +33,7 @@ public class MenuController : MonoBehaviour
     {
         //EventSystem.current.SetSelectedGameObject(_primaryButton);
 
-        Cursor.SetCursor(_baseMouseCursor, Vector2.zero, CursorMode.ForceSoftware);
+        //Cursor.SetCursor(_baseMouseCursor, Vector2.zero, CursorMode.ForceSoftware);
         
         _playerData = Resources.LoadAll<HeroData>("Units/Heroes").ToList();
         _enemiesData = Resources.LoadAll<EnemyData>("Units/Enemies").ToList();

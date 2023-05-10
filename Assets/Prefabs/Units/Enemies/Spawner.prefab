@@ -33,11 +33,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 80.5
+      value: 79.5
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 60.5
+      value: 62.5
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -82,6 +82,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1691780254251407065, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+--- !u!2083052967 &168674978540643690 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 1488062222611113928, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+  m_PrefabInstance: {fileID: 1653357946035274402}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &972945933761076639 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1977486373816229693, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
@@ -141,7 +146,10 @@ MonoBehaviour:
     _baseValue: 0
     ConstantRunValue: 0
     Variable: {fileID: 0}
+  _deathParticleTime: 0.2
   _unitData: {fileID: 11400000, guid: 679d2aa4bb6f68946a306cff2eac4e23, type: 2}
+  _visualEffect: {fileID: 3062939133779247089}
+  _deathVisualEffect: {fileID: 168674978540643690}
   _type: 3
   _weight: 4
   _attackRange: 1
@@ -162,3 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc19e2963c6522043b0ad219dd25bdc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!2083052967 &3062939133779247089 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 4355076098712501587, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
+  m_PrefabInstance: {fileID: 1653357946035274402}
+  m_PrefabAsset: {fileID: 0}

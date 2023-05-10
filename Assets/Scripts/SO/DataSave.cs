@@ -23,7 +23,6 @@ public class DataSave : MonoBehaviour
 
             if (File.Exists(fileName))
             {
-
                 BinaryFormatter bf = new BinaryFormatter();
                 FileStream file = File.Open(fileName, FileMode.Open);
                 JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file), data);

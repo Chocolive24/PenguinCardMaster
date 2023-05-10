@@ -58,7 +58,7 @@ public class BaseHero : BaseUnit
     
     // References ------------------------------------------------------------------------------------------------------
     private HeroData _heroData;
-    
+
     // private GameManager _gameManager;
     // private GridManager _gridManager;
     private CardPlayedManager _cardPlayedManager;
@@ -273,6 +273,11 @@ public class BaseHero : BaseUnit
         if (_currentHP.Value > _maxHP.Value)
         {
             _currentHP.SetValue(_maxHP.Value);
+        }
+
+        if (!_healthBar)
+        {
+            _healthBar = GetComponent<HealthBar>();
         }
 
         _healthBar.UpdateHealthBar(_currentHP.Value, _maxHP.Value);

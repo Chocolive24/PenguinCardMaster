@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class BaseUnit : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class BaseUnit : MonoBehaviour
     [SerializeField] protected IntReference _baseMovement;
     [SerializeField] protected IntReference _currentMovement;
     [SerializeField] protected IntReference _speed;
-   
+    [SerializeField] private float _deathParticleTime;
     
     #endregion
     
@@ -48,7 +49,11 @@ public class BaseUnit : MonoBehaviour
     protected UnitsManager _unitsManager;
 
     protected HealthBar _healthBar;
+
+    [SerializeField] protected VisualEffect _visualEffect;
+    [SerializeField] protected VisualEffect _deathVisualEffect;
     
+
     // Events ----------------------------------------------------------------------------------------------------------
     public event Action<BaseUnit, int> OnDamageTaken;
     public event Action<BaseUnit> OnDeath;
@@ -144,6 +149,11 @@ public class BaseUnit : MonoBehaviour
         _baseAttack = _unitData.Attack;
         _baseMovement = _unitData.Movement;
         _speed = _unitData.Speed;
+    }
+
+    public void SetParticleSystemActive(bool activeSelf)
+    {
+        _visualEffect.gameObject.SetActive(activeSelf);
     }
     
     public virtual void TakeDamage(int damage)
@@ -277,6 +287,15 @@ public class BaseUnit : MonoBehaviour
     
     protected virtual void Kill()
     {
+        StartCoroutine((nameof(DeathCo)));
+    }
+
+    private IEnumerator DeathCo()
+    {
+        _deathVisualEffect.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(_deathParticleTime);
+        
         OnDeath?.Invoke(this);
         Destroy(this.gameObject);
     }

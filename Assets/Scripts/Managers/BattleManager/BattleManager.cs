@@ -199,6 +199,8 @@ public class BattleManager : MonoBehaviour
         _canStartBattle = false;
         
         _battleRoom.SetDoorsOpen(true);
+        _battleRoom.HasEnemiesToFight = false;
+        _battleRoom.EnemySpawnWeight = 0;
         
         OnBattleEnd?.Invoke(this, _battleRoom);
     }
@@ -241,7 +243,10 @@ public class BattleManager : MonoBehaviour
     {
         _uiBattleManager.VictoryPanel.SetActive(true);
 
-        _currentGoldReward = Random.Range(_minGoldReward, _maxGoldReward);
+        
+        _currentGoldReward = _battleRoom.Type == RoomData.RoomType.END ?
+            Random.Range(_minGoldReward + 200, _maxGoldReward + 200) : 
+            Random.Range(_minGoldReward, _maxGoldReward);
         
         OnVictoryEnter?.Invoke(this, _currentGoldReward);
     }

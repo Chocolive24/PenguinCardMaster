@@ -79,6 +79,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 1625783719
       objectReference: {fileID: 0}
+    - target: {fileID: 4689059898971367273, guid: e7c760cfa9d76bb4981d4e1bb8d5a2dd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 8429241850663707289, guid: e7c760cfa9d76bb4981d4e1bb8d5a2dd, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -133,11 +137,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7c760cfa9d76bb4981d4e1bb8d5a2dd, type: 3}
---- !u!212 &893675626953368356 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 4548312822160360090, guid: e7c760cfa9d76bb4981d4e1bb8d5a2dd, type: 3}
-  m_PrefabInstance: {fileID: 3708753148043846078}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1309233364235491730 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2401394523178235948, guid: e7c760cfa9d76bb4981d4e1bb8d5a2dd, type: 3}
@@ -162,7 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: 
   _isWalkable: 0
-  _spriteRender: {fileID: 893675626953368356}
+  _spriteRender: {fileID: 0}
   _highlight: {fileID: 1309233364235491730}
   _highlightBorder: {fileID: 5493982077795524841}
   _arrow: {fileID: 3980248614927134163}
