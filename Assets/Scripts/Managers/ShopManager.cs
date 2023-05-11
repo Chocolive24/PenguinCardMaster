@@ -163,13 +163,21 @@ public class ShopManager : MonoBehaviour
         CreateACard(_cardsManager.ScrAttackCards, Rarety.Legendary, _legCard2RectTrans, 
             _legCard2Cost, 200, 250);
 
-        List<RelicData> alreadySpawnedRelics = Resources.LoadAll<RelicData>("Relics").ToList();
+        if (!_relicsManager.IsInventoryFull)
+        {
+            List<RelicData> alreadySpawnedRelics = Resources.LoadAll<RelicData>("Relics").ToList();
 
-        Relic relic1 = CreateARelic(_relic1RectTrans, _relic1Cost, alreadySpawnedRelics);
+            Relic relic1 = CreateARelic(_relic1RectTrans, _relic1Cost, alreadySpawnedRelics);
         
-        alreadySpawnedRelics.Remove(relic1.RelicDataRef);
+            alreadySpawnedRelics.Remove(relic1.RelicDataRef);
         
-        Relic relic2 = CreateARelic(_relic2RectTrans, _relic2Cost, alreadySpawnedRelics);
+            Relic relic2 = CreateARelic(_relic2RectTrans, _relic2Cost, alreadySpawnedRelics);
+        }
+        else
+        {
+            _relic1Cost.gameObject.SetActive(false);
+            _relic2Cost.gameObject.SetActive(false);
+        }
     }
     
     private void CreateACard(List<ScriptableCard> scrCards, Rarety rarety, RectTransform rect, TextMeshProUGUI costText,

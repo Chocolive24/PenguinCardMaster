@@ -213,9 +213,10 @@ public class RoomData : ScriptableObject
             for (int y = tilemapBounds.yMin; y < tilemapBounds.yMax; y++)
             {
                 var tile = rndWallPattern.GetTile(new Vector3Int(x, y, 0));
-
+                
                 if (tile)
                 {
+                    //tilemap.SetTile(new Vector3Int(x, y, 0), tile);
                     Vector3Int boundsCenterInt = new Vector3Int((int)_bounds.center.x, (int)_bounds.center.y, 0);
 
                     Vector3Int wallTilePos = boundsCenterInt + new Vector3Int(x, y, 0);

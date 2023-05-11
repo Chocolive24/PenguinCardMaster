@@ -52,7 +52,8 @@ public class BaseUnit : MonoBehaviour
 
     [SerializeField] protected VisualEffect _visualEffect;
     [SerializeField] protected VisualEffect _deathVisualEffect;
-    
+
+    protected SpriteRenderer _spriteRenderer;
 
     // Events ----------------------------------------------------------------------------------------------------------
     public event Action<BaseUnit, int> OnDamageTaken;
@@ -136,6 +137,8 @@ public class BaseUnit : MonoBehaviour
         _gridManager = GridManager.Instance;
         _tilemapsManager = TilemapsManager.Instance;
         _unitsManager = UnitsManager.Instance;
+
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     protected virtual void Update()
@@ -231,8 +234,10 @@ public class BaseUnit : MonoBehaviour
 
     protected virtual void FollowThePath(List<Vector3> path)
     {
-        if (_currentTargetIndex < path.Count - 1) 
+        if (_currentTargetIndex < path.Count - 1)
         {
+            _spriteRenderer.flipX = path[_currentTargetIndex + 1].x < transform.position.x;
+            
             _currentTargetIndex++;
 
             var nextTile = _gridManager.GetTileAtPosition(path[_currentTargetIndex]);
@@ -299,7 +304,10 @@ public class BaseUnit : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         
         OnDeath?.Invoke(this);
-        Destroy(this.gameObject);
+        if (_faction != Faction.Hero)
+        {
+            Destroy(this.gameObject);
+        }
     }
     
     public virtual Dictionary<Vector3, int> GetAvailableTilesInRange(Vector3 startPos, int range, 

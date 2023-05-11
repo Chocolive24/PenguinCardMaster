@@ -38,6 +38,7 @@ public class Archer : BaseEnemy
 
     private IEnumerator WaitForProjCo(BaseHero heroTarget)
     {
+        _spriteRenderer.flipX = heroTarget.transform.position.x < transform.position.x;
         _nbrOfAttackPerformed++;
         yield return new WaitForSeconds(0.5f);
         base.Attack(heroTarget);

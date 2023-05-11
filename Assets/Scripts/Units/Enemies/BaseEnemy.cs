@@ -228,6 +228,8 @@ public class BaseEnemy : BaseUnit
     
     public virtual void Attack(BaseHero heroTarget)
     {
+        _spriteRenderer.flipX = heroTarget.transform.position.x < transform.position.x;
+        
         heroTarget.TakeDamage(_currentAttack.Value);
         _nbrOfAttackPerformed++;
     }

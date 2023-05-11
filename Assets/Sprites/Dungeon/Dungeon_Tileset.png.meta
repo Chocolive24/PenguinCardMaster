@@ -138,7 +138,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_1
+      name: Dungeon_WallTop
       rect:
         serializedVersion: 2
         x: 16
@@ -243,7 +243,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_6
+      name: floor1
       rect:
         serializedVersion: 2
         x: 96
@@ -264,7 +264,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_7
+      name: floor2
       rect:
         serializedVersion: 2
         x: 112
@@ -285,7 +285,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_8
+      name: floor3
       rect:
         serializedVersion: 2
         x: 128
@@ -2304,7 +2304,6 @@ TextureImporter:
       Dungeon_Tileset_83: 1878725100
       Dungeon_Tileset_92: -846506333
       Dungeon_Tileset_101: -1821973057
-      Dungeon_Tileset_8: 1801460610
       Dungeon_Tileset_94: 207333392
       Dungeon_Tileset_10: 2010792581
       Dungeon_Tileset_43: -1917572678
@@ -2325,15 +2324,15 @@ TextureImporter:
       Dungeon_Tileset_17: -1835012238
       Dungeon_Tileset_46: 477863797
       RighttUpCorner: -2059175479
+      floor2: 1504089035
       Dungeon_Tileset_29: -179249427
       Dungeon_Tileset_20: 1237325991
       Dungeon_Tileset_41: -1213306916
-      Dungeon_Tileset_6: -1702694134
       Dungeon_Tileset_15: -1226452151
       Dungeon_Tileset_37: -1295458413
       Dungeon_Tileset_40: -568689454
-      Dungeon_Tileset_47: 391399400
       Dungeon_Tileset_82: 1529950334
+      Dungeon_Tileset_47: 391399400
       Dungeon_Tileset_60: -1940105640
       Dungeon_Tileset_67: 469895644
       Dungeon_Tileset_86: -1138369849
@@ -2367,19 +2366,19 @@ TextureImporter:
       Dungeon_Tileset_68: 1422014524
       Dungeon_Tileset_80: 1059487513
       Dungeon_Tileset_4: -2001768872
-      Dungeon_Tileset_1: 1929765263
       Dungeon_Tileset_2: 1265657134
-      Dungeon_Tileset_7: 1504089035
-      Dungeon_Tileset_19: 722472662
       Dungeon_Tileset_49: 187897612
+      Dungeon_Tileset_19: 722472662
       Dungeon_Tileset_78: 69220891
       Dungeon_Tileset_90: 615099294
       Dungeon_Tileset_88: 1426532498
       RightDownCorner: -780475504
+      Dungeon_WallTop: 1929765263
       Dungeon_Tileset_9: 1421846994
       Dungeon_Tileset_48: 489916319
       Dungeon_Tileset_52: -1018794623
       Dungeon_Tileset_64: -1522491315
+      floor1: -1702694134
       Dungeon_Tileset_0: -702315967
       Dungeon_Tileset_27: -1003250757
       LeftDownCorner: -1289746769
@@ -2388,6 +2387,7 @@ TextureImporter:
       Dungeon_Tileset_99: -1181129472
       Dungeon_Tileset_96: -44388554
       Dungeon_Tileset_91: 119375373
+      floor3: 1801460610
       Dungeon_Tileset_57: -1112478071
       Dungeon_Tileset_71: 872415329
       Dungeon_Tileset_85: -1098896010

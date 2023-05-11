@@ -33,7 +33,11 @@ public class UIBattleManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _golds;
     [SerializeField] private GameObject _cardAoeRenderer;
 
+    [SerializeField] private GameObject _nextFloorQuestionPanel;
     [SerializeField] private GameObject _gameOverPanel;
+    [SerializeField] private GameObject _gameWonPanel;
+    
+    [SerializeField] private IntReference _currentFloorNbr;
     
     #endregion
 
@@ -43,6 +47,7 @@ public class UIBattleManager : MonoBehaviour
     private CardPlayedManager _cardPlayedManager;
     private UnitsManager _unitsManager;
     private GameManager _gameManager;
+    
 
     #endregion
     
@@ -64,6 +69,7 @@ public class UIBattleManager : MonoBehaviour
     public Button EndTurnButton => _endTurnButton;
 
     public GameObject CardAoeRenderer => _cardAoeRenderer;
+    public GameObject NextFloorQuestionPanel => _nextFloorQuestionPanel;
 
     #endregion
     
@@ -87,9 +93,20 @@ public class UIBattleManager : MonoBehaviour
         BaseCard.OnNoTEnoughMana += DisplayNotEnoughManaTxt;
         BaseMoveCard.OnPathStarted += DesactivateEndTurnButton;
         BaseUnit.OnPathEnded += ActivateEndTurnButton;
+        DoorTileCell.OnDoorTileEnter += ActivateQuestionPanel;
     }
 
-    
+    private void ActivateQuestionPanel(DoorTileCell tile)
+    {
+        var room = tile.GetRoomNeighbour();
+
+        if (room.Type == RoomData.RoomType.END && !room.HasEnemiesToFight)
+        {
+            _VictoryPanel.SetActive(true);
+            _nextFloorQuestionPanel.SetActive(true);
+        }
+    }
+
 
     private void OnDestroy()
     {
@@ -97,6 +114,7 @@ public class UIBattleManager : MonoBehaviour
         BaseCard.OnNoTEnoughMana -= DisplayNotEnoughManaTxt;
         BaseMoveCard.OnPathStarted -= DesactivateEndTurnButton;
         BaseUnit.OnPathEnded -= ActivateEndTurnButton;
+        DoorTileCell.OnDoorTileEnter -= ActivateQuestionPanel;
     }
     
     // Start is called before the first frame update
@@ -204,10 +222,17 @@ public class UIBattleManager : MonoBehaviour
     
     private void HandleVictoryEnterUI(BattleManager battleManager, int golds)
     {
-        _VictoryPanel.SetActive(true);
-        _goldsPanel.SetActive(true);
-        _cardAoeRenderer.SetActive(false);
-        _golds.text = "You received " + golds + " golds !";
+        if (_battleManager.BattleRoom.Type == RoomData.RoomType.END && _currentFloorNbr.Value == 3)
+        {
+            _gameWonPanel.SetActive(true);
+        }
+        else
+        {
+            _VictoryPanel.SetActive(true);
+            _goldsPanel.SetActive(true);
+            _cardAoeRenderer.SetActive(false);
+            _golds.text = "You received " + golds + " golds !";
+        }
     }
 
     public void OnNextButtonClick()

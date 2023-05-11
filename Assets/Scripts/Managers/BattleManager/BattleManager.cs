@@ -38,7 +38,6 @@ public class BattleManager : MonoBehaviour
     #region Managers
 
     private GameManager _gameManager;
-    private GridManager _gridManager;
     private UnitsManager _unitsManager;
     private UIBattleManager _uiBattleManager;
     private CardsManager _cardsManager;
@@ -140,7 +139,6 @@ public class BattleManager : MonoBehaviour
     private void ReferenceManagers()
     {
         _gameManager = GameManager.Instance;
-        _gridManager = GridManager.Instance;
         _unitsManager = UnitsManager.Instance;
         _uiBattleManager = UIBattleManager.Instance;
         _cardsManager = CardsManager.Instance;
@@ -278,20 +276,23 @@ public class BattleManager : MonoBehaviour
         
             _uiBattleManager.CardAoeRenderer.SetActive(false);
 
-            if (_battleRoom.Type != RoomData.RoomType.END)
+            if (!_relicsManager.IsInventoryFull)
             {
-                if (Random.Range(1, 101) <= _relicRewardPercentage.Value)
+                if (_battleRoom.Type != RoomData.RoomType.END)
                 {
-                    _relicRewards = _relicsManager.CreateRelicRewards();
+                    if (Random.Range(1, 101) <= _relicRewardPercentage.Value + 90)
+                    {
+                        _relicRewards = _relicsManager.CreateRelicRewards();
+                    }
+                    else
+                    {
+                        _uiBattleManager.VictoryPanel.SetActive(false);
+                    }
                 }
                 else
                 {
-                    _uiBattleManager.VictoryPanel.SetActive(false);
+                    _relicRewards = _relicsManager.CreateRelicRewards();
                 }
-            }
-            else
-            {
-                _relicRewards = _relicsManager.CreateRelicRewards();
             }
         }
     }
@@ -310,8 +311,15 @@ public class BattleManager : MonoBehaviour
             }
         
             _relicRewards.Clear();
-        
-            _uiBattleManager.VictoryPanel.SetActive(false);
+
+            if (_battleRoom.Type == RoomData.RoomType.END)
+            {
+                _uiBattleManager.NextFloorQuestionPanel.SetActive(true);
+            }
+            else
+            {
+                _uiBattleManager.VictoryPanel.SetActive(false);
+            }
         }
     }
 
@@ -330,9 +338,9 @@ public class BattleManager : MonoBehaviour
 
         OnVictoryExit?.Invoke(this, _battleRoom);
         
-        if (_battleRoom.Type == RoomData.RoomType.END)
-        {
-            SceneManager.LoadScene("Game");
-        }
+        // if (_battleRoom.Type == RoomData.RoomType.END)
+        // {
+        //     SceneManager.LoadScene("Game");
+        // }
     }
 }

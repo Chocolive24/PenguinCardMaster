@@ -19,7 +19,9 @@ public class RelicsManager : MonoBehaviour
     [SerializeField] private RectTransform[] _rewardLocation;
     
     // Getters and Setters ---------------------------------------------------------------------------------------------
-
+    public bool IsInventoryFull => _relicInventoryData.RelicData.Count >= _relicEmplacements.Length;
+    
+    
     // Methods ---------------------------------------------------------------------------------------------------------
     private void Awake()
     {

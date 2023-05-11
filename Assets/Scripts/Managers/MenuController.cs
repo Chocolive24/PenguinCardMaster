@@ -25,11 +25,13 @@ public class MenuController : MonoBehaviour
     private List<DeckData> _movementDecksData;
     private List<DeckData> _mainDecksData;
 
+    private List<RelicInventoryData> _relicInventories;
+
     private List<DungeonData> _dungeonData;
     private List<SO_RoomsData> _dungeonRoomsData;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         //EventSystem.current.SetSelectedGameObject(_primaryButton);
 
@@ -42,6 +44,8 @@ public class MenuController : MonoBehaviour
         _movementDecksData = Resources.LoadAll<DeckData>("Decks/MovementDecks").ToList();
         _mainDecksData = Resources.LoadAll<DeckData>("Decks/MainDecks").ToList();
 
+        _relicInventories = Resources.LoadAll<RelicInventoryData>("Relics/Inventory").ToList();
+        
         _dungeonData = Resources.LoadAll<DungeonData>("Dungeon/IntReferences").ToList();
         _dungeonRoomsData = Resources.LoadAll<SO_RoomsData>("Dungeon/RoomsList").ToList();
     }
@@ -99,6 +103,12 @@ public class MenuController : MonoBehaviour
         foreach (var mainDeckData in _mainDecksData)
         {
             mainDeckData.CardDeckData.Clear();
+        }
+        
+        // Relics Data -------------------------------------------------------------------------------------------------
+        foreach (var inventory in _relicInventories)
+        {
+            inventory.RelicData.Clear();
         }
         
         // Dungeon Data ------------------------------------------------------------------------------------------------

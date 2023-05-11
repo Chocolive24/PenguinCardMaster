@@ -6,8 +6,16 @@ using UnityEngine;
 
 public class Tank : BaseEnemy
 {
+    [SerializeField] private SpriteRenderer _tankSprite;
+    
     private int _nbrOfMovement = 0;
     
+    // Methods ---------------------------------------------------------------------------------------------------------
+    protected override void Start()
+    {
+        base.Start();
+    }
+
     public override bool IsPositionAvailable(Vector3 position, bool countHeroes, bool countEnemies, bool countWalls)
     {
         bool isPosAvalaible = false;
@@ -58,6 +66,8 @@ public class Tank : BaseEnemy
     {
         if (_currentTargetIndex < pathToFollow.Count - 1 && _nbrOfMovement < _baseMovement.Value - 1) 
         {
+            _tankSprite.flipX = pathToFollow[_currentTargetIndex + 1].x < transform.position.x;
+            
             _currentTargetIndex++;
 
             if (GetTilesInAttackRange(transform.position, _attackRange).ContainsKey(

@@ -66,72 +66,86 @@ public class BaseAttackCard : BaseCard
     {
         List<GameObject> swordSlashes = new List<GameObject>();
         List<TileCell> tiles = new List<TileCell>();
+        
+        SpriteRenderer heroSprite = _unitsManager.HeroPlayer.GetComponent<SpriteRenderer>();
 
         if (tile.OccupiedUnit)
         {
             if (_cardType == CardType.BASE_ATTACK_CARD && tile.OccupiedUnit.Faction == Faction.Enemy)
             {
-                var enemy = (BaseEnemy)tile.OccupiedUnit;
-
-                enemy.IsSelected = !enemy.IsSelected;
-
-                if (_unitsManager.HeroPlayer)
-                {
-                    if (_availableTiles.ContainsKey(tile.transform.position) && enemy != null)
-                    {
-                        enemy.TakeDamage(CurrentDamage);
-                        
-                        tiles.Add(tile);
-                        
-                        HandleSwordSlashes(tiles);
-                        _hasPerformed = true;
-                        
-                        OnAttackCardPlayed?.Invoke();
-                    }
-                }
+                ActivateBaseAttackCard(tile, heroSprite, tiles);
             }
         }
+
         if (_cardType == CardType.AOE_ATTACK_CARD && _availableTiles.ContainsKey(tile.transform.position))
         {
             if (_availableTiles.ContainsKey(tile.transform.position) || tile.OccupiedUnit)
             {
-                if (_unitsManager.HeroPlayer)
-                {
-                    List<BaseEnemy> allreadyAttackedEnemies = new List<BaseEnemy>();
+                ActivateAoeAttackCard(tile, tiles);
+            }
+        }
+    }
+    
+    private void ActivateBaseAttackCard(TileCell tile, SpriteRenderer heroSprite, List<TileCell> tiles)
+    {
+        var enemy = (BaseEnemy)tile.OccupiedUnit;
 
-                    var baseEnemy = (BaseEnemy)tile.OccupiedUnit;
+        enemy.IsSelected = !enemy.IsSelected;
 
-                    if (baseEnemy)
-                    {
-                        baseEnemy.IsSelected = !baseEnemy.IsSelected;
-                    }
-                    
-                    foreach (var attackTile in _availableTiles)
-                    {
-                        var enemy = (BaseEnemy)_gridManager.GetTileAtPosition(attackTile.Key).OccupiedUnit;
+        if (_unitsManager.HeroPlayer)
+        {
+            if (_availableTiles.ContainsKey(tile.transform.position) && enemy != null)
+            {
+                heroSprite.flipX = _unitsManager.HeroPlayer.transform.position.x < transform.position.x;
+                enemy.TakeDamage(CurrentDamage);
 
-                        if (enemy)
-                        {
-                            if (!allreadyAttackedEnemies.Contains(enemy))
-                            {
-                                enemy.TakeDamage(CurrentDamage);
-                                
-                                tiles.Add(_gridManager.GetTileAtPosition(attackTile.Key));
-                                
-                                allreadyAttackedEnemies.Add(enemy);
-                            }
-                        }
-                    }
+                tiles.Add(tile);
 
-                    HandleSwordSlashes(tiles);
-                    _hasPerformed = true;
-                    OnAttackCardPlayed?.Invoke();
-                }
+                CreateSwordSlashes(tiles);
+                _hasPerformed = true;
+
+                OnAttackCardPlayed?.Invoke();
             }
         }
     }
 
-    private void HandleSwordSlashes(List<TileCell> tiles)
+    private void ActivateAoeAttackCard(TileCell tile, List<TileCell> tiles)
+    {
+        if (_unitsManager.HeroPlayer)
+        {
+            List<BaseEnemy> allreadyAttackedEnemies = new List<BaseEnemy>();
+
+            var baseEnemy = (BaseEnemy)tile.OccupiedUnit;
+
+            if (baseEnemy)
+            {
+                baseEnemy.IsSelected = !baseEnemy.IsSelected;
+            }
+
+            foreach (var attackTile in _availableTiles)
+            {
+                var enemy = (BaseEnemy)_gridManager.GetTileAtPosition(attackTile.Key).OccupiedUnit;
+
+                if (enemy)
+                {
+                    if (!allreadyAttackedEnemies.Contains(enemy))
+                    {
+                        enemy.TakeDamage(CurrentDamage);
+
+                        tiles.Add(_gridManager.GetTileAtPosition(attackTile.Key));
+
+                        allreadyAttackedEnemies.Add(enemy);
+                    }
+                }
+            }
+
+            CreateSwordSlashes(tiles);
+            _hasPerformed = true;
+            OnAttackCardPlayed?.Invoke();
+        }
+    }
+    
+    private void CreateSwordSlashes(List<TileCell> tiles)
     {
         foreach (var tile in tiles)
         {
