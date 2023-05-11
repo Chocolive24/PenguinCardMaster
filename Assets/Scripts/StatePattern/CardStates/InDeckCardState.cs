@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InDeckCardState : IState
 {
+
     public void OnEnter()
     {
         Debug.Log("Enter InDeck");

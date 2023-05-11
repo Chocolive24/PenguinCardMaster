@@ -21,7 +21,7 @@ MonoBehaviour:
     Variable: {fileID: 11400000, guid: 4d692dbc8b575c44296fcb88e6a6b271, type: 2}
   Attack:
     _useConstant: 0
-    _baseValue: 0
+    _baseValue: 50
     ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4fb2bff2c7e868c40bd61d4021591daa, type: 2}
   Movement:

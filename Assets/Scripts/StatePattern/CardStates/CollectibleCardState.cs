@@ -14,7 +14,7 @@ public class CollectibleCardState : IState
     // Methods ---------------------------------------------------------------------------------------------------------
     public void OnEnter()
     {
-        
+        _card.gameObject.SetActive(true);
     }
 
     public void OnExit()

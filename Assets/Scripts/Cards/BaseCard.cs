@@ -427,9 +427,12 @@ public abstract class BaseCard : Collectible
 
     public void ExitPerform()
     {
-        OnPerformed?.Invoke(this);
-        _cardPlayedManager.HandlePlayedCard();
-        gameObject.SetActive(false);
+        if (_isCollected)
+        {
+            OnPerformed?.Invoke(this);
+            _cardPlayedManager.HandlePlayedCard();
+            gameObject.SetActive(false);
+        }
     }
 
     public void EnterDiscarded()

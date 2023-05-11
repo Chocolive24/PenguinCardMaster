@@ -15,6 +15,7 @@ public class DrawnCardState : IState
     public void OnEnter()
     {
         _card.EnterDrawn();
+        
     }
 
     public void OnExit()

@@ -178,6 +178,7 @@ public class ShopManager : MonoBehaviour
         BaseCard cardRare1 = _cardsManager.InstantiateARandomCard(scrCards, rarety);
         cardRare1.transform.position = rect.position;
         cardRare1.transform.parent = rect.transform.parent;
+        cardRare1.gameObject.SetActive(true);
 
         cardRare1.Init(Collectible.CollectibleType.SHOP_OBJECT, Random.Range(minCost, maxCost), rect.gameObject);
         

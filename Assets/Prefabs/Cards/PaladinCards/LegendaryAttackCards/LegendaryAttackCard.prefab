@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LegendaryAttackCard
       objectReference: {fileID: 0}
+    - target: {fileID: 3369712378919419960, guid: 0a8883d2370707d49807bd26b2e40736, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3369712378919419961, guid: 0a8883d2370707d49807bd26b2e40736, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -133,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3369712378919419961, guid: 0a8883d2370707d49807bd26b2e40736, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1820
       objectReference: {fileID: 0}
     - target: {fileID: 3369712378919419961, guid: 0a8883d2370707d49807bd26b2e40736, type: 3}
       propertyPath: m_AnchoredPosition.y

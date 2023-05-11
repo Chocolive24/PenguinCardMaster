@@ -340,32 +340,40 @@ public class BaseHero : BaseUnit
     
     private void PutAllCardsInDecks(BattleManager obj, RoomData battleRoom)
     {
-        OnShuffleHandBackToDeck?.Invoke(this);
-
-        if (_movementDeck)
+        if (_cardHand.Count > 0)
         {
-            foreach (var card in _cardHand)
+            if (_movementDeck && _mainDeck)
             {
-                if (card.CardType == CardType.BASE_ATTACK_CARD || card.CardType == CardType.AOE_ATTACK_CARD)
+                foreach (var card in _cardHand)
                 {
-                    _mainDeck.AddCardWithoutData(card);
-                }
-                else if (card.CardType == CardType.MOVE_CARD)
-                {
-                    _movementDeck.AddCardWithoutData(card);
+                    if (card.CardType == CardType.BASE_ATTACK_CARD || card.CardType == CardType.AOE_ATTACK_CARD)
+                    {
+                        _mainDeck.AddCardWithoutData(card);
+                    }
+                    else if (card.CardType == CardType.MOVE_CARD)
+                    {
+                        _movementDeck.AddCardWithoutData(card);
+                    }
                 }
 
                 _cardPlayedManager.ResetSlots();
+            
+                OnShuffleHandBackToDeck?.Invoke(this);
+                
+                _cardHand.Clear();
             }
-
-            _cardHand.Clear();
         }
-        
-        if (_movDiscardDeck)
+
+        if (_movDiscardDeck && _movDiscardDeck.DiscardDeck.Count > 0)
         {
             _movDiscardDeck.ShuffleCardsBackToDeck();
+        }
+        if (_mainDiscardDeck && _mainDiscardDeck.DiscardDeck.Count > 0)
+        {
             _mainDiscardDeck.ShuffleCardsBackToDeck();
         }
+        
+        Debug.Log(_movementDeck + " " + _mainDeck);
     }
 
     public void AddCardToHand(BaseCard card)

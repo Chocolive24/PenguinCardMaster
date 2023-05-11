@@ -98,21 +98,21 @@ public abstract class DeckController : MonoBehaviour
         {
             for (int i = 0; i < cardNbr; i++)
             {
-                if (i == 3)
-                {
-                    foreach (var cardData in scriptableCards)
-                    {
-                        allreadySpawnedCards.Add(cardData);
-                    }
-                }
+                // if (i == 3)
+                // {
+                //     foreach (var cardData in scriptableCards)
+                //     {
+                //         allreadySpawnedCards.Add(cardData);
+                //     }
+                // }
                 
-                var card = CardsManager.Instance.InstantiateARandomCard(allreadySpawnedCards, Rarety.Basic);
+                var card = CardsManager.Instance.InstantiateARandomCard(allreadySpawnedCards, Rarety.Legendary);
 
                 card.IsCollected = true;
                 
                 AddCardWithData(card);
 
-                allreadySpawnedCards.Remove(card.CardData);
+                //allreadySpawnedCards.Remove(card.CardData);
             }
         }
         else

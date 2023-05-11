@@ -130,6 +130,7 @@ public class CardsManager : MonoBehaviour
                 BaseCard cardData = GetRandomCard<BaseCard>(scriptableCards, rarety);
                 BaseCard spawnedCard = Instantiate(cardData, rect.position, Quaternion.identity);
                 spawnedCard.transform.parent = rect.transform;
+                spawnedCard.gameObject.SetActive(true);
                 spawnedCards.Add(spawnedCard);
                 
                 switch (spawnedCard.CardType)
@@ -139,11 +140,8 @@ public class CardsManager : MonoBehaviour
                         break;
                     case CardType.BASE_ATTACK_CARD:
                     case CardType.AOE_ATTACK_CARD:
-                        if (rarety != Rarety.Legendary)
-                        {
-                            attackCardsNotSpawned.Remove(spawnedCard.CardData);
-                        }
-                        break;
+                        attackCardsNotSpawned.Remove(spawnedCard.CardData);
+                            break;
                 }
             }
         }

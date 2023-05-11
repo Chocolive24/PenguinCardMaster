@@ -113,7 +113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3904962186891751972, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 737.5
       objectReference: {fileID: 0}
     - target: {fileID: 3904962186891751972, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -134,6 +134,10 @@ PrefabInstance:
     - target: {fileID: 3904962186891751973, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
       propertyPath: m_Name
       value: Earthquake
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904962186891751973, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3904962186973532001, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
       propertyPath: m_Sprite

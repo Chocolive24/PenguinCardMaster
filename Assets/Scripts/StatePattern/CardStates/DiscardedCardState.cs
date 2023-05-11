@@ -15,6 +15,7 @@ public class DiscardedCardState : IState
     public void OnEnter()
     {
         //_card.EnterDiscarded();
+        
     }
 
     public void OnExit()

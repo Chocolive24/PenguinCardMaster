@@ -20,11 +20,11 @@ public class MovementDeckController : DeckController
         
         if (_deck.Count != _size)
         {
-            var cards = FindObjectsOfType<BaseMoveCard>();
+            var cards = _deckData.CardDeckData;
             _deck.Clear();
             foreach (var card in cards)
             {
-                AddCardWithoutData(card);
+                AddCardWithoutData(card.BaseCardPrefab);
             }
         }
         
