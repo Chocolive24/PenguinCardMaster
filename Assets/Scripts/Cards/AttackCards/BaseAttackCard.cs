@@ -122,26 +122,35 @@ public class BaseAttackCard : BaseCard
                 baseEnemy.IsSelected = !baseEnemy.IsSelected;
             }
 
+            bool hasAnEnemyBeenAttacked = false;
+            
             foreach (var attackTile in _availableTiles)
             {
                 var enemy = (BaseEnemy)_gridManager.GetTileAtPosition(attackTile.Key).OccupiedUnit;
 
-                if (enemy)
+                if (!enemy)
                 {
-                    if (!allreadyAttackedEnemies.Contains(enemy))
-                    {
-                        enemy.TakeDamage(CurrentDamage);
+                    continue;
+                }
+                
+                if (!allreadyAttackedEnemies.Contains(enemy))
+                {
+                    enemy.TakeDamage(CurrentDamage);
 
-                        tiles.Add(_gridManager.GetTileAtPosition(attackTile.Key));
+                    tiles.Add(_gridManager.GetTileAtPosition(attackTile.Key));
 
-                        allreadyAttackedEnemies.Add(enemy);
-                    }
+                    allreadyAttackedEnemies.Add(enemy);
+
+                    hasAnEnemyBeenAttacked = true;
                 }
             }
 
-            CreateSwordSlashes(tiles);
-            _hasPerformed = true;
-            OnAttackCardPlayed?.Invoke();
+            if (hasAnEnemyBeenAttacked)
+            {
+                CreateSwordSlashes(tiles);
+                _hasPerformed = true;
+                OnAttackCardPlayed?.Invoke();
+            }
         }
     }
     

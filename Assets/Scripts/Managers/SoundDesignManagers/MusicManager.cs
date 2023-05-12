@@ -27,23 +27,25 @@ public class MusicManager : MonoBehaviour
 
     private void Start()
     {
-        PlayMusic(_mainTheme);
+        PlayMusic(_mainTheme, 0.3f);
     }
 
-    public void PlayMusic(AudioClip music)
+    public void PlayMusic(AudioClip music, float volume)
     {
         _audioSource.clip = music;
+
+        _audioSource.volume = volume;
         
         _audioSource.Play();
     }
 
     private void PlayBattleTheme(BattleManager arg1, RoomData arg2)
     {
-        PlayMusic(_battleTheme);
+        PlayMusic(_battleTheme, 0.15f);
     }
     
     private void PlayMainTheme(BattleManager arg1, RoomData arg2)
     {
-        PlayMusic(_mainTheme);
+        PlayMusic(_mainTheme, 0.3f);
     }
 }

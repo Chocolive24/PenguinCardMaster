@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,11 +19,18 @@ public class RelicsManager : MonoBehaviour
 
     [SerializeField] private RectTransform[] _rewardLocation;
 
-    [SerializeField] private RectTransform _relicInfoPos;
+    [SerializeField] private GameObject _relicInfoGameObject;
+    [SerializeField] private TextMeshProUGUI _relicInfoTxt;
     
     // Getters and Setters ---------------------------------------------------------------------------------------------
     public bool IsInventoryFull => _relicInventoryData.RelicData.Count >= _relicEmplacements.Length;
-    public Vector3 RelicInfoPos => _relicInfoPos.position;
+    public GameObject RelicInfoPos => _relicInfoGameObject;
+
+    public TextMeshProUGUI RelicInfoTxt
+    {
+        get => _relicInfoTxt;
+        set => _relicInfoTxt = value;
+    }
 
 
     // Methods ---------------------------------------------------------------------------------------------------------
@@ -84,8 +92,6 @@ public class RelicsManager : MonoBehaviour
         if (relic)
         {
             relic.EffectBox.SetActive(false);
-
-            relic.EffectBox.transform.position = _relicInfoPos.transform.position;
 
             if (_emplIdx <= _relicEmplacements.Length)
             {

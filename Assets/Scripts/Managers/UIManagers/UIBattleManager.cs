@@ -38,6 +38,7 @@ public class UIBattleManager : MonoBehaviour
     [Header("IntReferences")]
     [SerializeField] private IntReference _playerMaxMana;
     [SerializeField] private IntReference _currentFloorNbr;
+    [SerializeField] private IntReference _maxNbrOfFloor;
     
     [SerializeField] private Button _endTurnButton;
     [SerializeField] private Image _manaContainerImage;
@@ -57,7 +58,6 @@ public class UIBattleManager : MonoBehaviour
     private CardPlayedManager _cardPlayedManager;
     private UnitsManager _unitsManager;
     private GameManager _gameManager;
-    
 
     #endregion
     
@@ -238,7 +238,8 @@ public class UIBattleManager : MonoBehaviour
     
     private void HandleVictoryEnterUI(BattleManager battleManager, int golds)
     {
-        if (_battleManager.BattleRoom.Type == RoomData.RoomType.END && _currentFloorNbr.Value == 3)
+        if (_battleManager.BattleRoom.Type == RoomData.RoomType.END && 
+            _currentFloorNbr.Value == _maxNbrOfFloor.Value)
         {
             _gameWonPanel.SetActive(true);
         }

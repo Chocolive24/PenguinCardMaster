@@ -62,7 +62,8 @@ public class BaseHero : BaseUnit
     // private GameManager _gameManager;
     // private GridManager _gridManager;
     private CardPlayedManager _cardPlayedManager;
-    
+    private bool _isMoving;
+
     // Events ----------------------------------------------------------------------------------------------------------
     public static event Action<BaseHero> OnShuffleHandBackToDeck;
 
@@ -118,6 +119,8 @@ public class BaseHero : BaseUnit
     // }
 
     public List<BaseCard> CardHand => _cardHand;
+
+    public bool IsMoving => _isMoving;
 
     #endregion
     
@@ -321,12 +324,20 @@ public class BaseHero : BaseUnit
         
         _availableTiles = _cardPlayedManager.CurrentCard.AvailableTiles;
         base.FindAvailablePathToTarget(targetPos, 0, countHeroes, countEnemies, countWalls);
+
+        if (_path.Count > 0)
+        {
+            _isMoving = true;
+        }
     }
 
 
     protected override void StopThePath()
     {
         base.StopThePath();
+
+        _isMoving = false;
+        
         foreach (var card in _cardHand)
         {
             card.CanBePlayed = true;

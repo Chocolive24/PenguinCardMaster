@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +20,8 @@ public abstract class Relic : Collectible
 
     [SerializeField] private GameObject _effectBox;
 
+    private RelicsManager _relicsManager;
+    
     // Events ----------------------------------------------------------------------------------------------------------
     //public event Action<Relic> OnCollected;
     
@@ -43,6 +46,7 @@ public abstract class Relic : Collectible
     protected virtual void Start()
     {
         _relicType = _relicDataRef.Type;
+        _relicsManager = FindObjectOfType<RelicsManager>();
     }
 
     public void OnRelicClick()
@@ -57,7 +61,8 @@ public abstract class Relic : Collectible
     {
         if (_isCollected)
         {
-            _effectBox.SetActive(true);
+            _relicsManager.RelicInfoPos.SetActive(true);
+            _relicsManager.RelicInfoTxt.text = _effectBox.GetComponentInChildren<TextMeshProUGUI>().text;
         }
     }
     
@@ -65,7 +70,7 @@ public abstract class Relic : Collectible
     {
         if (_isCollected)
         {
-            _effectBox.SetActive(false);
+            _relicsManager.RelicInfoPos.SetActive(false);
         }
     }
     

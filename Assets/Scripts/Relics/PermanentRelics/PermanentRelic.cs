@@ -15,6 +15,12 @@ public class PermanentRelic : Relic
         OnCollected += AddPermanentBuff;
     }
 
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        OnCollected -= AddPermanentBuff;
+    }
+
     private void AddPermanentBuff(Collectible obj)
     {
         if (obj == this)

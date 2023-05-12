@@ -280,7 +280,7 @@ public class BattleManager : MonoBehaviour
             {
                 if (_battleRoom.Type != RoomData.RoomType.END)
                 {
-                    if (Random.Range(1, 101) <= _relicRewardPercentage.Value + 90)
+                    if (Random.Range(1, 101) <= _relicRewardPercentage.Value)
                     {
                         _relicRewards = _relicsManager.CreateRelicRewards();
                     }
@@ -293,6 +293,10 @@ public class BattleManager : MonoBehaviour
                 {
                     _relicRewards = _relicsManager.CreateRelicRewards();
                 }
+            }
+            else
+            {
+                _uiBattleManager.VictoryPanel.SetActive(false);
             }
         }
     }

@@ -23,18 +23,21 @@ public class SoundEffectManagers : MonoBehaviour
 
     private void Start()
     {
-        
     }
 
-    public void PlaySound(AudioClip sound)
+    
+
+    public void PlaySound(AudioClip sound, float volume)
     {
         _audioSource.clip = sound;
+
+        _audioSource.volume = volume;
         
         _audioSource.Play();
     }
     
     private void PlaySwordSound()
     {
-        PlaySound(_swordSound);
+        PlaySound(_swordSound, 0.8f);
     }
 }

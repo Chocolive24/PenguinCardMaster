@@ -15,6 +15,12 @@ public class Hearth : Relic
         BattleManager.OnBattleEnd += HealPlayer;
     }
 
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        BattleManager.OnBattleEnd -= HealPlayer;
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -28,7 +34,7 @@ public class Hearth : Relic
 
     private void HealPlayer(BattleManager arg1, RoomData arg2)
     {
-        if (_unitsManager.HeroPlayer)
+        if (_unitsManager.HeroPlayer && _isCollected)
         {
             _unitsManager.HeroPlayer.HealHp(_heal);
         }

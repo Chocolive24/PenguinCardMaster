@@ -99,21 +99,21 @@ public abstract class DeckController : UI_Object
         {
             for (int i = 0; i < cardNbr; i++)
             {
-                // if (i == 3)
-                // {
-                //     foreach (var cardData in scriptableCards)
-                //     {
-                //         allreadySpawnedCards.Add(cardData);
-                //     }
-                // }
+                if (i == 3)
+                {
+                    foreach (var cardData in scriptableCards)
+                    {
+                        allreadySpawnedCards.Add(cardData);
+                    }
+                }
                 
-                var card = CardsManager.Instance.InstantiateARandomCard(allreadySpawnedCards, Rarety.Legendary);
+                var card = CardsManager.Instance.InstantiateARandomCard(allreadySpawnedCards, Rarety.Basic);
 
                 card.IsCollected = true;
                 
                 AddCardWithData(card);
 
-                //allreadySpawnedCards.Remove(card.CardData);
+                allreadySpawnedCards.Remove(card.CardData);
             }
         }
         else
@@ -138,11 +138,16 @@ public abstract class DeckController : UI_Object
 
         card.gameObject.SetActive(false);
 
-        card.IsCollected = true;
-
         _deck.Add(card);
 
         UpdateCardTxtNbr();
+
+        card.IsCollected = true;
+
+        if (card.AoeTilemap)
+        {
+            Destroy(card.AoeTilemap.gameObject);
+        }
     }
 
     public void AddCardWithData(BaseCard card)
@@ -233,6 +238,4 @@ public abstract class DeckController : UI_Object
     {
         _button.interactable = false;
     }
-
-    
 }

@@ -29,7 +29,9 @@ public class UnitsManager : MonoBehaviour
     private GridManager _gridManager;
     private UIBattleManager _uiBattleManager;
 
-    [SerializeField] private AI_TypeSO _aiTypeSO;
+    [SerializeField] private IntReference _minEnemySpawnWeight;
+    [SerializeField] private IntReference _maxEnemySpawnWeight;
+    
     private float _betweenTurnsTime = 0.5f;
 
     private RoomData _currentRoom;
@@ -108,13 +110,16 @@ public class UnitsManager : MonoBehaviour
         
         if (_currentRoom.HasEnemiesToFight)
         {
-            HandleEnemyStatBoost();
+            _roomVisitedNbr++;
             
-            int remainginWeight = _currentRoom.EnemySpawnWeight;
+            HandleEnemyStatBoost();
+
+            HandleEnemySpawnWeight();
+            
+            int remainginWeight = Random.Range(_minEnemySpawnWeight.Value, _maxEnemySpawnWeight.Value + 1);
 
             while (remainginWeight > 0)
             {
-                //BaseEnemy enemy = GetAnEnemyByType(EnemyType.GOBLIN);
                 BaseEnemy enemy = GetRandomEnemyUnderWeight(remainginWeight);
             
                 bool isPosValid = false;
@@ -174,11 +179,9 @@ public class UnitsManager : MonoBehaviour
             }
         }
     }
-
+    
     private void HandleEnemyStatBoost()
     {
-        _roomVisitedNbr++;
-
         if (_currentRoom.Type == RoomData.RoomType.END)
         {
             foreach (var enemyData in _enemiesData)
@@ -195,10 +198,8 @@ public class UnitsManager : MonoBehaviour
         }
         else
         {
-            if (_roomVisitedNbr > 2)
+            if (_roomVisitedNbr == 3)
             {
-                _roomVisitedNbr = 0;
-
                 foreach (var enemyData in _enemiesData)
                 {
                     enemyData.MaxHP.AddValue(Random.Range(2, 3));
@@ -214,6 +215,17 @@ public class UnitsManager : MonoBehaviour
         }
     }
 
+    private void HandleEnemySpawnWeight()
+    {
+        if (_roomVisitedNbr == 4)
+        {
+            _minEnemySpawnWeight.AddValue(1);
+            _maxEnemySpawnWeight.AddValue(1);
+
+            _roomVisitedNbr = 0;
+        }
+    }
+    
     private void DebuffEnemies(BattleManager arg1, int arg2)
     {
         if (_currentRoom.Type == RoomData.RoomType.END)
@@ -251,8 +263,6 @@ public class UnitsManager : MonoBehaviour
         BaseHero heroPlayer = FindObjectOfType<BaseHero>();
         
         var rndSpawnedTile = _gridManager.GetHeroSpawnTile();
-
-        //var spawnedHero = Instantiate(randomPrefab, rndSpawnedTile.transform.position, Quaternion.identity);
 
         heroPlayer.transform.position = rndSpawnedTile.transform.position;
         
@@ -311,145 +321,6 @@ public class UnitsManager : MonoBehaviour
     private void HandleHeroDeath(BaseUnit obj)
     {
         obj.GetComponent<BaseHero>().OnDeath -= HandleHeroDeath;
-    }
-
-    public void HandleSpawnEnemies()
-    {
-        switch (_aiTypeSO.Type)
-        {
-            case EnemyType.GOBLIN:
-                SpawnEnemy(3, EnemyType.GOBLIN);
-                break;
-            case EnemyType.ARCHER:
-                SpawnEnemy(3, EnemyType.ARCHER);
-                break;
-            case EnemyType.TANK:
-                SpawnEnemy(2, EnemyType.TANK);
-                break;
-            case EnemyType.SPAWNER:
-                SpawnEnemy(1, EnemyType.SPAWNER);
-                break;
-            case EnemyType.MIX:
-                SpawnEnemy(1, EnemyType.MIX);
-                break;
-        }
-        
-        // var enemyCount = 3;
-        //
-        // for (int i = 0; i < enemyCount; i++)
-        // {
-        //     var randomPrefab = GetRandomUnit<BaseEnemy>(Faction.Enemy);
-        //     var spawnedEnemy = Instantiate(randomPrefab);
-        //     var randomSpawnTile = _gridManager.GetEnemySpawnTile();
-        //     spawnedEnemy.transform.position = randomSpawnTile.transform.position;
-        //     randomSpawnTile.SetUnit(spawnedEnemy);
-        //     _enemies.Add(spawnedEnemy);
-        //     
-        //     spawnedEnemy.OnTurnFinished += SetNextEnemyTurn;
-        // }
-    }
-    
-    public void SpawnEnemy(int enemyNbr, EnemyType enemyType)
-    {
-        for (int i = 0; i < enemyNbr; i++)
-        {
-            BaseEnemy enemyData;
-            
-            if (enemyType == EnemyType.MIX)
-            {
-                // BaseEnemy enemyData2;
-                //
-                // BaseEnemy enemyData3;
-                //
-                // enemyData = GetAnEnemyByType(EnemyType.GOBLIN);
-                //
-                // var spawnedEnemy = Instantiate(enemyData);
-                //
-                // spawnedEnemy.transform.position = _gridManager.WorldToCellCenter(new Vector3(0, 6.5f, 0));
-                //
-                // spawnedEnemy.PreviousOccupiedTiles = spawnedEnemy.GetOccupiedTiles();
-                //
-                // foreach (var tile in spawnedEnemy.GetOccupiedTiles())
-                // {
-                //     tile.SetUnit(spawnedEnemy);
-                // }
-                //
-                // //randomSpawnTile.SetUnit(spawnedEnemy);
-                // _enemies.Add(spawnedEnemy);
-                //
-                // spawnedEnemy.OnTurnFinished += SetNextEnemyTurn;
-                // spawnedEnemy.OnDeath += HandleEnemyDeath;
-                //
-                // // ----------------------------------------------------------------------------------------
-                //
-                // // enemyData = GetAnEnemyByType(EnemyType.GOBLIN);
-                // //
-                // // var spawnedEnemy = Instantiate(enemyData);
-                // //
-                // // spawnedEnemy.transform.position = _gridManager.WorldToCellCenter(new Vector3(0, 1.5f, 0));
-                // //
-                // // spawnedEnemy.PreviousOccupiedTiles = spawnedEnemy.GetOccupiedTiles();
-                // //
-                // // foreach (var tile in spawnedEnemy.GetOccupiedTiles())
-                // // {
-                // //     tile.SetUnit(spawnedEnemy);
-                // // }
-                // //
-                // // //randomSpawnTile.SetUnit(spawnedEnemy);
-                // // _enemies.Add(spawnedEnemy);
-                // //
-                // // spawnedEnemy.OnTurnFinished += SetNextEnemyTurn;
-                // // spawnedEnemy.OnDeath += HandleEnemyDeath;
-                //
-                // // ----------------------------------------------------------------------------------------
-                //
-                // enemyData2 = GetAnEnemyByType(EnemyType.TANK);
-                //
-                // var spawnedEnemy2 = Instantiate(enemyData2);
-                //
-                // spawnedEnemy2.transform.position = _gridManager.WorldToCellCenter(new Vector3(3, 6.5f, 0));
-                //
-                // spawnedEnemy2.PreviousOccupiedTiles = spawnedEnemy2.GetOccupiedTiles();
-                //
-                // foreach (var tile in spawnedEnemy2.GetOccupiedTiles())
-                // {
-                //     tile.SetUnit(spawnedEnemy2);
-                // }
-                //
-                // //randomSpawnTile.SetUnit(spawnedEnemy);
-                // _enemies.Add(spawnedEnemy2);
-                //
-                // spawnedEnemy2.OnTurnFinished += SetNextEnemyTurn;
-                // spawnedEnemy2.OnDeath += HandleEnemyDeath;
-
-                do
-                {
-                    enemyData = GetRandomUnit<BaseEnemy>(Faction.Enemy);
-                } while (enemyData.UnitName == "Minion");
-            }
-            else
-            {
-                enemyData = GetAnEnemyByType(enemyType);
-            }
-            
-            var spawnedEnemy = Instantiate(enemyData);
-            
-            var randomSpawnTile = _gridManager.GetEnemySpawnTile();
-            spawnedEnemy.transform.position = randomSpawnTile.transform.position;
-            
-            spawnedEnemy.PreviousOccupiedTiles = spawnedEnemy.GetOccupiedTiles();
-            
-            foreach (var tile in spawnedEnemy.GetOccupiedTiles())
-            {
-                tile.SetUnit(spawnedEnemy);
-            }
-            
-            //randomSpawnTile.SetUnit(spawnedEnemy);
-            _enemies.Add(spawnedEnemy);
-            
-            spawnedEnemy.OnTurnFinished += SetNextEnemyTurn;
-            spawnedEnemy.OnDeath += HandleEnemyDeath;
-        }
     }
     
     public void SetNextEnemyTurn()

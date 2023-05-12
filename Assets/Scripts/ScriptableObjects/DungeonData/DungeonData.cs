@@ -8,9 +8,9 @@ public class DungeonData : ScriptableObject
 {
     public IntReference MinNbrOfRooms;
     public IntReference MaxNbrOfRooms;
-    
-    public IntReference MinEnemyWeight;
-    public IntReference MaxEnemyWeight;
+
+    public IntReference MinEnemySpawnWeight;
+    public IntReference MaxEnemySpawnWeight;
     
     public IntReference CurrentFloor;
     public IntReference MaxNbrOfFloors;
@@ -28,8 +28,8 @@ public class DungeonData : ScriptableObject
             IntReferences.Add(MinNbrOfRooms);
             IntReferences.Add(MaxNbrOfRooms);
         
-            IntReferences.Add(MinEnemyWeight);
-            IntReferences.Add(MaxEnemyWeight);
+            IntReferences.Add(MinEnemySpawnWeight);
+            IntReferences.Add(MaxEnemySpawnWeight);
         
             IntReferences.Add(CurrentFloor);
             IntReferences.Add(MaxNbrOfFloors);

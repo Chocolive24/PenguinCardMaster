@@ -115,6 +115,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -280116805, guid: e788fb2af79177845ab73ff2130e510d, type: 3}
+    - target: {fileID: 5447476176099889746, guid: 2d318bb797e5ea14db40b3574cf9a7b9, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5447476176099889746, guid: 2d318bb797e5ea14db40b3574cf9a7b9, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 5447476176423612542, guid: 2d318bb797e5ea14db40b3574cf9a7b9, type: 3}
       propertyPath: m_Sprite
       value: 

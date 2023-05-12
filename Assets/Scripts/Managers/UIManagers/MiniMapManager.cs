@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,10 @@ public class MiniMapManager : MonoBehaviour
 {
     [SerializeField] private Image _miniMapImage;
     [SerializeField] private GameObject _roomUIPrefab;
+
+    [SerializeField] private TextMeshProUGUI _currentFloorTxt;
+
+    [SerializeField] private IntReference _currentFloorNbr;
 
     private DungeonGenerator _dungeonGenerator;
     
@@ -47,6 +52,8 @@ public class MiniMapManager : MonoBehaviour
         _currentRoomUI = CreateRoomInMiniMap(_miniMapCenter, Color.green);
         
         CreateRoomNeighboursInMiniMap(_dungeonGenerator.Rooms.First().Value);
+
+        _currentFloorTxt.text = "Floor " + _currentFloorNbr.Value;
     }
 
     private Image CreateRoomInMiniMap(Vector3 position, Color color)

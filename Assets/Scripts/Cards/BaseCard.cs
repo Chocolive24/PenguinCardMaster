@@ -312,7 +312,7 @@ public abstract class BaseCard : Collectible
             this.DrawTilemap(_availableTiles, _aoeTilemap, _tilemapsManager.GetRuleTile(this));
         }
 
-        if (!_aoeTilemap && _isCollected && !_cardPlayedManager.CurrentCard)
+        if (!_aoeTilemap && _isCollected && !_unitsManager.HeroPlayer.IsMoving)
         {
             _aoeTilemap = _tilemapsManager.InstantiateTilemap(_name + " aoe");
 
