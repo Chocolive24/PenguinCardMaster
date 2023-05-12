@@ -24,6 +24,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2456730619047760709, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
+      propertyPath: _moveTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456730619047760709, guid: 168bbf2ff3ff7914ab68d39cca976da2, type: 3}
       propertyPath: _baseDamage
       value: 5
       objectReference: {fileID: 0}

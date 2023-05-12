@@ -53,5 +53,21 @@ public abstract class Relic : Collectible
         }
     }
 
+    public void OnRelicTriggerEnter()
+    {
+        if (_isCollected)
+        {
+            _effectBox.SetActive(true);
+        }
+    }
+    
+    public void OnRelicTriggerExit()
+    {
+        if (_isCollected)
+        {
+            _effectBox.SetActive(false);
+        }
+    }
+    
     protected abstract void PerformEffect();
 }

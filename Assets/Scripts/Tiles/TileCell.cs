@@ -125,52 +125,54 @@ public class TileCell : MonoBehaviour
     
     protected virtual void OnMouseEnter()
     {
-        Debug.Log("OnMouse : tile");
-        
-        _highlight.SetActive(true);
-        _highlightBorder.SetActive(true);
-        
-        _uiBattleManager.ShowTileInfo(this);
-
-        CheckForEnemyTilemapToCreate();
-        
-        if (_cardPlayedManager.CurrentCard != null)
+        if (!_uiBattleManager.MustTilesBeDisabled)
         {
-            if (_cardPlayedManager.CurrentCard.CardType == CardType.MOVE_CARD &&
-                _cardPlayedManager.CurrentCard.AvailableTiles.ContainsKey(_position) &&
-                !_occupiedUnit)
+            _highlight.SetActive(true);
+            _highlightBorder.SetActive(true);
+
+            _uiBattleManager.ShowTileInfo(this);
+
+            CheckForEnemyTilemapToCreate();
+
+            if (_cardPlayedManager.CurrentCard != null)
             {
-                BaseMoveCard card = (BaseMoveCard)_cardPlayedManager.CurrentCard;
-
-                if (card.HasPlayerClickedOnATile)
+                if (_cardPlayedManager.CurrentCard.CardType == CardType.MOVE_CARD &&
+                    _cardPlayedManager.CurrentCard.AvailableTiles.ContainsKey(_position) &&
+                    !_occupiedUnit)
                 {
-                    return;
-                }
-                
-                card.Path = _tilemapsManager.FindPathWithinRange(_position, card.AvailableTiles);
-        
-                _unitsManager.HeroPlayer.Path = card.Path.Keys.ToList();
+                    BaseMoveCard card = (BaseMoveCard)_cardPlayedManager.CurrentCard;
 
-                List<TileCell> pathTiles = new List<TileCell>();
-                
-                foreach (var item in card.Path)
-                {
-                    var tile = _gridManager.GetTileAtPosition(item.Key);
-                    tile.Arrow.transform.rotation = Quaternion.identity;
-                    tile.Arrow.SetActive(true);
-                    pathTiles.Add(tile);
-                }
-
-                pathTiles.Reverse();
-
-                for (int i = 0; i < pathTiles.Count; i++)
-                {
-                    var previousTile = i > 0 ? pathTiles[i - 1] : _unitsManager.HeroPlayer.GetOccupiedTiles().First();
-                    var futureTile = i < pathTiles.Count - 1 ? pathTiles[i + 1] : null;
-
-                    if (!card.HasPlayerClickedOnATile)
+                    if (card.HasPlayerClickedOnATile)
                     {
-                        _arrowTranslator.DrawArrowPath(previousTile, pathTiles[i], futureTile);
+                        return;
+                    }
+
+                    card.Path = _tilemapsManager.FindPathWithinRange(_position, card.AvailableTiles);
+
+                    _unitsManager.HeroPlayer.Path = card.Path.Keys.ToList();
+
+                    List<TileCell> pathTiles = new List<TileCell>();
+
+                    foreach (var item in card.Path)
+                    {
+                        var tile = _gridManager.GetTileAtPosition(item.Key);
+                        tile.Arrow.transform.rotation = Quaternion.identity;
+                        tile.Arrow.SetActive(true);
+                        pathTiles.Add(tile);
+                    }
+
+                    pathTiles.Reverse();
+
+                    for (int i = 0; i < pathTiles.Count; i++)
+                    {
+                        var previousTile =
+                            i > 0 ? pathTiles[i - 1] : _unitsManager.HeroPlayer.GetOccupiedTiles().First();
+                        var futureTile = i < pathTiles.Count - 1 ? pathTiles[i + 1] : null;
+
+                        if (!card.HasPlayerClickedOnATile)
+                        {
+                            _arrowTranslator.DrawArrowPath(previousTile, pathTiles[i], futureTile);
+                        }
                     }
                 }
             }
@@ -181,18 +183,18 @@ public class TileCell : MonoBehaviour
     {
         _highlight.SetActive(false);
         _highlightBorder.SetActive(false);
-        
+
         _uiBattleManager.ShowTileInfo(null);
-        
+
         CheckForEnemyTilemapToDestroy();
-        if (_cardPlayedManager.CurrentCard != null && 
+        if (_cardPlayedManager.CurrentCard != null &&
             _cardPlayedManager.CurrentCard.AvailableTiles.ContainsKey(_position) &&
             !_occupiedUnit)
         {
             if (_cardPlayedManager.CurrentCard.CardType == CardType.MOVE_CARD)
             {
                 BaseMoveCard card = (BaseMoveCard)_cardPlayedManager.CurrentCard;
-                
+
                 foreach (var item in card.Path)
                 {
                     var tile = _gridManager.GetTileAtPosition(item.Key);
@@ -204,12 +206,10 @@ public class TileCell : MonoBehaviour
     
     protected virtual void OnMouseDown()
     {
-        // if (!_gameManager.IsInBattleState)
-        // {
-        //     return;
-        // }
-        
-        OnTileSelected?.Invoke(this);
+        if (!_uiBattleManager.MustTilesBeDisabled)
+        {
+            OnTileSelected?.Invoke(this);
+        }
     }
     
     private void CheckForEnemyTilemapToCreate()

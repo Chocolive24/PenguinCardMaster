@@ -19,25 +19,35 @@ public class UIBattleManager : MonoBehaviour
     
     // References ------------------------------------------------------------------------------------------------------
     #region UIGameobjects
+    [Header("Panels")]
     [SerializeField] private GameObject _battlePanel;
     [SerializeField] private GameObject _exploringPanel;
-    [SerializeField] private GameObject _VictoryPanel;
-    [SerializeField] private Button _endTurnButton;
-    [SerializeField] private TextMeshProUGUI _currentTurnTxt;
-    [SerializeField] private TextMeshProUGUI _notEnoughManaTxt;
-    [SerializeField] private TextMeshProUGUI _manaNbrTxt;
-    [SerializeField] private Image _manaContainerImage;
-    [SerializeField] private IntReference _playerMaxMana;
-    [SerializeField] private GameObject _selectedHeroObject, _tileObject, _tileUnitObject;
+    [SerializeField] private GameObject _victoryPanel;
     [SerializeField] private GameObject _goldsPanel;
-    [SerializeField] private TextMeshProUGUI _golds;
-    [SerializeField] private GameObject _cardAoeRenderer;
-
+    [SerializeField] private GameObject _pauseMenuPanel;
     [SerializeField] private GameObject _nextFloorQuestionPanel;
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private GameObject _gameWonPanel;
     
+    [Header("Texts")]
+    [SerializeField] private TextMeshProUGUI _currentTurnTxt;
+    [SerializeField] private TextMeshProUGUI _notEnoughManaTxt;
+    [SerializeField] private TextMeshProUGUI _manaNbrTxt;
+    [SerializeField] private TextMeshProUGUI _golds;
+    
+    [Header("IntReferences")]
+    [SerializeField] private IntReference _playerMaxMana;
     [SerializeField] private IntReference _currentFloorNbr;
+    
+    [SerializeField] private Button _endTurnButton;
+    [SerializeField] private Image _manaContainerImage;
+    
+    [SerializeField] private GameObject _selectedHeroObject, _tileObject, _tileUnitObject;
+    
+    [SerializeField] private GameObject _cardAoeRenderer;
+
+    
+    
     
     #endregion
 
@@ -62,14 +72,20 @@ public class UIBattleManager : MonoBehaviour
     public GameObject ExploringPanel => _exploringPanel;
     public GameObject VictoryPanel
     {
-        get => _VictoryPanel;
-        set => _VictoryPanel = value;
+        get => _victoryPanel;
+        set => _victoryPanel = value;
     }
 
     public Button EndTurnButton => _endTurnButton;
 
     public GameObject CardAoeRenderer => _cardAoeRenderer;
     public GameObject NextFloorQuestionPanel => _nextFloorQuestionPanel;
+
+    public bool MustTilesBeDisabled => _victoryPanel.activeSelf ||
+                                       _nextFloorQuestionPanel.activeSelf ||
+                                       _pauseMenuPanel.activeSelf ||
+                                       _gameOverPanel.activeSelf ||
+                                       _gameWonPanel.activeSelf;
 
     #endregion
     
@@ -86,7 +102,7 @@ public class UIBattleManager : MonoBehaviour
         }
         
         //_battlePanel.SetActive(false);
-        _VictoryPanel.SetActive(false);
+        _victoryPanel.SetActive(false);
         _notEnoughManaTxt.gameObject.SetActive(false);
 
         BattleManager.OnVictoryEnter += HandleVictoryEnterUI;
@@ -102,7 +118,7 @@ public class UIBattleManager : MonoBehaviour
 
         if (room.Type == RoomData.RoomType.END && !room.HasEnemiesToFight)
         {
-            _VictoryPanel.SetActive(true);
+            _victoryPanel.SetActive(true);
             _nextFloorQuestionPanel.SetActive(true);
         }
     }
@@ -228,7 +244,7 @@ public class UIBattleManager : MonoBehaviour
         }
         else
         {
-            _VictoryPanel.SetActive(true);
+            _victoryPanel.SetActive(true);
             _goldsPanel.SetActive(true);
             _cardAoeRenderer.SetActive(false);
             _golds.text = "You received " + golds + " golds !";

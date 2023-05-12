@@ -11,19 +11,20 @@ public class HeroData : UnitData
     public IntReference MaxMana;
     public IntReference ExploreSpeed;
     public IntReference BattleSpeed;
+    public IntReference MaxNbrOfCardToDrawPerTurn;
 
     protected override void OnEnable()
     {
         if (IntReferences.Count == 0)
         {
             base.OnEnable();
-        
-        
+            
             IntReferences.Add(CurrentHp);
             IntReferences.Add(Golds);
             IntReferences.Add(MaxMana);
             IntReferences.Add(ExploreSpeed);
             IntReferences.Add(BattleSpeed);
+            IntReferences.Add(MaxNbrOfCardToDrawPerTurn);
         }
     }
 }

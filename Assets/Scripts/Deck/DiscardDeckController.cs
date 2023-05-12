@@ -10,8 +10,9 @@ public enum DiscardCardType
     Main
 }
 
-public class DiscardDeckController : MonoBehaviour
+public class DiscardDeckController : UI_Object
 {
+    [Header("Discard Deck Attributes")]
     [SerializeField] protected List<BaseCard> _discardDeck;
 
     [SerializeField] protected HeroClass _heroClass;
@@ -24,7 +25,7 @@ public class DiscardDeckController : MonoBehaviour
     private UnitsManager _unitsManager;
 
     private DeckController _deck;
-    
+
     // Events ----------------------------------------------------------------------------------------------------------
     public static event Action<DiscardDeckController> OnDiscarFull; 
 

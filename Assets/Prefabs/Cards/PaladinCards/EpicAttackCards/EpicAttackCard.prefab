@@ -265,7 +265,7 @@ MonoBehaviour:
   _heroClass: 0
   _aeraOfEffect: 1
   _neighboursType: 0
-  _moveTime: 0
+  _moveTime: 0.2
   _cardData: {fileID: 0}
   _manaNbrTxt: {fileID: 3904962185654177219}
   _cardEffectTxt: {fileID: 3904962185596345692}

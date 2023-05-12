@@ -72,6 +72,10 @@ MonoBehaviour:
     _baseValue: 8
     ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4560b11ed34c93c44824028003737d6c, type: 2}
+  - _useConstant: 0
+    _baseValue: 5
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 3feaf518f5b93374c8fea93938b7450d, type: 2}
   HeroClass: 0
   CurrentHp:
     _useConstant: 0
@@ -98,3 +102,8 @@ MonoBehaviour:
     _baseValue: 8
     ConstantRunValue: 0
     Variable: {fileID: 11400000, guid: 4560b11ed34c93c44824028003737d6c, type: 2}
+  MaxNbrOfCardToDrawPerTurn:
+    _useConstant: 0
+    _baseValue: 5
+    ConstantRunValue: 0
+    Variable: {fileID: 11400000, guid: 3feaf518f5b93374c8fea93938b7450d, type: 2}

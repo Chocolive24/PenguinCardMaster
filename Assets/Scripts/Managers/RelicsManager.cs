@@ -17,11 +17,14 @@ public class RelicsManager : MonoBehaviour
     [SerializeField] private RectTransform[] _relicEmplacements;
 
     [SerializeField] private RectTransform[] _rewardLocation;
+
+    [SerializeField] private RectTransform _relicInfoPos;
     
     // Getters and Setters ---------------------------------------------------------------------------------------------
     public bool IsInventoryFull => _relicInventoryData.RelicData.Count >= _relicEmplacements.Length;
-    
-    
+    public Vector3 RelicInfoPos => _relicInfoPos.position;
+
+
     // Methods ---------------------------------------------------------------------------------------------------------
     private void Awake()
     {
@@ -81,7 +84,9 @@ public class RelicsManager : MonoBehaviour
         if (relic)
         {
             relic.EffectBox.SetActive(false);
-        
+
+            relic.EffectBox.transform.position = _relicInfoPos.transform.position;
+
             if (_emplIdx <= _relicEmplacements.Length)
             {
                 relic.transform.position = _relicEmplacements[_emplIdx].position;

@@ -262,14 +262,27 @@ public abstract class BaseCard : Collectible
             
             if (currentCard == this)
             {
-                transform.position = _cardPlayedManager.CardSlots[_handIndex].position;
+                StartCoroutine(InterpolateMoveCo(transform.position,
+                    _cardPlayedManager.CardSlots[_handIndex].position));
+                
                 OnPlayExit?.Invoke(this);
             }
             else
             {
-                currentCard.transform.position = _cardPlayedManager.CardSlots[currentCard.HandIndex].position;
-                transform.position = _cardPlayedManager.CardLocation.position;
-                OnSwitchCard?.Invoke(this);
+                if (_unitsManager.HeroPlayer.CurrentMana >= _manaCost)
+                {
+                    StartCoroutine(currentCard.InterpolateMoveCo(currentCard.transform.position,
+                        _cardPlayedManager.CardSlots[currentCard.HandIndex].position));
+                    
+                    StartCoroutine(InterpolateMoveCo(transform.position,
+                        _cardPlayedManager.CardLocation.position));
+                    
+                    OnSwitchCard?.Invoke(this);
+                }
+                else
+                {
+                    OnNoTEnoughMana?.Invoke(this);
+                }
             }
         }
         
@@ -277,8 +290,9 @@ public abstract class BaseCard : Collectible
         {
             Vector3 pos = _cardPlayedManager.CardLocation.position;
             pos.z = 0;
-            transform.position = pos;
-
+            
+            StartCoroutine(InterpolateMoveCo(transform.position, pos));
+            
             OnPlayEnter?.Invoke(this);
         }
     }
@@ -398,7 +412,7 @@ public abstract class BaseCard : Collectible
         }
     }
 
-    private IEnumerator InterpolateMoveCo(Vector3 startPos, Vector3 endPos) 
+    public IEnumerator InterpolateMoveCo(Vector3 startPos, Vector3 endPos) 
     {
         float countTime = 0;
         

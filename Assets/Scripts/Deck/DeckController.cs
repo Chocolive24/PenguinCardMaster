@@ -7,8 +7,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public abstract class DeckController : MonoBehaviour
+public abstract class DeckController : UI_Object
 {
+    [Header("Deck Attributes")]
     [SerializeField] protected List<BaseCard> _deck;
 
     [SerializeField] protected HeroClass _heroClass;
@@ -232,4 +233,6 @@ public abstract class DeckController : MonoBehaviour
     {
         _button.interactable = false;
     }
+
+    
 }

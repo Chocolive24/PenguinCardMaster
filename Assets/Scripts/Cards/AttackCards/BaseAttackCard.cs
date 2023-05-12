@@ -96,7 +96,7 @@ public class BaseAttackCard : BaseCard
         {
             if (_availableTiles.ContainsKey(tile.transform.position) && enemy != null)
             {
-                heroSprite.flipX = _unitsManager.HeroPlayer.transform.position.x < transform.position.x;
+                heroSprite.flipX = enemy.transform.position.x < _unitsManager.HeroPlayer.transform.position.x;
                 enemy.TakeDamage(CurrentDamage);
 
                 tiles.Add(tile);

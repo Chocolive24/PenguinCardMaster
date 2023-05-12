@@ -85,6 +85,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2341642365077544620, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: _hpText
+      value: 
+      objectReference: {fileID: 3770964661343326845}
+    - target: {fileID: 2341642365077544620, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
       propertyPath: _playerMaxHP._useConstant
       value: 1
       objectReference: {fileID: 0}
@@ -135,6 +139,22 @@ PrefabInstance:
     - target: {fileID: 6110644468454574276, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363980237213923592, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363980237213923592, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363980237213923592, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.9960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363980237213923592, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190334
       objectReference: {fileID: 0}
     - target: {fileID: 8607855869782897736, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
       propertyPath: m_Name
@@ -221,6 +241,17 @@ MonoBehaviour:
   _maxNbrOfAttackPerTurn: 1
   _maxNbrOfMovementPerTurn: 1
   _minimumPathCount: 1
+--- !u!114 &3770964661343326845 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6363980237213923592, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}
+  m_PrefabInstance: {fileID: 7783432022446730101}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4091820338577843121 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6110644468454574276, guid: d705e8e0b34a66c45b924ccfe455bce1, type: 3}

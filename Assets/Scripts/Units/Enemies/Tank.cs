@@ -14,6 +14,7 @@ public class Tank : BaseEnemy
     protected override void Start()
     {
         base.Start();
+        _spriteRenderer = _tankSprite;
     }
 
     public override bool IsPositionAvailable(Vector3 position, bool countHeroes, bool countEnemies, bool countWalls)

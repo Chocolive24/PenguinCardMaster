@@ -33,11 +33,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 70.5
+      value: 78.5
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 46.5
+      value: 59.5
       objectReference: {fileID: 0}
     - target: {fileID: 4091820338577843121, guid: 96564f87f22cc59478c479e065f325a8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -151,7 +151,7 @@ MonoBehaviour:
   _visualEffect: {fileID: 3062939133779247089}
   _deathVisualEffect: {fileID: 168674978540643690}
   _type: 3
-  _weight: 4
+  _weight: 3
   _attackRange: 1
   _maxNbrOfAttackPerTurn: 1
   _maxNbrOfMovementPerTurn: 1

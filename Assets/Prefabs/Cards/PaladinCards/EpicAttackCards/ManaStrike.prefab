@@ -222,7 +222,7 @@ MonoBehaviour:
   _heroClass: 0
   _aeraOfEffect: 1
   _neighboursType: 0
-  _moveTime: 0
+  _moveTime: 0.2
   _cardData: {fileID: 11400000, guid: e908f74d827d1774094cf393cfe03024, type: 2}
   _manaNbrTxt: {fileID: 2550057470532442474}
   _cardEffectTxt: {fileID: 2550057469785623029}
